@@ -3,13 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './security/components/login/login.component';
-import { RegistrerComponent } from './security/components/registrer/registrer.component';
-import { TempHomeComponent } from './security/components/temp-home/temp-home.component';
-import { TempProfileComponent } from './security/components/temp-profile/temp-profile.component';
-import { TempBoardAdminComponent } from './security/components/temp-board-admin/temp-board-admin.component';
-import { TempBoardModeratorComponent } from './security/components/temp-board-moderator/temp-board-moderator.component';
-import { TempBoardUserComponent } from './security/components/temp-board-user/temp-board-user.component';
+
+/* ************************BASE DE SEGURANÇA PARA TESTE A SER REFATORADA **********************/
+import { LoginComponent } from './security/pages/login/login.component';
+import { RegistrerComponent } from './security/pages/registrer/registrer.component';
+import { TempHomeComponent } from './security/pages/temp-home/temp-home.component';
+import { TempProfileComponent } from './security/pages/temp-profile/temp-profile.component';
+import { TempBoardAdminComponent } from './security/pages/temp-board-admin/temp-board-admin.component';
+import { TempBoardModeratorComponent } from './security/pages/temp-board-moderator/temp-board-moderator.component';
+import { TempBoardUserComponent } from './security/pages/temp-board-user/temp-board-user.component';
+
+import { authInterceptorProviders } from './security/interceptor/auth.interceptor'
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+/* *********************************************************************************************/ 
 
 @NgModule({
   declarations: [
@@ -24,9 +33,11 @@ import { TempBoardUserComponent } from './security/components/temp-board-user/te
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
