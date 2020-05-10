@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from '@angular/common/http'
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -9,12 +12,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         NavbarComponent],
     imports: [
         CommonModule,
-        FontAwesomeModule     
+        FontAwesomeModule ,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule    
     ],
     exports: [
+        //modulos compartilhados
         CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FontAwesomeModule,
+
+        //componentes compartilhados
         NavbarComponent,
-        FontAwesomeModule
     ]
 })
 export class CoreModule { }
