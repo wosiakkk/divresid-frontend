@@ -13,7 +13,7 @@ import { TempBoardAdminComponent } from './security/pages/temp-board-admin/temp-
 
 const routes: Routes = [
   { path: 'home', component: TempHomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', loadChildren: ()=> import('./pages/public/login/login.module').then(m => m.LoginModule) },
   { path: 'register', component: RegistrerComponent },
   { path: 'profile', component: TempProfileComponent },
   { path: 'user', component: TempBoardUserComponent },

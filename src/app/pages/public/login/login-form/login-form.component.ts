@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../services/token-storage.service';
 import { faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../../../security/services/auth.service';
+import { TokenStorageService } from '../../../../security/services/token-storage.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
 
   faUserShield = faUserShield;
 
@@ -48,4 +48,5 @@ export class LoginComponent implements OnInit {
   reloadPage() {
     window.location.reload();
   }
+
 }
