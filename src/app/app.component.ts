@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { TokenStorageService } from './security/services/token-storage.service';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +17,14 @@ export class AppComponent {
   showModeratorBoard = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+ 
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
+  constructor(private tokenStorageService: TokenStorageService, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

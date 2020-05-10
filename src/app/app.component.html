@@ -1,4 +1,4 @@
-<div id="app">
+<!-- <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">bezKoder</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
@@ -38,4 +38,39 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-</div>
+</div> -->
+
+
+
+<!-- <app-toolbar></app-toolbar>-->
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar color="primary">
+        Menu
+    </mat-toolbar>
+    <app-sidebar-itens></app-sidebar-itens>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Third Line</span>
+      <span class="example-spacer"></span>
+      
+      <a><mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon></a>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <app-dash></app-dash>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
