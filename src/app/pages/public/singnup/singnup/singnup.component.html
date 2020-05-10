@@ -1,10 +1,11 @@
 <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+      <span class="text-center">
+        <fa-icon [icon]="faUserPlus" size="7x"
+                 [styles]="{'stroke': 'grey', 'color': 'grey'}"
+        ></fa-icon>
+      </span>
+      <hr>
       <form
         *ngIf="!isSuccessful"
         name="form"

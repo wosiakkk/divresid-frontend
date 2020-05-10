@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../security/services/auth.service';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-singnup',
@@ -7,6 +8,8 @@ import { AuthService } from '../../../../security/services/auth.service';
   styleUrls: ['./singnup.component.css']
 })
 export class SingnupComponent implements OnInit {
+  faUserPlus = faUserPlus;
+
   form: any = {};
   isSuccessful = false;
   isSignUpFailed = false;
