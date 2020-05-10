@@ -12,14 +12,16 @@ import { TempBoardAdminComponent } from './security/pages/temp-board-admin/temp-
 /* ***********************************************/
 
 const routes: Routes = [
+  { path: 'index', loadChildren: ()=> import('./pages/public/index/index.module').then(m => m.IndexModule) },
   { path: 'home', component: TempHomeComponent },
   { path: 'login', loadChildren: ()=> import('./pages/public/login/login.module').then(m => m.LoginModule) },
-  { path: 'register', component: RegistrerComponent },
+  { path: 'register', loadChildren: ()=> import('./pages/public/singnup/singnup.module').then(m => m.SingnupModule) },
+
   { path: 'profile', component: TempProfileComponent },
   { path: 'user', component: TempBoardUserComponent },
   { path: 'mod', component: TempBoardModeratorComponent },
   { path: 'admin', component: TempBoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'index', pathMatch: 'full' }
 ];
 
 @NgModule({
