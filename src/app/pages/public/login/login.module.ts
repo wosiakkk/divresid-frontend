@@ -4,6 +4,7 @@ import { LoginRoutingModule } from "./login-routing.module";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         LoginRoutingModule,
         CommonModule,
         FormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        RouterModule
     ],
     exports: [
         CommonModule

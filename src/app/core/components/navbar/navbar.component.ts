@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faHouseDamage } from '@fortawesome/free-solid-svg-icons';
 import { TokenStorageService } from '../../../security/services/token-storage.service'
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,7 +18,17 @@ export class NavbarComponent implements OnInit {
   showModeratorBoard = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+
+currentUser: TokenStorageService;
+constructor(private tokenStorageService: TokenStorageService) {
+  tokenStorageService.itemValue.subscribe(currentUser => {
+     this.currentUser = JSON.parse(currentUser);
+    });
+}
+
+
+
+ // constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

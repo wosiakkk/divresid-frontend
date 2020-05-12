@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../security/services/auth.service';
 import { TokenStorageService } from '../../../../security/services/token-storage.service';
+import { LoginService } from "../login.service";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-login-form',
@@ -18,12 +21,18 @@ export class LoginFormComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, 
+      private tokenStorage: TokenStorageService,
+      private loginService: LoginService,
+      private router : Router
+      ) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      this.loginService.isLoggedIn = true;
+      this.router.navigate(['/home']);
     }
   }
 
@@ -36,11 +45,22 @@ export class LoginFormComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        //this.reloadPage();
+        this.loginService.isLoggedIn = true;
+        if(this.loginService.redirectUrl != null){
+          let backupUrl = this.loginService.redirectUrl;
+          this.router.navigate([`${backupUrl}`]);
+          console.log('entrou if, valor rota: '+ this.loginService.redirectUrl );
+        }
+        else{
+          this.router.navigate(['/home']);
+          console.log('não entrou if');
+        }
       },
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        this.loginService.isLoggedIn = false;
       }
     );
   }
