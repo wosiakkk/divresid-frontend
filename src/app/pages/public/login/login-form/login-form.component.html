@@ -7,7 +7,6 @@
       </span>
       <hr>
       <form
-        *ngIf="!isLoggedIn"
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
@@ -73,8 +72,6 @@
         </div>
       </form>
   
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
-      </div>
+      
     </div>
   </div>

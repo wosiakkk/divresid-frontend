@@ -1,33 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-const AUTH_API = 'http://192.168.0.4:8080/api/auth/';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  authenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  authUserName$: BehaviorSubject<string> = new BehaviorSubject(null);
+  authAdmin$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  authMod$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  authUser$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  login(credentials): Observable<any> {
-    return this.http.post(AUTH_API + 'signin', {
-      username: credentials.username,
-      password: credentials.password
-    }, httpOptions);
+  public authenticate() {
+    this.authenticated$.next(true);
   }
 
-  register(user): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
-      username: user.username,
-      email: user.email,
-      password: user.password
-    }, httpOptions);
+  public unauthenticate() {
+    this.authenticated$.next(false);
   }
-  
+
+  public setUsername(value:string){
+    this.authUserName$.next(value);
+  }
+
+  public setRoles(values:string[]){
+    values.forEach(role =>{
+      if(role == "ROLE_ADMIN")
+        this.authAdmin$.next(true);
+      else if((role == "ROLE_MODERATOR"))
+        this.authMod$.next(true);
+      else
+        this.authUser$.next(true);
+    });
+  }
+ 
 }

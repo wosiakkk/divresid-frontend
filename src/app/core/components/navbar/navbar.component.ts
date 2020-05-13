@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faHouseDamage } from '@fortawesome/free-solid-svg-icons';
 import { TokenStorageService } from '../../../security/services/token-storage.service'
+import { AuthService } from "../../../security/services/auth.service";
 
 
 @Component({
@@ -9,45 +10,18 @@ import { TokenStorageService } from '../../../security/services/token-storage.se
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  //icones
   faHouseDamage = faHouseDamage;
 
-
-  private roles: string[];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  username: string;
-
-
-currentUser: TokenStorageService;
-constructor(private tokenStorageService: TokenStorageService) {
-  tokenStorageService.itemValue.subscribe(currentUser => {
-     this.currentUser = JSON.parse(currentUser);
-    });
-}
-
-
-
- // constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(public tokenStorageService: TokenStorageService, public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log('valor de isLoggedIn: '+ this.isLoggedIn);
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-      this.username = user.username;
-    }
+    
   }
 
   logout() {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    this.authService.unauthenticate();
   }
 
 }
