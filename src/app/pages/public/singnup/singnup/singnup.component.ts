@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SingnupService } from '../singnup.service';
+import { PublicService } from '../../public.service';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -15,13 +15,13 @@ export class SingnupComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private singnupService: SingnupService) { }
+  constructor(private publicService: PublicService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this.singnupService.register(this.form).subscribe(
+    this.publicService.register(this.form).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;
