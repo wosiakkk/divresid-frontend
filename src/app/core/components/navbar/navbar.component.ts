@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faHouseDamage } from '@fortawesome/free-solid-svg-icons';
 import { TokenStorageService } from '../../../security/services/token-storage.service'
 import { AuthService } from "../../../security/services/auth.service";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,11 @@ export class NavbarComponent implements OnInit {
   //icones
   faHouseDamage = faHouseDamage;
 
-  constructor(public tokenStorageService: TokenStorageService, public authService: AuthService) { }
+  constructor(
+    public tokenStorageService: TokenStorageService,
+    public authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     
@@ -22,6 +27,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.tokenStorageService.signOut();
     this.authService.unauthenticate();
+    this.router.navigate(['/login']);
   }
 
 }
