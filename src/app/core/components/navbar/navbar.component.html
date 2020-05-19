@@ -56,6 +56,9 @@
         </ul>
         <ul class="navbar-nav mr-right"  *ngIf="(authService.authenticated$ | async) === true">
             <li class="nav-item">
+                <a class="nav-link" routerLink="/profile">Nome: {{ authService.authName$ | async }}</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" routerLink="/profile">{{ authService.authUserName$ | async }}</a>
             </li>
             <li class="nav-item">

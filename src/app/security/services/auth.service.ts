@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 
 @Injectable({
@@ -9,6 +9,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class AuthService {
 
   authenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  authName$: BehaviorSubject<string> = new BehaviorSubject(null);
   authUserName$: BehaviorSubject<string> = new BehaviorSubject(null);
   authAdmin$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   authMod$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -20,6 +21,10 @@ export class AuthService {
 
   public unauthenticate() {
     this.authenticated$.next(false);
+  }
+
+  public setName(value: string) {
+    this.authName$.next(value);
   }
 
   public setUsername(value:string){

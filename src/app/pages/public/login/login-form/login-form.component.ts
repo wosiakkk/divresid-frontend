@@ -39,6 +39,7 @@ export class LoginFormComponent implements OnInit {
         this.authService.setRoles(this.tokenStorage.getUser().roles);
         this.authService.authenticate();
         this.authService.setUsername(this.tokenStorage.getUser().username);
+        this.authService.setName(this.tokenStorage.getUser().name);
 
         if(this.publicService.redirectUrl != null){
           let backupUrl = this.publicService.redirectUrl;

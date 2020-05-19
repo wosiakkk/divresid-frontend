@@ -14,6 +14,28 @@
         novalidate
       >
         <div class="form-group">
+          <label for="name">Nome Completo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="form.name"
+            required
+            minlength="3"
+            maxlength="50"
+            #name="ngModel"
+          />
+          <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Name is required</div>
+            <div *ngIf="username.errors.minlength">
+              Name must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Name must be at most 50 characters
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="username">Username</label>
           <input
             type="text"
