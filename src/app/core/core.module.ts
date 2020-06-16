@@ -6,11 +6,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from '@angular/common/http'
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AuthService } from '../security/services/auth.service'
 
 
 @NgModule({
     declarations: [      
-        NavbarComponent],
+        NavbarComponent, SidebarComponent],
     imports: [
         CommonModule,
         FontAwesomeModule ,
@@ -29,6 +31,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
         //componentes compartilhados
         NavbarComponent,
-    ]
+        SidebarComponent
+    ],
+
 })
 export class CoreModule { }

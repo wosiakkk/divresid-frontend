@@ -1,4 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+
+body {
+    overflow-x: hidden;
+  }
+
+
+ 
+
+
+
+
+
+
+
+
+  
+
+
+
+  #sidebarCollapse {
+    width: 40px;
+    height: 40px;
+   /* background: #f5f5f5;*/
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #f5f5f5;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
+
+#sidebarCollapse span:first-of-type {
+    /* rotate first one */
+    transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+    /* second one is not visible */
+    opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+    /* rotate third one */
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+#sidebarCollapse.active span {
+    /* no rotation */
+    transform: none;
+    /* all bars are visible */
+    opacity: 1;
+    margin: 5px auto;
+}
+
+
+
+
+
+  #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+  }
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  }
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: -15rem;
+    }
+  }

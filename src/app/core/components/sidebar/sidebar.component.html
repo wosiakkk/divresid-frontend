@@ -1,0 +1,36 @@
+<div class="bg-light border-right" id="sidebar-wrapper" *ngIf="(authService.authenticated$ | async) === true">
+    <div class="sidebar-heading bg-info text-white mb-2">Administração </div>
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+      <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action bg-light" role="button" aria-controls="otherSections">
+        <i class="fas fa-sync"></i>Other sections
+    </a>
+    <ul class="collapse list-unstyled" id="otherSections">
+        <li>
+            <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+        </li>
+        <li>
+            <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+        </li>
+    </ul>
+    <div *ngIf="isAdmin">
+      <a href="#" class="list-group-item list-group-item-action bg-light" >
+        Adm
+      </a>
+    </div>
+    <div *ngIf="isMod">
+    <a href="#" class="list-group-item list-group-item-action bg-light">
+      Mod
+    </a>
+  </div>
+    <a href="#" class="list-group-item list-group-item-action bg-light">
+      User
+    </a>
+      
+       
+    </div>
+   
+   
+
+</div>
+

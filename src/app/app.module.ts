@@ -4,7 +4,8 @@ import { AppComponent } from './app.component';
 
 import { authInterceptorProviders } from './security/interceptor/auth.interceptor'
 import { FormsModule } from '@angular/forms';
-
+import { AuthService } from './security/services/auth.service'
+import { TokenStorageService } from './security/services/token-storage.service';
 import { CoreModule } from "./core/core.module";
 
 
@@ -18,7 +19,7 @@ import { CoreModule } from "./core/core.module";
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,AuthService,TokenStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

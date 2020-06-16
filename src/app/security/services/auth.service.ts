@@ -15,31 +15,44 @@ export class AuthService {
   authMod$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   authUser$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+
+  isAdmin:boolean = false;
+  isMod:boolean = false;
+
   public authenticate() {
     this.authenticated$.next(true);
   }
+
 
   public unauthenticate() {
     this.authenticated$.next(false);
   }
 
+
   public setName(value: string) {
     this.authName$.next(value);
   }
 
-  public setUsername(value:string){
+
+  public setUsername(value: string) {
     this.authUserName$.next(value);
   }
 
-  public setRoles(values:string[]){
-    values.forEach(role =>{
-      if(role == "ROLE_ADMIN")
+
+  public setRoles(values: string[]) {
+    values.forEach(role => {
+      if (role == "ROLE_ADMIN"){
         this.authAdmin$.next(true);
-      else if((role == "ROLE_MODERATOR"))
+        this.isAdmin = true;
+      } 
+      else if ((role == "ROLE_MODERATOR")){
         this.authMod$.next(true);
+        this.isMod = true;
+      }
       else
         this.authUser$.next(true);
     });
   }
- 
+
 }
+
