@@ -1,36 +1,99 @@
 <div class="bg-light border-right" id="sidebar-wrapper" *ngIf="(authService.authenticated$ | async) === true">
-    <div class="sidebar-heading bg-info text-white mb-2">Administração </div>
+    <div class="sidebar-heading bg-info text-white mb-3">Administração </div>
     <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-      <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle list-group-item list-group-item-action bg-light" role="button" aria-controls="otherSections">
-        <i class="fas fa-sync"></i>Other sections
-    </a>
-    <ul class="collapse list-unstyled" id="otherSections">
-        <li>
-            <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
-        </li>
-        <li>
-            <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
-        </li>
-    </ul>
-    <div *ngIf="isAdmin">
-      <a href="#" class="list-group-item list-group-item-action bg-light" >
-        Adm
-      </a>
-    </div>
-    <div *ngIf="isMod">
-    <a href="#" class="list-group-item list-group-item-action bg-light">
-      Mod
-    </a>
-  </div>
-    <a href="#" class="list-group-item list-group-item-action bg-light">
-      User
-    </a>
-      
-       
-    </div>
-   
-   
+      <div>
+        <a href="#menuFinPessoal" data-toggle="collapse" aria-expanded="false" 
+          class="list-group-item list-group-item-action bg-light" role="button" aria-controls="menuFinPessoal">
+          <fa-icon [icon]="faHandHoldingUsd" size="lg"></fa-icon>
+          <span class="ml-2">Finanças Pessoais</span>
+          <span class="dropdown-toggle float-right"></span>
+        </a>
+        <div class="collapse" id="menuFinPessoal">
+          <ul class=" list-unstyled" >
+            <li>
+              <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+            </li>
+            <li>
+                <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
+      <div>
+        <a href="#menuResidencias" data-toggle="collapse" aria-expanded="false" 
+          class="list-group-item list-group-item-action bg-light" role="button" aria-controls="menuResidencias">
+          <fa-icon [icon]="faHome" size="lg"></fa-icon>
+          <span class="ml-2">Residências</span>
+          <span class="dropdown-toggle float-right"></span>
+        </a>
+        <div class="collapse"  id="menuResidencias">
+          <ul class=" list-unstyled">
+            <li>
+              <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+            </li>
+            <li>
+                <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+            </li>
+          </ul><i class="fas fa-sync"></i>
+        </div>
+      </div>
+
+      <div>
+        <a href="#menuFinColetivas" data-toggle="collapse" aria-expanded="false" 
+          class="list-group-item list-group-item-action bg-light" role="button" aria-controls="menuFinColetivas">
+          <fa-icon [icon]="faCommentsDollar" size="lg"></fa-icon>
+          <span class="ml-2">Finanças Coletivas</span>
+          <span class="dropdown-toggle float-right"></span>
+        </a>
+        <div class="collapse"  id="menuFinColetivas">
+          <ul class="list-unstyled">
+            <li>
+              <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+            </li>
+            <li>
+                <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <a href="#menuMoradores" data-toggle="collapse" aria-expanded="false" 
+          class="list-group-item list-group-item-action bg-light" role="button" aria-controls="menuMoradores">
+          <fa-icon [icon]="faUsers" size="lg"></fa-icon>
+          <span class="ml-2">Moradores</span>
+          <span class="dropdown-toggle float-right"></span>
+        </a>
+        <div class="collapse" id="menuMoradores">
+          <ul class="list-unstyled" >
+            <li>
+              <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+            </li>
+            <li>
+                <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <a href="#menuRelatorios" data-toggle="collapse" aria-expanded="false" 
+          class="list-group-item list-group-item-action bg-light" role="button" aria-controls="menuRelatorios">
+          <fa-icon [icon]="faFileInvoice" size="lg"></fa-icon>
+          <span class="ml-2">Relatórios</span>
+          <span class="dropdown-toggle float-right"></span>
+        </a>
+        <div class="collapse" id="menuRelatorios">
+          <ul class="list-unstyled">
+            <li>
+              <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-3">Our projects</a>
+            </li>
+            <li>
+                <a class="scroll-link list-group-item list-group-item-action bg-light" href="#section-4">We think that...</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 </div>
 

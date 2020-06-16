@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './security/services/auth.service'
 import { TokenStorageService } from './security/services/token-storage.service';
 import { CoreModule } from "./core/core.module";
+import { LoginModule } from './pages/public/login/login.module';
 
 
 
@@ -18,6 +19,7 @@ import { CoreModule } from "./core/core.module";
     CoreModule,
     AppRoutingModule,
     FormsModule,
+    LoginModule
   ],
   providers: [authInterceptorProviders,AuthService,TokenStorageService],
   bootstrap: [AppComponent]

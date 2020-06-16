@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../security/services/auth.service";
-import { faHouseDamage } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingUsd, faHome, faCommentsDollar, faUsers, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
 import { TokenStorageService } from '../../../security/services/token-storage.service'
 
@@ -12,23 +12,17 @@ import { TokenStorageService } from '../../../security/services/token-storage.se
 export class SidebarComponent implements OnInit {
 
    //icones
-   faHouseDamage = faHouseDamage;
+   faHandHoldingUsd = faHandHoldingUsd;
+   faHome = faHome;
+   faCommentsDollar = faCommentsDollar;
+   faUsers = faUsers;
+   faFileInvoice = faFileInvoice;
+  
 
-  isAdmin:boolean = false;
-  isMod:boolean = false;
-  roles:any[] = this.tokenStorage.currentUser.roles;
-
-  constructor(public authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    //check roles
-    this.roles.forEach(element => {
-      if(element == "ROLE_ADMIN")
-        this.isAdmin=true;
-      else if (element == "ROLE_MODERATOR")
-        this.isMod = true;
-    });;
-
+   
     //Toggle Click Function
     $(document).ready(function () {
       $('#sidebarCollapse').on('click', function (e) {
