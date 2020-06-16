@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component} from '@angular/core';
 
 //refact
 import { TokenStorageService } from "./security/services/token-storage.service";
@@ -15,7 +15,7 @@ export class AppComponent {
   
   constructor(private tokenService: TokenStorageService, public authService: AuthService) { }
 
-  //@Output() roles: any[];
+
 
 
 
@@ -24,8 +24,6 @@ export class AppComponent {
       this.authService.authenticate();
       this.authService.setUsername(this.tokenService.getUser().username);
       this.authService.setRoles(this.tokenService.getUser().roles);
-      //this.roles = this.tokenService.getUser().roles;
-      //console.log('role em app '+this.roles);
     }
   }
 

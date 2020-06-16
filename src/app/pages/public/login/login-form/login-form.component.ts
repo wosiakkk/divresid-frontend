@@ -48,7 +48,6 @@ export class LoginFormComponent implements OnInit {
         else{
           this.router.navigate(['/home']);
         }
-        console.log('roles submit login: '+ this.tokenStorage.getUser().roles)
       },
       err => {
         this.errorMessage = err.error.message;

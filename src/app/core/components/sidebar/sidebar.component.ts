@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../security/services/auth.service";
-import { faHandHoldingUsd, faHome, faCommentsDollar, faUsers, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
-import { TokenStorageService } from '../../../security/services/token-storage.service'
+import { 
+  faHandHoldingUsd,
+  faHome,
+  faCommentsDollar, 
+  faUsers, 
+  faFileInvoice, 
+  faIdBadge, 
+  faCogs,   
+  faCubes
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,6 +25,9 @@ export class SidebarComponent implements OnInit {
    faCommentsDollar = faCommentsDollar;
    faUsers = faUsers;
    faFileInvoice = faFileInvoice;
+   faIdBadge = faIdBadge;
+   faCogs = faCogs;
+   faCubes = faCubes;
   
 
   constructor(public authService: AuthService) { }
