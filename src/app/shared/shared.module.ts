@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -6,7 +7,8 @@ import { NgModule } from '@angular/core';
     declarations: [],
     imports: [],
     exports: [
-
+        //shared modules
+        CommonModule,
 
         //shares components
         
