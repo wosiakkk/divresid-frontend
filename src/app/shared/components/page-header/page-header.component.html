@@ -1,10 +1,13 @@
 <div class="row "> 
     <div class="col-md-9">
         <p class="h1 font-weight-light">{{pageTitle}}</p> 
-        <small class="text-muted">{{pageSubTitle}}</small>
+        <small class="text-muted ml-1">{{pageSubTitle}}</small>
     </div> 
     <div class="col-md-3 mt-5 text-right">
-        <a class="btn btn-info" [routerLink]="pageButtonLink">{{pageNewButtonText}}</a>
+        <a class="btn btn-info" [routerLink]="pageButtonLink">
+            <fa-icon [icon]="faPlusCircle"></fa-icon>
+            {{pageNewButtonText}}
+        </a>
     </div>
 </div> 
 <hr>

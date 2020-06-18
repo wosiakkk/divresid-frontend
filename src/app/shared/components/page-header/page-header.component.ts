@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./page-header.component.css']
 })
 export class PageHeaderComponent implements OnInit {
+
+  faPlusCircle = faPlusCircle;
 
   @Input('page-title') pageTitle: string;
   @Input('page-sub-title') pageSubTitle: string;

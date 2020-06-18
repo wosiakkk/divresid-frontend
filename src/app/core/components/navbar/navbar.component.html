@@ -27,13 +27,19 @@
         </ul>
         <ul class="navbar-nav ml-right"  *ngIf="(authService.authenticated$ | async) === true">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/profile">Nome: {{ authService.authName$ | async }}</a>
+                <a class="nav-link text-light" routerLink="/profile">
+                    <fa-icon [icon]="faUserCircle"></fa-icon>
+                        {{ authService.authName$ | async }}
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/profile">{{ authService.authUserName$ | async }}</a>
+                <a class="nav-link text-light" routerLink="/profile">{{ authService.authUserName$ | async }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="logout()">LogOut</a>
+                <a class="nav-link text-light" (click)="logout()">
+                    <fa-icon [icon]="faSignOutAlt"></fa-icon>
+                    Sair
+                </a>
             </li>
         </ul>
     </div>

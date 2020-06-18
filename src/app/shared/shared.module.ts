@@ -8,7 +8,7 @@ import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [PageHeaderComponent],
-    imports: [CommonModule,RouterModule],
+    imports: [CommonModule,RouterModule,FontAwesomeModule],
     exports: [
         //shared modules
         CommonModule,
