@@ -1,12 +1,13 @@
+<app-page-header
+    page-title = "Categorias"
+    page-sub-title = "Lista de Categorias cadastradas."
+    page-new-button-text = "+ Categoria"
+    page-button-link = "/home">
+</app-page-header>
 
-<p class="h1 font-weight-light">Categorias</p>
-<small class="text-muted">Lista de Categorias cadastradas.</small>
-<hr>
-
-    <fa-icon [icon]="faSearch" size="lg"></fa-icon>
-    <input class="ml-1 mb-2" type="text" pInputText size="35" placeholder="Busca dinâmica"
-        (input)="tt.filterGlobal($event.target.value, 'contains')">
-
+<fa-icon [icon]="faSearch" size="lg"></fa-icon>
+<input class="ml-1 mb-2" type="text" pInputText size="35" placeholder="Busca dinâmica"
+    (input)="tt.filterGlobal($event.target.value, 'contains')">
 
 <div class="table-responsive">
 
