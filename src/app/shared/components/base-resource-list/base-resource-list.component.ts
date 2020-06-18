@@ -7,7 +7,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
 
 
     resources: T[] = [];
-
+    loading: boolean;
     constructor(private resourcesService: BaseResourceService<T>){
 
     }

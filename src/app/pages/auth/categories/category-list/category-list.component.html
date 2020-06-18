@@ -1,23 +1,43 @@
 
-<h1>Categorias</h1>
+<p class="h1 font-weight-light">Categorias</p>
+<small class="text-muted">Lista de Categorias cadastradas.</small>
+<hr>
+
+    <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+    <input class="ml-1 mb-2" type="text" pInputText size="35" placeholder="Busca dinâmica"
+        (input)="tt.filterGlobal($event.target.value, 'contains')">
 
 
-<table class="table table-hover">
-    <thead>
-        <tr class="bg-info text-light">
-            <th>Categorias</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor=" let category of resources">
-            <td>
-                <strong>{{category.name}}</strong><br>
-                <small>{{category.description}}</small>
-            </td>
-            <td>
-                <a class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                <button class="btn btn-outline-danger btn-sm">Excluir</button>
-            </td>
-        </tr>
-</tbody>
+<div class="table-responsive">
+
+    <p-table #tt [columns]="cols"
+        [value]="resources" [paginator]="true" [rows]="5" 
+        [globalFilterFields]="['description','id','name']"
+        [resizableColumns]="true" >
+        
+        <ng-template pTemplate="header" let-columns>
+            <tr class="text-center">
+                <th *ngFor="let col of columns" pResizableColumn  class="bg-info text-light">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-resources>
+            <tr>
+                <td>
+                    <strong>{{resources.name}}</strong> 
+                    <br>
+                    {{resources.description}}
+                </td>
+               
+                <td class="text-center">
+                    <a class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                    <button class="btn btn-outline-danger btn-sm">Excluir</button>
+                </td>
+
+            </tr>
+        </ng-template>
+        
+    </p-table>
+</div>
