@@ -5,7 +5,6 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { RouterModule } from "@angular/router";
 
 
-
 @NgModule({
     declarations: [PageHeaderComponent],
     imports: [CommonModule,RouterModule,FontAwesomeModule],
@@ -14,7 +13,8 @@ import { RouterModule } from "@angular/router";
         CommonModule,
         FontAwesomeModule,
         //shares components
-        PageHeaderComponent
+        PageHeaderComponent,
+      
     ]
 })
 export class SharedModule { }
