@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { RouterModule } from "@angular/router";
         //shared modules
         CommonModule,
         FontAwesomeModule,
+        ReactiveFormsModule,
         //shares components
         PageHeaderComponent,
       

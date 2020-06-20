@@ -1,6 +1,6 @@
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { OnInit, AfterContentChecked, Injector } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { switchMap } from 'rxjs/operators';
@@ -138,8 +138,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
             this.serverErrorMessages = JSON.parse(error._body).errors;
         else //erro de comunicação
             this.serverErrorMessages = 
-                ["Falha na comunicação com o servidor,\
-                     por favor tente mais tarde."];
+                ["Falha na comunicação com o servidor,"
+                    +"por favor tente mais tarde."];
     }
 
 }
