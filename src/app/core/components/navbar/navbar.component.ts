@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHouseDamage,faSignOutAlt,faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHouseDamage,faSignOutAlt,faUserCircle,faExpandAlt } from '@fortawesome/free-solid-svg-icons';
 import { TokenStorageService } from '../../../security/services/token-storage.service'
 import { AuthService } from "../../../security/services/auth.service";
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   faHouseDamage = faHouseDamage;
   faSignOutAlt = faSignOutAlt;
   faUserCircle = faUserCircle;
+  faExpandAlt = faExpandAlt;
 
   constructor(
     public tokenStorageService: TokenStorageService,
