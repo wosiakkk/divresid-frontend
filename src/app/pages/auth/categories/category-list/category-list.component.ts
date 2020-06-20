@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, ChangeDetectorRef} from '@angular/core';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
@@ -18,8 +18,8 @@ export class CategoryListComponent extends BaseResourceListComponent<Category> {
     { field: 'desc', header: 'Ações' },
   ];
 
-  constructor(private categoryService: CategoryService) {
-    super(categoryService)
+  constructor(private categoryService: CategoryService, private change: ChangeDetectorRef) {
+    super(categoryService,change)
   }
 
 }
