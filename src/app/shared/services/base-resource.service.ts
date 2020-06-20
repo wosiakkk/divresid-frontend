@@ -3,24 +3,47 @@ import { HttpClient } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from "rxjs/operators"
+import { Pageable } from "../interfaces/pageable.interface"
+
 
 
 export abstract class BaseResourceService<T extends BaseResourceModel>{
 
     protected http: HttpClient;
+    public totalElements: number;
 
     constructor(
         protected apiPath: string,
         protected injector: Injector,
-        protected jsonDataToResourceFn: (jsonData: any) => T
+        protected jsonDataToResourceFn: (jsonData: any) => T,
+        protected paginationJsonDataToResourceFn: (jsonData: any) => T
     ){
         this.http = injector.get(HttpClient);
+    }
+
+
+    getNumberOfResources():Observable<number>{
+      const url = `${this.apiPath}/pagination/count`;
+      return this.http.get(url).pipe(
+        catchError(this.handleError)
+      )
+    }
+
+
+    getAllPagination(pageable: Pageable): Observable<T[]>{
+      if(pageable.sort === null)
+          pageable.sort = "not";
+      const url = `${this.apiPath}/pagination?page=${pageable.page}&size=${pageable.size}&name=${pageable.sort}`;
+      return this.http.get(url).pipe(
+        map(this.jsonDataToResourcesPagination.bind(this)),
+        catchError(this.handleError)
+      );
     }
 
     getAll(): Observable<T[]>{
         return this.http.get(this.apiPath).pipe(
           map(this.jsonDataToResources.bind(this)),
-          catchError(this.handleError)
+          catchError(this.handleError)  
         )
       }
     
@@ -58,8 +81,16 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
 
 
     //Métodos
+    protected jsonDataToResourcesPagination(jsonData: any): T[]{
+        const resources: T[] = [];
+        jsonData.content.forEach(
+          elemento => resources.push(this.jsonDataToResourceFn(elemento))
+        );
+        this.totalElements =  jsonData.totalElements;
+        return resources;
+    }
 
-    protected jsonDataToResources(jsonData: any[]): T[]{
+    protected jsonDataToResources(jsonData: any): T[]{
         const resources: T[] = [];
         jsonData.forEach(
           elemento => resources.push( this.jsonDataToResourceFn(elemento) )

@@ -15,4 +15,8 @@ export class Category extends BaseResourceModel{
         return Object.assign(new Category(), jsonData);
     }
 
+    static paginationFromJson(jsonData: any): Category{
+        return Object.assign(new Category(), jsonData.element);
+    }
+
 }

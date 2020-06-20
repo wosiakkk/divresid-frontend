@@ -13,8 +13,9 @@
 
     <p-table #tt [columns]="cols"
         [value]="resources" [paginator]="true" [rows]="5" 
-        [globalFilterFields]="['description','id','name']"
-        [resizableColumns]="true" >
+        [resizableColumns]="true"
+        [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
+        [totalRecords]="totalRecords" [loading]="loading">
         
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
