@@ -2,7 +2,9 @@
     page-title = "Nova/Editar Categoria"
     page-sub-title = "Cadastro ouedição de Categoria."
     page-new-button-text = "Voltar"
-    page-button-link = "/categories">
+    page-button-link = "/categories"
+    icon-button =  "backIcon"
+>
 </app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
@@ -33,7 +35,7 @@
 
 
     <button [disabled]="submittingForm || resourceForm.invalid" 
-        type="submit" class="btn btn-primary btn-lg float-right mt-3">
+        type="submit" class="btn btn-info btn-lg float-right mt-3">
         Salvar
     </button>
 

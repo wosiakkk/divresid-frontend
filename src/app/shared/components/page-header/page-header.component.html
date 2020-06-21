@@ -5,7 +5,12 @@
     </div> 
     <div class="col-md-3 mt-5 text-right">
         <a class="btn btn-info" [routerLink]="pageButtonLink">
-            <fa-icon [icon]="faPlusCircle"></fa-icon>
+            <fa-icon [icon]="faPlusCircle" 
+                *ngIf="iconButton === 'newIcon'">
+            </fa-icon>
+            <fa-icon [icon]="faAngleDoubleLeft" 
+                *ngIf="iconButton === 'backIcon'">
+            </fa-icon>
             {{pageNewButtonText}}
         </a>
     </div>
