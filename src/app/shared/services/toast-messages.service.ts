@@ -33,6 +33,18 @@ export class ToastMessagesService {
             "type=\"button\" class=\"btn clear\">Sair</a>", "Erro no servidor");
     }
 
+    loadDeleteResourceError(){
+        toastr.options.positionClass = 'toast-top-center';
+        toastr.options.onclick = null;
+        toastr.options.tapToDismiss = false;
+        toastr.options.timeOut = 0;
+        toastr.options.extendedTimeOut = 0;
+        toastr.options.closeButton = true;
+        toastr.error("Problema ao realizar a exclusão,"+
+            "tente mais tarde <br /><br /><a href=\"home\" "+
+            "type=\"button\" class=\"btn clear\">Sair</a>", "Erro no servidor");
+    }
+
     loadValidationsErrorsToast(errors: string[]){
         toastr.options.positionClass = 'toast-top-center';
         toastr.options.onclick = null;
@@ -51,6 +63,11 @@ export class ToastMessagesService {
     loadUpdateResourceSuccess(){
         toastr.options.positionClass = 'toast-bottom-center';
         toastr.success("Dado atualizado com sucesso!", "Sucesso");
+    }
+
+    loadDeleteResourceSucess(){
+        toastr.options.positionClass = 'toast-bottom-center';
+        toastr.success("Dado excluído com sucesso!", "Sucesso");
     }
 
 }

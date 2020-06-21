@@ -122,7 +122,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     }
 
     protected actionsForSuccess(resource: T) {
-        this.toastMessagesService.loadCreatedResourceSuccess();
+        this.currentAction === 'new' ? 
+            this.toastMessagesService.loadCreatedResourceSuccess() : 
+            this.toastMessagesService.loadUpdateResourceSuccess();
+    
         const baseComponentPath: string = 
             this.route.snapshot.parent.url[0].path;
 

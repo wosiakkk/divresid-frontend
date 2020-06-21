@@ -37,8 +37,14 @@
                 </td>
                
                 <td class="text-center">
-                    <a class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                    <button class="btn btn-outline-danger btn-sm">
+                    <a class="btn btn-outline-info btn-sm mr-2" 
+                        [routerLink]="[resources.id, 'edit']"
+                    >
+                        Editar
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm"
+                        (click)="deleteResource(resources)"
+                    >
                         Excluir
                     </button>
                 </td>

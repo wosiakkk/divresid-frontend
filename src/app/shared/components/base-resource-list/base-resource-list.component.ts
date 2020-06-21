@@ -51,6 +51,19 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
        
     }
     
+    deleteResource(resource : T){
+        const mustDelete = confirm('Deseja realmente excluir?');
+        if(mustDelete){
+          this.resourcesService.delete(resource.id).subscribe(
+            () =>{ 
+                this.resources = 
+                    this.resources.filter(element => element != resource);
+                this.toastMessageService.loadDeleteResourceSucess();
+            },
+            () => this.toastMessageService.loadDeleteResourceError()
+          )
+        }
+      }
    
 
 }

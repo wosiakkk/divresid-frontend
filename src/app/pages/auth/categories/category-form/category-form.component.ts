@@ -29,4 +29,13 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
     })
   }
 
+  //sobrescreita dos valores default de titulos de página
+  protected creationPageTitle(): string{
+    return "Cadastro de nova Categoria";
+  }
+
+  protected editionPageTitle() :string{
+    return "Edição da Categoria";
+  }
+
 }
