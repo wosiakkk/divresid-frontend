@@ -4,10 +4,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 
 
 @NgModule({
-    declarations: [PageHeaderComponent],
+    declarations: [PageHeaderComponent, FormFieldErrorComponent],
     imports: [CommonModule,RouterModule,FontAwesomeModule],
     exports: [
         //shared modules
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule,
         //shares components
         PageHeaderComponent,
+        FormFieldErrorComponent,
       
     ]
 })
