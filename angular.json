@@ -72,7 +72,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "divresid-frontend:build"
+            "browserTarget": "divresid-frontend:build",
+            "proxyConfig": "./proxy.config.js"
           },
           "configurations": {
             "production": {
