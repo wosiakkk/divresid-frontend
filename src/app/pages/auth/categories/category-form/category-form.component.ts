@@ -3,6 +3,7 @@ import { BaseResourceFormComponent } from 'src/app/shared/components/base-resour
 import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
 import { Validators } from '@angular/forms';
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
 
 @Component({
   selector: 'app-category-form',
@@ -13,9 +14,11 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
 
   constructor(
     protected categoryService: CategoryService,
-    protected injector: Injector
+    protected injector: Injector,
+    protected toastMessagesService: ToastMessagesService
   ){
-    super(injector, new Category(), categoryService, Category.fromJson)
+    super(injector, new Category(), 
+      categoryService, Category.fromJson,toastMessagesService)
    }
 
   protected buildResourceForm(): void {

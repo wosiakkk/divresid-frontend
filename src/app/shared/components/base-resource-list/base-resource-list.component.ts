@@ -3,16 +3,20 @@ import { OnInit,ChangeDetectorRef } from '@angular/core';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { Pageable } from '../../interfaces/pageable.interface';
 import { LazyLoadEvent } from 'primeng/api';
+import { ToastMessagesService } from '../../services/toast-messages.service';
 
 
-export abstract class BaseResourceListComponent<T extends BaseResourceModel> implements OnInit{
+export abstract class BaseResourceListComponent<T extends BaseResourceModel> 
+    implements OnInit{
 
     resources: T[] = [];
     totalRecords: number;
     loading: boolean;
-    constructor(private resourcesService: BaseResourceService<T>,private cdr: ChangeDetectorRef){
-        
-    }
+    constructor(
+        private resourcesService: BaseResourceService<T>,
+        private cdr: ChangeDetectorRef, 
+        private toastMessageService: ToastMessagesService
+    ){ }
 
     loadLazyData(event: LazyLoadEvent) {
        
@@ -28,12 +32,12 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
             this.resourcesService.getAllPagination(pageableData).subscribe(
                 resources => {
                     this.resources = resources;
-                    this.totalRecords = this.resourcesService.totalElements;this.totalRecords = this.resourcesService.totalElements;
+                    this.totalRecords = this.resourcesService.totalElements;
                     this.loading = false;
                     this.cdr.detectChanges();
                 },
                 error => {
-                    return alert('Erro ao carregar Lista');
+                    this.toastMessageService.loadServerListErrorToast();
                 }
             )
         }, 300 );   
@@ -47,4 +51,6 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
        
     }
     
+   
+
 }

@@ -3,6 +3,7 @@ import { BaseResourceListComponent } from 'src/app/shared/components/base-resour
 import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ToastMessagesService } from "../../../../shared/services/toast-messages.service"
 
 @Component({
   selector: 'app-category-list',
@@ -18,8 +19,11 @@ export class CategoryListComponent extends BaseResourceListComponent<Category> {
     { field: 'desc', header: 'Ações' },
   ];
 
-  constructor(private categoryService: CategoryService, private change: ChangeDetectorRef) {
-    super(categoryService,change)
+  constructor(private categoryService: CategoryService, 
+      private change: ChangeDetectorRef , 
+      private toastService: ToastMessagesService
+    ) {
+    super(categoryService,change,toastService)
   }
 
 }

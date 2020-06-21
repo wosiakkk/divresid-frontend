@@ -8,7 +8,8 @@ import { BaseResourceService } from "../../../../shared/services/base-resource.s
 export class CategoryService extends BaseResourceService<Category>{
 
   constructor(protected injector: Injector) { 
-    super("http://192.168.0.4:8080/api/auth/categories", injector, Category.fromJson, Category.paginationFromJson); 
+    super("http://192.168.0.4:8080/api/auth/categories", injector, 
+      Category.fromJson, Category.paginationFromJson); 
   }
 
 }

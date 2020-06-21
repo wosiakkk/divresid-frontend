@@ -6,7 +6,8 @@
 </app-page-header>
 
 <fa-icon [icon]="faSearch" size="lg"></fa-icon>
-<input class="ml-1 mb-2" type="text" pInputText size="35" placeholder="Busca dinâmica"
+<input class="ml-1 mb-2" type="text" pInputText size="35" 
+    placeholder="Busca dinâmica"
     (input)="tt.filterGlobal($event.target.value, 'contains')">
 
 <div class="table-responsive">
@@ -19,7 +20,8 @@
         
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
-                <th *ngFor="let col of columns" pResizableColumn  class="bg-info text-light">
+                <th *ngFor="let col of columns" pResizableColumn  
+                    class="bg-info text-light">
                     {{col.header}}
                 </th>
             </tr>
@@ -35,7 +37,9 @@
                
                 <td class="text-center">
                     <a class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                    <button class="btn btn-outline-danger btn-sm">Excluir</button>
+                    <button class="btn btn-outline-danger btn-sm">
+                        Excluir
+                    </button>
                 </td>
 
             </tr>

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { switchMap } from 'rxjs/operators';
 import toastr from "toastr";
+import { ToastMessagesService } from '../../services/toast-messages.service';
 
 
 
@@ -21,6 +22,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     protected router: Router;
     protected formBuilder: FormBuilder;
 
+
+  
+
     //sobrescrita para definir campos específicos nos forms filhos
     protected abstract buildResourceForm(): void
 
@@ -28,7 +32,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
         protected injector: Injector,
         public resource: T,
         protected resourceService: BaseResourceService<T>,
-        protected jsonDataToResourceFn: (jsonData) => T
+        protected jsonDataToResourceFn: (jsonData) => T,
+        protected toastMessagesService: ToastMessagesService
     ) {
         this.route = this.injector.get(ActivatedRoute);
         this.router = this.injector.get(Router);
@@ -76,7 +81,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
                         this.resourceForm.patchValue(resource);
                     },
                     error => 
-                        alert('Ocorreu um erro no servidor, tente mais tared')
+                        this.toastMessagesService.loadServerErrorToast()
                 );
         }
     }
@@ -117,8 +122,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     }
 
     protected actionsForSuccess(resource: T) {
-        toastr.success("Solicitação processada com sucesso!");
-
+        this.toastMessagesService.loadCreatedResourceSuccess();
         const baseComponentPath: string = 
             this.route.snapshot.parent.url[0].path;
 
@@ -131,15 +135,17 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     }
 
     protected actionsForError(error: any) {
+        toastr.options.positionClass = 'toast-bottom-center';
         toastr.error("Ocorreu um erro ao processar a sua solicitação!");
         this.submittingForm = false;
 
-        if (error.status === 422)//algum erro de validação
+        if (error.status === 422){//algum erro de validação
             this.serverErrorMessages = JSON.parse(error._body).errors;
+            this.toastMessagesService.
+                loadValidationsErrorsToast(this.serverErrorMessages);
+        }
         else //erro de comunicação
-            this.serverErrorMessages = 
-                ["Falha na comunicação com o servidor,"
-                    +"por favor tente mais tarde."];
+            this.toastMessagesService.loadServerErrorToast();
     }
 
 }

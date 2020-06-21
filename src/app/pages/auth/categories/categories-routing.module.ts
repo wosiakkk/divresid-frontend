@@ -6,9 +6,9 @@ import { AuthGuard } from "../../../security/guards/auth/auth.guard";
 
 
 const routes: Routes = [
-    {path: '', component: CategoryListComponent, canActivate: [AuthGuard]},
-    {path: 'new', component: CategoryFormComponent, canActivate: [AuthGuard]},
-    {path: ':id/edit', component: CategoryFormComponent, canActivate: [AuthGuard]}
+    {path: '', component: CategoryListComponent, canActivate:[AuthGuard]},
+    {path: 'new', component: CategoryFormComponent, canActivate:[AuthGuard]},
+    {path: ':id/edit', component: CategoryFormComponent, canActivate:[AuthGuard]}
   ];
   
 
