@@ -1,11 +1,12 @@
 import { BaseResourceModel } from '../../models/base-resource.model';
-import { OnInit,ChangeDetectorRef } from '@angular/core';
+import { OnInit, ChangeDetectorRef, Directive } from '@angular/core';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { Pageable } from '../../interfaces/pageable.interface';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastMessagesService } from '../../services/toast-messages.service';
 
 
+@Directive()
 export abstract class BaseResourceListComponent<T extends BaseResourceModel> 
     implements OnInit{
 
