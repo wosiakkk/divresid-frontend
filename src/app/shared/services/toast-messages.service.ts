@@ -9,6 +9,11 @@ export class ToastMessagesService {
 
     constructor() { }
 
+    loadWelcomeMessageToast(){
+        toastr.options.positionClass = 'toast-bottom-center';
+        toastr.success("Bem vindo ao sistema!", "Login realizado");
+    }
+
     loadServerListErrorToast(){
         toastr.options.positionClass = 'toast-top-center';
         toastr.options.onclick = null;

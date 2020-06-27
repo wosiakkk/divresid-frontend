@@ -4,6 +4,7 @@ import { PublicService } from '../../public.service';
 import { TokenStorageService } from '../../../../security/services/token-storage.service';
 import { Router } from "@angular/router";
 import { AuthService } from "../../../../security/services/auth.service";
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class LoginFormComponent implements OnInit {
       private tokenStorage: TokenStorageService,
       private publicService: PublicService,
       private authService: AuthService,
-      private router : Router
+      private router : Router,
+      private toastMessages: ToastMessagesService
     ) { }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class LoginFormComponent implements OnInit {
           this.router.navigate([`${backupUrl}`]);
         }
         else{
+          this.toastMessages.loadWelcomeMessageToast();  
           this.router.navigate(['/home']);
         }
       },
