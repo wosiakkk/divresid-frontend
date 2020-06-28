@@ -51,6 +51,12 @@
 
             </tr>
         </ng-template>
-        
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length">
+                    Você ainda não cadastrou nenhuma Categoria!
+                </td>
+            </tr>
+        </ng-template>
     </p-table>
 </div>

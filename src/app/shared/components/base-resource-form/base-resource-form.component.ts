@@ -6,6 +6,8 @@ import { BaseResourceService } from '../../services/base-resource.service';
 import { switchMap } from 'rxjs/operators';
 import toastr from "toastr";
 import { ToastMessagesService } from '../../services/toast-messages.service';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
+import { User } from 'src/app/security/models/user.model';
 
 
 
@@ -18,6 +20,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
+    authenticatedUser: User;
 
     protected route: ActivatedRoute;
     protected router: Router;
@@ -34,7 +37,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
         public resource: T,
         protected resourceService: BaseResourceService<T>,
         protected jsonDataToResourceFn: (jsonData) => T,
-        protected toastMessagesService: ToastMessagesService
+        protected toastMessagesService: ToastMessagesService,
+        protected tokerStorageService: TokenStorageService
     ) {
         this.route = this.injector.get(ActivatedRoute);
         this.router = this.injector.get(Router);
@@ -43,11 +47,13 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
 
     ngAfterContentChecked(): void {
         this.setPageTitle();
+       
     }
     ngOnInit(): void {
         this.setCurrentAction();
         this.buildResourceForm();
         this.loadResource();
+        this.loadAuthResource();
     }
 
     //tratando a submition do form new ou update
@@ -87,6 +93,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
         }
     }
 
+    protected loadAuthResource(){
+        return new User(this.tokerStorageService.getUser().id);
+
+    }
+
     protected setPageTitle() {
         if (this.currentAction == "new")
             this.pageTitle = this.creationPageTitle();
@@ -105,7 +116,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     }
 
     protected createResource() {
-        const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
+        let resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
+        resource.user =  this.loadAuthResource();
         this.resourceService.create(resource)
             .subscribe(
                 resource => this.actionsForSuccess(resource),

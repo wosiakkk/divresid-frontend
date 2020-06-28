@@ -4,6 +4,7 @@ import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
 import { Validators } from '@angular/forms';
 import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 
 @Component({
   selector: 'app-category-form',
@@ -15,17 +16,18 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
   constructor(
     protected categoryService: CategoryService,
     protected injector: Injector,
-    protected toastMessagesService: ToastMessagesService
+    protected toastMessagesService: ToastMessagesService,
+    protected tokerStorageService: TokenStorageService
   ){
     super(injector, new Category(), 
-      categoryService, Category.fromJson,toastMessagesService)
+      categoryService, Category.fromJson,toastMessagesService,tokerStorageService)
    }
 
   protected buildResourceForm(): void {
     this.resourceForm = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required, Validators.minLength(3)]],
-      description: [null]
+      description: [null],
     })
   }
 

@@ -4,6 +4,7 @@ import { Category } from '../shared/category.model';
 import { CategoryService } from '../shared/category.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ToastMessagesService } from "../../../../shared/services/toast-messages.service"
+import { TokenStorageService } from "../../../../security/services/token-storage.service"
 
 @Component({
   selector: 'app-category-list',
@@ -21,9 +22,10 @@ export class CategoryListComponent extends BaseResourceListComponent<Category> {
 
   constructor(private categoryService: CategoryService, 
       private change: ChangeDetectorRef , 
-      private toastService: ToastMessagesService
+      private toastService: ToastMessagesService,
+      private tokenSotrage: TokenStorageService
     ) {
-    super(categoryService,change,toastService)
+    super(categoryService,change,toastService,tokenSotrage)
   }
 
 }

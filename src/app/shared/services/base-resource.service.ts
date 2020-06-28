@@ -4,6 +4,7 @@ import { Injector } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from "rxjs/operators"
 import { Pageable } from "../interfaces/pageable.interface"
+import { User } from 'src/app/security/models/user.model';
 
 
 
@@ -30,10 +31,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
     }
 
 
-    getAllPagination(pageable: Pageable): Observable<T[]>{
+    getAllPagination(pageable: Pageable,user : User): Observable<T[]>{
       if(pageable.sort === null)
           pageable.sort = "not";
-      const url = `${this.apiPath}/pagination?page=${pageable.page}&size=${pageable.size}&name=${pageable.sort}`;
+      const url = `${this.apiPath}/pagination?page=${pageable.page}&size=${pageable.size}&name=${pageable.sort}&user=${user.id}`;
       return this.http.get(url).pipe(
         map(this.jsonDataToResourcesPagination.bind(this)),
         catchError(this.handleError)
@@ -56,6 +57,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
       }
       
       create(resource: T): Observable<T>{
+
         return this.http.post(this.apiPath, resource).pipe(
           map(this.jsonDataToResource.bind(this)),
           catchError(this.handleError)

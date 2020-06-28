@@ -4,6 +4,8 @@ import { BaseResourceService } from '../../services/base-resource.service';
 import { Pageable } from '../../interfaces/pageable.interface';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastMessagesService } from '../../services/toast-messages.service';
+import { User } from 'src/app/security/models/user.model';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 
 
 @Directive()
@@ -13,10 +15,13 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
     resources: T[] = [];
     totalRecords: number;
     loading: boolean;
+    emptyList:boolean =false;
+   
     constructor(
         private resourcesService: BaseResourceService<T>,
         private cdr: ChangeDetectorRef, 
-        private toastMessageService: ToastMessagesService
+        private toastMessageService: ToastMessagesService,
+        private tokerStorageService: TokenStorageService
     ){ }
 
     loadLazyData(event: LazyLoadEvent) {
@@ -30,11 +35,14 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
         }
 
         setTimeout(() => {
-            this.resourcesService.getAllPagination(pageableData).subscribe(
+            let user:User = this.loadAuthResource();
+            this.resourcesService.getAllPagination(pageableData,user).subscribe(
                 resources => {
                     this.resources = resources;
                     this.totalRecords = this.resourcesService.totalElements;
                     this.loading = false;
+                    if(this.resources.length<=0)
+                        this.emptyList=true;
                     this.cdr.detectChanges();
                 },
                 error => {
@@ -50,6 +58,11 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
             count => this.totalRecords = count
         )
        
+    }
+    
+    protected loadAuthResource(){
+        return new User(this.tokerStorageService.getUser().id);
+
     }
     
     deleteResource(resource : T){
