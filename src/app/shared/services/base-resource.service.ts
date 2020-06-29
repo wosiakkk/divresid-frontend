@@ -23,8 +23,8 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
     }
 
 
-    getNumberOfResources():Observable<number>{
-      const url = `${this.apiPath}/pagination/count`;
+    getNumberOfResources(user : User):Observable<number>{
+      const url = `${this.apiPath}/pagination/count?user=${user.id}`;
       return this.http.get(url).pipe(
         catchError(this.handleError)
       )

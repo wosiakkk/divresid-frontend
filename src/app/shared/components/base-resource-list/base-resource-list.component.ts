@@ -6,6 +6,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { ToastMessagesService } from '../../services/toast-messages.service';
 import { User } from 'src/app/security/models/user.model';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
+import { count } from 'rxjs/operators';
 
 
 @Directive()
@@ -53,8 +54,8 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
     }
 
     ngOnInit(): void { 
-       
-        this.resourcesService.getNumberOfResources().subscribe(
+        let user:User = this.loadAuthResource();
+        this.resourcesService.getNumberOfResources(user).subscribe(
             count => this.totalRecords = count
         )
        
