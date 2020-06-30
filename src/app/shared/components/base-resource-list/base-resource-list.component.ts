@@ -6,7 +6,6 @@ import { LazyLoadEvent } from 'primeng/api';
 import { ToastMessagesService } from '../../services/toast-messages.service';
 import { User } from 'src/app/security/models/user.model';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
-import { count } from 'rxjs/operators';
 
 
 @Directive()
