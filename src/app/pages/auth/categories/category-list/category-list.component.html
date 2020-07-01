@@ -14,7 +14,7 @@
 <div class="table-responsive">
 
     <p-table #tt [columns]="cols"
-        [value]="resources" [paginator]="true" [rows]="20" 
+        [value]="resources" [paginator]="true" [rows]="5" 
         [resizableColumns]="true"
         [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
         [totalRecords]="totalRecords" [loading]="loading">
