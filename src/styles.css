@@ -41,7 +41,14 @@ body {
     opacity: 1;
     margin: 5px auto;
 }
-
+/*#sidebar-wrapper{
+   /* position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+   /* z-index: 1; /* Stay on top */
+   /* top: 0; /* Stay at the top */
+   /* overflow-x: hidden; /* Disable horizontal scroll */
+   /* height: 100%; /* Full-height: remove this if you want "auto" height */
+  /*}*/
+  
   #sidebar-wrapper {
     min-height: 100vh;
     margin-left: -15rem;

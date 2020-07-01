@@ -9,7 +9,8 @@ import {
   faFileInvoice, 
   faIdBadge, 
   faCogs,   
-  faCubes
+  faCubes,
+  faFileInvoiceDollar
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -28,6 +29,7 @@ export class SidebarComponent implements OnInit {
    faIdBadge = faIdBadge;
    faCogs = faCogs;
    faCubes = faCubes;
+   faFileInvoiceDollar = faFileInvoiceDollar;
   
 
   constructor(public authService: AuthService) { }
