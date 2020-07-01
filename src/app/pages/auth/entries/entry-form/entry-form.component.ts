@@ -9,6 +9,7 @@ import { CategoryService } from '../../categories/shared/category.service';
 import { Validators } from '@angular/forms';
 import { User } from 'src/app/security/models/user.model';
 
+
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.component.html',
@@ -19,25 +20,27 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
 
         protected buildResourceForm(){
             this.resourceForm = this.formBuilder.group({
-              
-              type: ["expense", [Validators.required]],
-              
-              category: [null, [Validators.required]]
+                name: [null,[Validators.required]],
+                description: [null],
+                type: ["expense", [Validators.required]],
+                amount: [null],
+                date: [null],
+                paid: [null],
+                category: [null, [Validators.required]],
             });
           }
         
 
     categories: Array<Category>;
 
-
-  /*  imaskConfig = {
+    imaskConfig = {
         mask: Number,
         scale: 2,
-         thousandsSeparator: '',
+        thousandsSeparator: '',
         padFractionalZeros: true,
         normalizeZeros: true,
         radix: ','
-    };*/
+    };
 
     //config calendar primeng
     ptBR= {
@@ -90,6 +93,16 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
                     console.log(JSON.stringify(this.categories))
                 }
             )
+    }
+
+    //sobrescrevendo os métodos para o título da página, para não utilizar o valor padrão
+    protected creationPageTitle(): string{
+        return "Cadastro de novo Lançamento";
+    }
+
+    protected editionPageTitle(): string{
+        const resourceName = this.resource.name || ""; //caso ainda nao tenha sido carregado o dado, "" será exibido, evitnado o undefined
+        return "Editando Lançamento: "+ resourceName;
     }
 
 }
