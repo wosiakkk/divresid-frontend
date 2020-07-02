@@ -26,14 +26,14 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
                 amount: [null],
                 date: [null],
                 paid: [null],
-                category: [null, [Validators.required]],
+                categoryId: [null, [Validators.required]]
             });
           }
         
 
     categories: Array<Category>;
 
-    imaskConfig = {
+   imaskConfig = {
         mask: Number,
         scale: 2,
         thousandsSeparator: '',
@@ -87,11 +87,7 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
        const user: User = this.loadAuthResource();
         this.categoryService
             .getAllByAuthUser(user).subscribe(
-                c => {
-                    //console.log(JSON.stringify(c)),
-                    this.categories = c,
-                    console.log(JSON.stringify(this.categories))
-                }
+                c => this.categories = c
             )
     }
 
