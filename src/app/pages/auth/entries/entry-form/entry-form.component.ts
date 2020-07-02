@@ -23,7 +23,7 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
                 id: [null],
                 name: [null,[Validators.required]],
                 description: [null],
-                type: ["expense", [Validators.required]],
+                type: [this.types[0].value, [Validators.required]],
                 amount: [null],
                 date: [null],
                 paid: [null],
@@ -34,6 +34,7 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
         
 
     categories: Array<Category>;
+    types: Array<any>;
 
    imaskConfig = {
         mask: Number,
@@ -70,11 +71,13 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
     }
 
     ngOnInit(): void {
+        this.types = this.setTypeOptions();
         this.loadCategories()
         super.ngOnInit()
      }
 
-     get typeOptions(): Array<any>{
+
+    private setTypeOptions(): Array<any>{
         return Object.entries(Entry.types).map(
           ([value, text]) => {
             return{
