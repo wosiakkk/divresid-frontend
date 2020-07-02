@@ -20,13 +20,15 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
 
         protected buildResourceForm(){
             this.resourceForm = this.formBuilder.group({
+                id: [null],
                 name: [null,[Validators.required]],
                 description: [null],
                 type: ["expense", [Validators.required]],
                 amount: [null],
                 date: [null],
                 paid: [null],
-                categoryId: [null, [Validators.required]]
+                categoryId: [null, [Validators.required]],
+                user: [this.loadAuthResource()]
             });
           }
         
