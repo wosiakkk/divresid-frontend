@@ -60,8 +60,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
     submitForm() {
         this.submittingForm = true;
 
-        if (this.currentAction == "new")
+        if (this.currentAction == "new"){
             this.createResource();
+        }
+         
         else
             this.updateResource();
     }

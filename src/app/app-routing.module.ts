@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: ()=> import('./pages/public/singnup/singnup.module').then(m => m.SingnupModule) },
   { path: 'home',  loadChildren: ()=> import('./pages/auth/home/home.module').then(m => m.HomeModule) },
   {path: 'categories',  loadChildren: () => import('./pages/auth/categories/categories.module').then(m => m.CategoriesModule)},
+  {path: 'entries',  loadChildren: () => import('./pages/auth/entries/entries.module').then(m => m.EntriesModule)},
   { path: '', redirectTo: '/index', pathMatch: 'full' } 
 ];
 
