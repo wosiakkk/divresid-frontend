@@ -8,15 +8,13 @@ import { AuthService } from './security/services/auth.service'
 import { TokenStorageService } from './security/services/token-storage.service';
 import { CoreModule } from "./core/core.module";
 import { LoginModule } from './pages/public/login/login.module';
-import { EntryReportComponent } from './pages/auth/reports/entry-report/entry-report.component';
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    EntryReportComponent,
-   
+    AppComponent, 
   ],
   imports: [
     CoreModule,

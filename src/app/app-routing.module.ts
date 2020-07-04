@@ -8,8 +8,9 @@ const routes: Routes = [
   { path: 'login', loadChildren: ()=> import('./pages/public/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: ()=> import('./pages/public/singnup/singnup.module').then(m => m.SingnupModule) },
   { path: 'home',  loadChildren: ()=> import('./pages/auth/home/home.module').then(m => m.HomeModule) },
-  {path: 'categories',  loadChildren: () => import('./pages/auth/categories/categories.module').then(m => m.CategoriesModule)},
-  {path: 'entries',  loadChildren: () => import('./pages/auth/entries/entries.module').then(m => m.EntriesModule)},
+  { path: 'categories',  loadChildren: () => import('./pages/auth/categories/categories.module').then(m => m.CategoriesModule)},
+  { path: 'entries',  loadChildren: () => import('./pages/auth/entries/entries.module').then(m => m.EntriesModule)},
+  { path: 'reports',  loadChildren: () => import('./pages/auth/reports/reports.module').then(m => m.ReportsModule)},
   { path: '', redirectTo: '/index', pathMatch: 'full' } 
 ];
 
