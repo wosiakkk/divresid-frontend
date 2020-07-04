@@ -21,21 +21,50 @@
         
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
-                <th *ngFor="let col of columns" pResizableColumn  
-                    class="bg-info text-light">
-                    {{col.header}}
-                </th>
+                <th class="bg-info text-light" style="width:10%">Data</th>
+                <th class="bg-info text-light" style="width:45%">Lançamento</th>
+                <th class="bg-info text-light" style="width:15%">Valor</th>
+                <th class="bg-info text-light" style="width:15%">Situação</th>
+                <th class="bg-info text-light" style="width:15%">Ações</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-resources>
             <tr>
+                <!--Date-->
+                <td class="text-center">
+                    <strong>{{resources.date  | date:'mediumDate'}}</strong> 
+                </td>
+                <!--Name/Description-->
                 <td>
+                    <span class="badge float-left mr-2"
+                        [class.badge-success]="resources.type == 'revenue'"
+                        [class.badge-danger]="resources.type == 'expense'"
+                    >{{resources.type == 'revenue'? 'receita':'despesa'}}</span>
                     <strong>{{resources.name}}</strong> 
                     <br>
                     {{resources.description}}
                 </td>
-               
+                <!--Amount-->
+                <td class="text-center">
+                    <strong 
+                        [class.text-success]="resources.type == 'revenue'"
+                        [class.text-danger]="resources.type == 'expense'"
+                    >
+                   
+                        {{resources.amount | currency:'BRL'}}
+                    </strong> 
+                </td>
+                <!--Status-->
+                <td class="text-center">
+                    <strong class="text-success" *ngIf="resources.paid">
+                        Pago
+                    </strong>
+                    <strong class="text-warning" *ngIf="!resources.paid">
+                        Pendente
+                    </strong>
+                </td>
+                <!--Actions-->
                 <td class="text-center">
                     <a class="btn btn-outline-info btn-sm mr-2" 
                         [routerLink]="[resources.id, 'edit']"
