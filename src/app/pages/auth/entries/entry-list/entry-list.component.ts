@@ -17,12 +17,6 @@ export class EntryListComponent extends BaseResourceListComponent<Entry> {
  
     faSearch = faSearch;
   
-    cols: any[] =  [
-        {field: 'date', header: 'Data'},
-        { field: 'description', header: 'Lançamentos' },
-        { field: 'actions', header: 'Ações' },
-    ];
-
 
   constructor(
     private change: ChangeDetectorRef , 
