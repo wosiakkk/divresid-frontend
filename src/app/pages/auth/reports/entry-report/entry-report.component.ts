@@ -43,11 +43,17 @@ export class EntryReportComponent implements OnInit {
     ) { }
 
      ngOnInit(): void {
-         this.categoryService.getAllByAuthUser(
+        /* this.categoryService.getAllByAuthUser(
                 new User(this.tokenStorageService.getUser().id)
             )
-            .subscribe(categories => this.categories = categories);
-        console.log('Categorias carregadas para reports: ' + JSON.stringify(this.categories));
+            .subscribe(categories => this.categories = categories);*/
+        this.entryService
+            .getByMonthAndYear
+                (6,2020,new User(this.tokenStorageService.getUser().id))
+                .subscribe( ent => console.log("retorno: "+ JSON.stringify(ent))) ;  
+        
+        
+        //console.log('Categorias carregadas para reports: ' + JSON.stringify(this.categories));
     }
 
     public generateReports() {

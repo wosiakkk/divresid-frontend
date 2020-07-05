@@ -3,19 +3,23 @@ import { BaseResourceService } from "../../../../shared/services/base-resource.s
 import { Entry } from "../shared/entry.model"
 import { Observable } from 'rxjs';
 import { CategoryService } from '../../categories/shared/category.service';
-import { flatMap,catchError } from 'rxjs/operators';
+import { flatMap,catchError, map } from 'rxjs/operators';
+import { User } from 'src/app/security/models/user.model';
+
+const urlServer =  "http://localhost:4200/api/auth/entries";
 
 @Injectable({
     providedIn: 'root'
 })
 export class EntryService extends BaseResourceService<Entry> {
 
+    
+
     constructor(
         protected injector: Injector,
         protected categoryService: CategoryService
     ){
-        super("http://localhost:4200/api/auth/entries",injector, 
-                Entry.fromJson, Entry.paginationFromJson);
+        super(urlServer,injector,Entry.fromJson, Entry.paginationFromJson);
     }
     
     //override para setar category
@@ -41,5 +45,16 @@ export class EntryService extends BaseResourceService<Entry> {
             ),
             catchError(this.handleError)
         )
+    }
+
+    getByMonthAndYear(month: number, year: number, user : User)
+        :Observable<Entry[]>{
+        return this.http
+            .get(
+                `${urlServer}/byDate?userId=${user.id}&month=${month}&year=${year}`
+            ).pipe(
+                map(Entry.fromJson.bind(this)),
+                catchError(this.handleError)
+            );
     }
 }
