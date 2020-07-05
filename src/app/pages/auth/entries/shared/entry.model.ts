@@ -26,6 +26,12 @@ export class Entry extends BaseResourceModel{
         return Object.assign(new Entry(),jsonData);
     }
 
+    static fromJsonToArray(jsonData: any): Entry[]{
+        let ent: Entry[] = [];
+        ent.push(Object.assign(new Entry(),jsonData));
+        return ent;
+    }
+
     static paginationFromJson(jsonData: any): Entry{
         return Object.assign(new Entry(), jsonData.element);
     }
