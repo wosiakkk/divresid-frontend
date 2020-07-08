@@ -63,7 +63,9 @@ export class EntryService extends BaseResourceService<Entry> {
         year: number,user : User): Observable<Entry[]>{
         if(pageable.sort === null)
             pageable.sort = "not";
-        const url = `${this.apiPath}/pagination/filtered?page=${pageable.page}&size=${pageable.size}&searchString=${pageable.sort}&month=${month}&year=${year}&userId=${user.id}`;
+        const url = `${this.apiPath}/pagination/filtered?page=${pageable.page}`
+            +`&size=${pageable.size}&searchString=${pageable.sort}`
+            +`&month=${month}&year=${year}&userId=${user.id}`;
 
         return this.http.get(url).pipe(
           map(this.jsonDataToResourcesPagination.bind(this)),

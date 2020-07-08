@@ -46,12 +46,18 @@
         <option value="2020">2020</option>
     </select>
         
-    <button type="button" class="btn btn-info ml-1" (click)="loadLazyData($event)">
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="loadLazyData($event)"
+    >
         <fa-icon [icon]="faFilter"></fa-icon> Filtrar
+    </button>
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="clearFilter()"
+    >
+        <fa-icon [icon]="faEraser"></fa-icon> Limpar
     </button>
       
 </div>
-  
 
 
 <div class="table-responsive">

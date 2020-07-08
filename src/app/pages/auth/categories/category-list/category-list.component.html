@@ -6,10 +6,17 @@
     icon-button = "newIcon">
 </app-page-header>
 
-<fa-icon [icon]="faSearch" size="lg"></fa-icon>
-<input class="ml-1 mb-2" type="text" pInputText size="35" 
-    placeholder="Busca dinâmica"
-    (input)="tt.filterGlobal($event.target.value, 'contains')">
+<div class="row  mb-2">
+    <div class="input-group-prepend ml-3">
+        <label class="input-group-text" for="filterGlobal">
+            <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+        </label>
+    </div>  
+    <input id="filterGlobal" class="form-control" type="text"
+        pInputText style="width:25%"
+        placeholder="Busca dinâmica"
+        (input)="tt.filterGlobal($event.target.value, 'contains')">
+</div>
 
 <div class="table-responsive">
 
