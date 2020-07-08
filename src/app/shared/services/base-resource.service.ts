@@ -32,7 +32,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
     getAllPagination(pageable: Pageable,user : User): Observable<T[]>{
       if(pageable.sort === null)
           pageable.sort = "not";
-      const url = `${this.apiPath}/pagination?page=${pageable.page}&size=${pageable.size}&name=${pageable.sort}&user=${user.id}`;
+      const url = `${this.apiPath}/pagination?page=${pageable.page}&size=${pageable.size}&searchString=${pageable.sort}&user=${user.id}`;
       return this.http.get(url).pipe(
         map(this.jsonDataToResourcesPagination.bind(this)),
         catchError(this.handleError)

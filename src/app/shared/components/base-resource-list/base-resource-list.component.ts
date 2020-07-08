@@ -25,7 +25,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
     ){ }
 
     loadLazyData(event: LazyLoadEvent) {
-       
+        console.log("event: "+ JSON.stringify(event));
         this.loading = true;
         this.cdr.detectChanges();
         const pageableData: Pageable = {

@@ -4,7 +4,7 @@ import { Entry } from "../shared/entry.model"
 import { EntryService } from "../shared/entry-service"
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -14,18 +14,25 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class EntryListComponent extends BaseResourceListComponent<Entry> {
 
- 
     faSearch = faSearch;
-  
+    faFilter = faFilter;
 
-  constructor(
-    private change: ChangeDetectorRef , 
-    private toastService: ToastMessagesService,
-    private tokenSotrage: TokenStorageService,
-    private entryService: EntryService 
-  ) {
-      super(entryService,change,toastService,tokenSotrage);
-  }
+    cols: any[] =  [
+        { field: 'date', header: 'Data', width:'10%' },
+        { field: 'entry', header: 'Lançamento', width:'45%' },
+        { field: 'amount', header: 'Valor', width:'15%' },
+        { field: 'status', header: 'Situação', width:'15%' },
+        { field: 'actions', header: 'Ações', width:'15%' }
+    ];
+
+    constructor(
+        private change: ChangeDetectorRef , 
+        private toastService: ToastMessagesService,
+        private tokenSotrage: TokenStorageService,
+        private entryService: EntryService 
+    ) {
+        super(entryService,change,toastService,tokenSotrage);
+    }
 
 
 
