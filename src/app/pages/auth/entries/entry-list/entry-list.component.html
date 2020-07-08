@@ -57,7 +57,7 @@
 <div class="table-responsive">
 <!--em p-table [globalFilterFields]="['vin','year']-->
     <p-table #tt
-        [value]="resources" [paginator]="true" [rows]="10" 
+        [value]="resources" [paginator]="true" [rows]="5s   " 
         [columns]="cols"
         [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
         [totalRecords]="totalRecords" [loading]="loading"
