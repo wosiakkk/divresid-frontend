@@ -22,7 +22,7 @@
             Filtrar por data:
         </label>
     </div>
-    <select class="custom-select" id="selectMonth" style="width:15%">
+    <select #month class="custom-select" id="selectMonth" style="width:15%">
         <option value="">Selecione um mês</option>
         <option value="1">Janeiro</option>
         <option value="2">Fevereiro</option>
@@ -46,7 +46,7 @@
         <option value="2020">2020</option>
     </select>
         
-    <button type="button" class="btn btn-info ml-1">
+    <button type="button" class="btn btn-info ml-1" (click)="loadLazyData($event)">
         <fa-icon [icon]="faFilter"></fa-icon> Filtrar
     </button>
       
@@ -57,7 +57,7 @@
 <div class="table-responsive">
 <!--em p-table [globalFilterFields]="['vin','year']-->
     <p-table #tt
-        [value]="resources" [paginator]="true" [rows]="5s   " 
+        [value]="resources" [paginator]="true" [rows]="5" 
         [columns]="cols"
         [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
         [totalRecords]="totalRecords" [loading]="loading"

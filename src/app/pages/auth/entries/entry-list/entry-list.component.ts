@@ -65,25 +65,28 @@ export class EntryListComponent extends BaseResourceListComponent<Entry> {
                         if(this.resources.length<=0)
                             this.emptyList=true;
                         this.change.detectChanges();
+                        console.log("DEUS: "+JSON.stringify(this.resources));
+                    },
+                    error => {
+                        this.toastService.loadServerListErrorToast();
+                    }
+                )
+            }else {
+                this.entryService.getAllPagination(pageableData,user).subscribe(
+                    resources => {
+                        this.resources = resources;
+                        this.totalRecords = this.entryService.totalElements;
+                        this.loading = false;
+                        if(this.resources.length<=0)
+                            this.emptyList=true;
+                        this.change.detectChanges();
                     },
                     error => {
                         this.toastService.loadServerListErrorToast();
                     }
                 )
             }
-            this.entryService.getAllPagination(pageableData,user).subscribe(
-                resources => {
-                    this.resources = resources;
-                    this.totalRecords = this.entryService.totalElements;
-                    this.loading = false;
-                    if(this.resources.length<=0)
-                        this.emptyList=true;
-                    this.change.detectChanges();
-                },
-                error => {
-                    this.toastService.loadServerListErrorToast();
-                }
-            )
+            
         }, 300 );   
     }
 
