@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CategoryService } from '../../categories/shared/category.service';
 import { flatMap,catchError, map } from 'rxjs/operators';
 import { User } from 'src/app/security/models/user.model';
+import { Pageable } from 'src/app/shared/interfaces/pageable.interface';
 
 const urlServer =  "http://localhost:4200/api/auth/entries";
 
@@ -57,4 +58,18 @@ export class EntryService extends BaseResourceService<Entry> {
                 catchError(this.handleError)
             );
     }
+
+    getAllPaginationByMonthAndYear(pageable: Pageable, month: number,
+        year: number,user : User): Observable<Entry[]>{
+        if(pageable.sort === null)
+            pageable.sort = "not";
+        const url = `${this.apiPath}/pagination/filtered?page=${pageable.page}`
+            +`&size=${pageable.size}&searchString=${pageable.sort}`
+            +`&month=${month}&year=${year}&userId=${user.id}`;
+
+        return this.http.get(url).pipe(
+          map(this.jsonDataToResourcesPagination.bind(this)),
+          catchError(this.handleError)
+        );
+      }
 }

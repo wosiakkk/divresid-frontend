@@ -6,26 +6,71 @@
     icon-button = "newIcon">
 </app-page-header>
 
-<fa-icon [icon]="faSearch" size="lg"></fa-icon>
-<input class="ml-1 mb-2" type="text" pInputText size="35" 
-    placeholder="Busca dinâmica"
-    (input)="tt.filterGlobal($event.target.value, 'contains')">
+<div class="row  mb-2">
+    <div class="input-group-prepend ml-3">
+        <label class="input-group-text" for="filterGlobal">
+            <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+        </label>
+    </div>  
+    <input id="filterGlobal" class="form-control" type="text" 
+        pInputText style="width:25%" 
+        placeholder="Busca por nome de Lançamento"
+        (input)="tt.filterGlobal($event.target.value, 'contains')">
+
+    <div class="input-group-prepend ml-5">
+        <label class="input-group-text" for="selectMonth">
+            Filtrar por data:
+        </label>
+    </div>
+    <select #month class="custom-select" id="selectMonth" style="width:15%">
+        <option value="">Selecione um mês</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+    </select>
+    <input #year type="number" id="year" style="width:15%" 
+        name="year" value="" placeholder="Informe o ano" class="form-control">
+        
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="loadLazyData($event)"
+    >
+        <fa-icon [icon]="faFilter"></fa-icon> Filtrar
+    </button>
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="clearFilter()"
+    >
+        <fa-icon [icon]="faEraser"></fa-icon> Limpar
+    </button>
+      
+</div>
+
 
 <div class="table-responsive">
-
+<!--em p-table [globalFilterFields]="['vin','year']-->
     <p-table #tt
         [value]="resources" [paginator]="true" [rows]="5" 
-        [resizableColumns]="true"
+        [columns]="cols"
         [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
-        [totalRecords]="totalRecords" [loading]="loading">
+        [totalRecords]="totalRecords" [loading]="loading"
+        [globalFilterFields]="['date','entry']">
         
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
-                <th class="bg-info text-light" style="width:10%">Data</th>
-                <th class="bg-info text-light" style="width:45%">Lançamento</th>
-                <th class="bg-info text-light" style="width:15%">Valor</th>
-                <th class="bg-info text-light" style="width:15%">Situação</th>
-                <th class="bg-info text-light" style="width:15%">Ações</th>
+                <th *ngFor="let col of columns" 
+                    class="bg-info text-light"
+                    [ngStyle]="{'width': col.width}" 
+                >
+                    {{col.header}}
+                </th>  
             </tr>
         </ng-template>
 
@@ -51,7 +96,6 @@
                         [class.text-success]="resources.type == 'revenue'"
                         [class.text-danger]="resources.type == 'expense'"
                     >
-                   
                         {{resources.amount | currency:'BRL'}}
                     </strong> 
                 </td>
@@ -83,7 +127,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="columns.length">
-                    Você ainda não cadastrou nenhum Lançamento!
+                    Não foi encontrado nenhum Lançamento!
                 </td>
             </tr>
         </ng-template>
