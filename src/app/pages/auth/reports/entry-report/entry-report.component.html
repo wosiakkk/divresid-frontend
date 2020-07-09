@@ -1,6 +1,6 @@
 <app-page-header
-    page-title = "Relatório de Lançamentos!"
-    page-sub-title = "Emissão de relatórios."
+    page-title = "Relatório de Lançamentos Mensal"
+    page-sub-title = "Visualização de graficos referente ao seus Lançamentos."
     page-new-button-text = "Voltar"
     page-button-link = "/home"
     icon-button =  "backIcon"
@@ -8,12 +8,12 @@
 
 <div class="card">
     <div class="card-header">
-        Selecione o mês e o ano para gerar relatórios!!!!
+        Informe o mês e o ano para gerar os gráficos de despesa e receita.
     </div>
 
     <div class="card-body">
         <div class="form-row">
-            <div class="form-group col-md-7">
+            <div class="form-group col-md-6">
                 <label for="month">Mês</label>
                 <select #month name="month" id="month" class="form-control">
                     <option value="">Selecione um mês</option>
@@ -32,16 +32,10 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-6">
                 <label for="year">Ano</label>
-                <select #year name="year" id="year" class="form-control">
-                    <option value="">Selecione um ano</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
+                <input #year type="number" class="form-control" 
+                    placeholder="Informe o ano" name="year" id="year">
             </div>
 
         </div>
@@ -49,7 +43,7 @@
         <div class="form-row">
             <div class="col-md text-right">
                 <button type="button" (click)="generateReports()" 
-                    class="btn btn-primary"
+                    class="btn btn-info"
                 >
                     Gerar Relatórios
                 </button>

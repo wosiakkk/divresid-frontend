@@ -37,14 +37,8 @@
         <option value="11">Novembro</option>
         <option value="12">Dezembro</option>
     </select>
-    <select #year name="year" id="year" class="custom-select" style="width:15%">
-        <option value="">Selecione um ano</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-    </select>
+    <input #year type="number" id="year" style="width:15%" 
+        name="year" value="" placeholder="Informe o ano" class="form-control">
         
     <button type="button" class="btn btn-info ml-1" 
         (click)="loadLazyData($event)"
