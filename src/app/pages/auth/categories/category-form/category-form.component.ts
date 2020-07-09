@@ -28,6 +28,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
       id: [null],
       name: [null, [Validators.required, Validators.minLength(3)]],
       description: [null],
+      user: [this.loadAuthResource()]
     })
   }
 
