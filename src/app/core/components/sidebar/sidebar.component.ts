@@ -11,7 +11,9 @@ import {
   faCogs,   
   faCubes,
   faFileInvoiceDollar,
-  faMoneyBillAlt
+  faMoneyBillAlt,
+  faCity,
+  faBuilding
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -32,6 +34,8 @@ export class SidebarComponent implements OnInit {
    faCubes = faCubes;
    faFileInvoiceDollar = faFileInvoiceDollar;
    faMoneyBillAlt = faMoneyBillAlt;
+   faCity = faCity;
+   faBuilding = faBuilding;
   
 
   constructor(public authService: AuthService) { }
