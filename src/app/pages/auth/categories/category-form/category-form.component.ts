@@ -32,7 +32,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
     })
   }
 
-  //sobrescreita dos valores default de titulos de página
+  //sobrescrita dos valores default de titulos de página
   protected creationPageTitle(): string{
     return "Cadastro de nova Categoria";
   }
