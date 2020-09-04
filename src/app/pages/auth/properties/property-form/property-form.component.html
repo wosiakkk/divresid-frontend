@@ -15,7 +15,19 @@
         </div>
         <div class="card-body">
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <!--Active-->
+                <div class="form-group col-md-1">
+                    <label for="active">Imóvel Ativo</label>
+                    <div id="active">
+                        <p-inputSwitch 
+                            formControlName="active">
+                        </p-inputSwitch>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <!--Name-->
+                <div class="form-group col-md-3">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" 
                         id="name" formControlName="name">
@@ -23,66 +35,62 @@
                         [form-control]="resourceForm.get('name')" >
                     </app-form-field-error>    
                 </div>
-
-                <div class="form-group col-md-4">
+                <!--Description-->
+                <div class="form-group col-md-5">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" 
                         id="description" formControlName="description">
                 </div>
-
-                <div class="form-group col-md-4">
-                    <label for="active">Ativo</label>
-                    <p-inputSwitch formControlName="active"
-                        id="active">
-                    </p-inputSwitch>
-                </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <!--LandLord-->
+                <div class="form-group col-md-3">
                     <label for="landLord">Proprietário</label>
                     <input type="text" class="form-control"
                         id="landLord" formControlName="landLordName">
                 </div>
-
-                <div class="form-group col-md-6">
+                <!--LandLordPhone-->
+                <div class="form-group col-md-2">
                     <label for="landLordPhone">Telefone Proprietario</label>
                     <input type="text" class="form-control"
                         id="lardLordPhone" formControlName="landLordPhone">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col md-4">
+                <!--CEP-->
+                <div class="form-group col-md-2">
                     <label for="zipCode">CEP</label>
                     <input type="text" class="form-control"
                         id="zipCode" formControlName="zipCode">
                 </div>
-
-                <div class="form-group col md-4">
+                <!--Street-->
+                <div class="form-group col-md-6">
                     <label for="street">Rua</label>
                     <input type="text" class="form-control"
                         id="street" formControlName="street">
                 </div>
-
-                <div class="form-group col md-4">
+                 <!--Number-->
+                 <div class="form-group col md-2">
+                    <label for="number">Número</label>
+                    <input type="text" class="form-control"
+                        id="number" formControlName="number">
+                </div>
+                <!--AddressDetails-->
+                <div class="form-group col-md-2">
                     <label for="addressDetails">Complemento</label>
                     <input type="text" class="form-control"
                         id="addressDetails" formControlName="addressDetails">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col md-4">
-                    <label for="number">Número</label>
-                    <input type="text" class="form-control"
-                        id="number" formControlName="number">
-                </div>
-
-                <div class="form-group col md-4">
+                <!--City-->
+                <div class="form-group col-md-3">
                     <label for="city">Cidade</label>
                     <input type="text" class="form-control"
                         id="city" formControlName="city">
                 </div>
-
-                <div class="form-group col md-4">
+                <!--State-->
+                <div class="form-group col-md-2">
                     <label for="state">Estado</label>
                     <input type="text" class="form-control"
                         id="state" formControlName="state">
