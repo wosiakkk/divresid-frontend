@@ -60,6 +60,16 @@ export class ToastMessagesService {
         toastr.error(errors.toString, "Problema no dados informados");
     }
 
+    loadCepApiErrorToast(){
+        toastr.options.positionClass = 'toast-top-center';
+        toastr.options.onclick = null;
+        toastr.options.tapToDismiss = false;
+        toastr.options.timeOut = 0;
+        toastr.options.extendedTimeOut = 0;
+        toastr.options.closeButton = true;
+        toastr.error("Problema ao carregar CEP, insira manualmente");
+    }
+
     loadCreatedResourceSuccess(){
         toastr.options.positionClass = 'toast-bottom-center';
         toastr.success("Dado salvo com sucesso!", "Sucesso");

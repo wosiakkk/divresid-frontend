@@ -5,6 +5,7 @@ import { PropertyService } from '../shared/property.service'
 import { ToastMessagesService } from '../../../../shared/services/toast-messages.service'
 import { TokenStorageService } from '../../../../security/services/token-storage.service'
 import { Validators } from '@angular/forms';
+import { ViaCepService } from '../shared/viacep.service'
 
 
 @Component({
@@ -18,7 +19,8 @@ export class PropertyFormComponent extends BaseResourceFormComponent<Property> {
         protected propertyService: PropertyService,
         protected injector: Injector,
         protected toastMessagesService: ToastMessagesService,
-        protected tokenStorageService: TokenStorageService
+        protected tokenStorageService: TokenStorageService,
+        private cepService: ViaCepService
     ) { 
         super(
             injector, new Property(), propertyService, Property.fromJson ,
@@ -52,4 +54,22 @@ export class PropertyFormComponent extends BaseResourceFormComponent<Property> {
     protected editionPageTitle() :string{
         return "Edição do Imóvel";
     }
+
+    getDataFromCep(){
+        let cep = this.resourceForm.controls['zipCode'].value;
+        this.cepService.getDataFromCep(cep).subscribe(
+            response =>{
+                this.resourceForm.controls['street']
+                    .setValue(response.logradouro);
+                this.resourceForm.controls['city']
+                    .setValue(response.localidade);
+                this.resourceForm.controls['state']
+                    .setValue(response.uf);
+            },
+            error => {
+                this.toastMessagesService.loadCepApiErrorToast();
+            }
+        )
+    }
+
 }
