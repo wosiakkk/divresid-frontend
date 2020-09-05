@@ -29,7 +29,8 @@
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
                 <th *ngFor="let col of columns" pResizableColumn  
-                    class="bg-info text-light">
+                    class="bg-info text-light"
+                    [ngStyle]="{'width': col.width}">
                     {{col.header}}
                 </th>
             </tr>
@@ -37,15 +38,20 @@
 
         <ng-template pTemplate="body" let-resources>
             <tr>
-                <!--Id-->
+                <!--Acive-->
                 <td class="text-center">
-                    <strong>{{resources.id}}</strong>
+                    <strong>{{resources.active? 'Sim':'Não'}}</strong>
                 </td>
                 <!--Name/Description-->
                 <td>
                     <strong>{{resources.name}}</strong> 
                     <br>
                     {{resources.description}}
+                </td>
+                 <!--Address-->
+                 <td>
+                    {{resources.street}}, {{resources.number}}
+                     {{resources.city}} - {{resources.state}} 
                 </td>
                 <!--Actions-->
                 <td class="text-center">

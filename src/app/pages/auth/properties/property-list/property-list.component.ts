@@ -16,8 +16,9 @@ export class PropertyListComponent extends BaseResourceListComponent<Property> {
     faSearch = faSearch;
 
     cols: any[] = [
-        { filed: 'id', header: 'ID' },
+        { filed: 'active', header: 'Ativo', width: '10%' },
         { field: 'name', header: 'Nome' },
+        { field: 'address', header: 'Endereço' },
         { field: 'actions', header: 'Ações' }
     ]
 
