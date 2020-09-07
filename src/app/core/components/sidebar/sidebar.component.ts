@@ -5,7 +5,8 @@ import {
   faHandHoldingUsd,
   faHome,
   faCommentsDollar, 
-  faUsers, 
+  faUsers,
+  faUserPlus, 
   faFileInvoice, 
   faIdBadge, 
   faCogs,   
@@ -13,7 +14,9 @@ import {
   faFileInvoiceDollar,
   faMoneyBillAlt,
   faCity,
-  faBuilding
+  faBuilding,
+  faMailBulk,
+  faIdCard
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -28,6 +31,7 @@ export class SidebarComponent implements OnInit {
    faHome = faHome;
    faCommentsDollar = faCommentsDollar;
    faUsers = faUsers;
+   faUserPlus = faUserPlus;
    faFileInvoice = faFileInvoice;
    faIdBadge = faIdBadge;
    faCogs = faCogs;
@@ -36,6 +40,8 @@ export class SidebarComponent implements OnInit {
    faMoneyBillAlt = faMoneyBillAlt;
    faCity = faCity;
    faBuilding = faBuilding;
+   faMailBulk = faMailBulk;
+   faIdCard = faIdCard;
   
 
   constructor(public authService: AuthService) { }
