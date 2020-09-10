@@ -6,21 +6,9 @@
     icon-button = "newIcon">
 </app-page-header>
 
-<div class="row mb-2">
-    <div class="input-group-prepend ml-3">
-        <label class="input-group-text" for="filterGlobal">
-            <fa-icon [icon]="faSearch" size="lg"></fa-icon>
-        </label>
-    </div>
-    <input id="filterGlobal" class="form-control" type="text"
-        pInputText style="width:25%"
-        placeholder="Busca dinâmica"
-        (input)="tt.filterGlobal($event.target.value, 'contains')">
-</div>
-
 <div class="table-responsive">
 
-    <p-table #tt [columns]="cols"
+    <p-table [columns]="cols"
         [value]="resources" [paginator]="true" [rows]="5" 
         [resizableColumns]="true"
         [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
@@ -37,33 +25,30 @@
 
         <ng-template pTemplate="body" let-resources>
             <tr>
-                <td>
+                <td class="text-center">
                     {{resources.idFrom.name}}
                 </td>
-                <td>
+                <td class="text-center">
                     {{resources.idTo.name}}
                 </td>
-                <td>
+                <td class="text-center">
                     {{resources.idProperty.name}}
                 </td>
-                <td>
-                    {{resources.accepted}}
-                </td>
-                <td>
-                    <button>
-                        Aceitar
-                    </button>
-                </td>
-                <td>
-                    <button>
-                        Rejeitar e excluir
-                    </button>
+                <td class="text-center">
+                    <strong class="text-success" *ngIf="resources.accepted">
+                        Aceito
+                    </strong>
+                    <strong class="text-warning" *ngIf="!resources.accepted">
+                        Pendente
+                    </strong>
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-outline-info btn-sm mr-2" 
+                    <a class="btn btn-outline-success btn-sm mr-2" 
                         [routerLink]="[resources.id, 'edit']"
+                        *ngIf="!resources.accepted 
+                            && (resources.idFrom.id !== userAuth.id)"
                     >
-                        Editar
+                        Aceitar
                     </a>
                     <button class="btn btn-outline-danger btn-sm"
                         (click)="deleteResource(resources)"

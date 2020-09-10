@@ -5,6 +5,7 @@ import { InviteService } from '../shared/invite.service';
 import { Invite } from '../shared/invite.model';
 import { ToastMessagesService } from '../../../../shared/services/toast-messages.service';
 import { TokenStorageService } from '../../../../security/services/token-storage.service';
+import { User } from 'src/app/security/models/user.model';
 
 
 
@@ -18,13 +19,13 @@ export class InviteListComponent extends BaseResourceListComponent<Invite> {
 
     faSearch = faSearch;
 
+    userAuth: User;
+
     cols: any[] = [
-        { field: 'from', header: 'From' },
-        { field: 'to', header: 'To' },
+        { field: 'from', header: 'Remetente' },
+        { field: 'to', header: 'Destinatário' },
         { field: 'property', header: 'Imóvel' },
         { field: 'status', header: 'Status' },
-        { field: 'accept', header: 'Aceitar' },
-        { field: 'reject', header: 'Rejeitar' },
         { field: 'actions', header: 'Ações' }
     ];
   
@@ -35,6 +36,11 @@ export class InviteListComponent extends BaseResourceListComponent<Invite> {
         private toastMessage: ToastMessagesService
     ) { 
         super(inviteService,change,toastMessage,tokenStorage);
+    }
+
+    ngOnInit(): void {
+        this.userAuth = this.loadAuthResource();
+        super.ngOnInit();
     }
  
 }
