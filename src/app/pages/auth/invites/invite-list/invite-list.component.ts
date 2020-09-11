@@ -6,7 +6,7 @@ import { Invite } from '../shared/invite.model';
 import { ToastMessagesService } from '../../../../shared/services/toast-messages.service';
 import { TokenStorageService } from '../../../../security/services/token-storage.service';
 import { User } from 'src/app/security/models/user.model';
-
+import { ActivatedRoute, Router } from '@angular/router'
 
 
 
@@ -33,7 +33,9 @@ export class InviteListComponent extends BaseResourceListComponent<Invite> {
         private inviteService: InviteService,
         private change: ChangeDetectorRef,
         private tokenStorage: TokenStorageService,
-        private toastMessage: ToastMessagesService
+        private toastMessage: ToastMessagesService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
     ) { 
         super(inviteService,change,toastMessage,tokenStorage);
     }
@@ -41,6 +43,20 @@ export class InviteListComponent extends BaseResourceListComponent<Invite> {
     ngOnInit(): void {
         this.userAuth = this.loadAuthResource();
         super.ngOnInit();
+    }
+
+    acceptingInvitation(invite: Invite){
+        this.inviteService.acceptingInvitation(invite).subscribe(
+            () => {
+                const baseComponentPath: string = this.activatedRoute
+                    .snapshot.parent.url[0].path;
+                
+                this.router.navigateByUrl("home",
+                    { skipLocationChange: true })
+                    .then(()=> this.router.navigate([baseComponentPath]))
+            },
+            () => alert('error ao aceitar')
+        )
     }
  
 }

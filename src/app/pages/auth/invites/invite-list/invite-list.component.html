@@ -44,7 +44,7 @@
                 </td>
                 <td class="text-center">
                     <a class="btn btn-outline-success btn-sm mr-2" 
-                        [routerLink]="[resources.id, 'edit']"
+                        (click)="acceptingInvitation(resources)"
                         *ngIf="!resources.accepted 
                             && (resources.idFrom.id !== userAuth.id)"
                     >
