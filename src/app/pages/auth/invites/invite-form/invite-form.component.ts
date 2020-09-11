@@ -2,6 +2,7 @@ import { Component, Injector } from '@angular/core';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { PropertyService } from '../../properties/shared/property.service';
 import { Invite } from '../shared/invite.model';
 import { InviteService } from '../shared/invite.service';
 
@@ -24,18 +25,26 @@ export class InviteFormComponent
         })
     }
 
-
-
     constructor(
         protected injector: Injector,
         protected inviteService: InviteService,
         protected toastMessageService: ToastMessagesService,
         protected tokenStorageService: TokenStorageService,
+        protected propertyService: PropertyService
     ) { 
         super(injector, new Invite, inviteService,
             Invite.fromJson, toastMessageService,tokenStorageService)
     }
+    ngOnInit():void {
+        this.loadCurrentActiveProperty(this.loadAuthResource().id);
+        super.ngOnInit();
+    }
 
-
+    loadCurrentActiveProperty(userId: number){
+        return this.propertyService.getCurrentActivePropertyId(userId)
+            .subscribe(id => {
+                this.resourceForm.controls['idProperty'].setValue(id)
+            })
+    }
 
 }
