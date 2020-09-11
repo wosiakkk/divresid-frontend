@@ -1,15 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
+import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { Invite } from '../shared/invite.model';
+import { InviteService } from '../shared/invite.service';
 
 @Component({
   selector: 'app-invite-form',
   templateUrl: './invite-form.component.html',
   styleUrls: ['./invite-form.component.css']
 })
-export class InviteFormComponent implements OnInit {
+export class InviteFormComponent 
+    extends BaseResourceFormComponent<Invite> {
 
-  constructor() { }
+    protected buildResourceForm(): void {
+        this.resourceForm = this.formBuilder.group({
+            id: [null],
+            idFrom: [this.loadAuthResource().id],
+            idTo: [null],
+            idProperty: [null],
+            accepted: [false],
+            email: [null]
+        })
+    }
 
-  ngOnInit(): void {
-  }
+
+
+    constructor(
+        protected injector: Injector,
+        protected inviteService: InviteService,
+        protected toastMessageService: ToastMessagesService,
+        protected tokenStorageService: TokenStorageService,
+    ) { 
+        super(injector, new Invite, inviteService,
+            Invite.fromJson, toastMessageService,tokenStorageService)
+    }
+
+
 
 }
