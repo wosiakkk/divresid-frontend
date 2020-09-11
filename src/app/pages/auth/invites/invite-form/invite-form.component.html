@@ -1,1 +1,32 @@
-<p>invite-form works!</p>
+<app-page-header
+    page-title = {{pageTitle}}
+    page-sub-title = "Envie um novo convite para um usuário cadastrado"
+    page-new-button-text = "Voltar"
+    page-button-link = "/invites"
+    icon-button = "backIcon"
+>
+</app-page-header>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Busque pelo usuário e envie o convite
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <!--SearchUser-->
+                <div class="form-group col-md-6">
+                    <label for="searchUser">Buscar Usuário</label>
+                    <input type="text" class="form-control"
+                        id="searchUser" formControlName="email">
+                    <app-form-field-error
+                        [form-control]="resourceForm.get('email')">
+                    </app-form-field-error>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
