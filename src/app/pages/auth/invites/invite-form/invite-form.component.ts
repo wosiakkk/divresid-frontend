@@ -46,13 +46,13 @@ export class InviteFormComponent
 
     loadCurrentActiveProperty(userId: number){
         return this.propertyService.getCurrentActivePropertyId(userId)
-            .subscribe(id => {
-                this.resourceForm.controls['idProperty'].setValue(id)
-                this.currentProperty.id = id;
-                if(id != null && id != '')
+            .subscribe(p => {
+                this.resourceForm.controls['idProperty'].setValue(p.id)
+                this.currentProperty = p;
+                if(p.id != null && p.id != '')
                     this.existsActiveProperty = true;
                 else
-                this.existsActiveProperty = false;
+                    this.existsActiveProperty = false;
                 }
             )
     }
