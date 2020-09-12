@@ -19,7 +19,7 @@ export class InviteFormComponent
 
     currentProperty: Property = new Property();
     existsActiveProperty: boolean;
-    userFound: boolean;
+    userFound: boolean = false;
     faSearch = faSearch;    
 
     protected buildResourceForm(): void {
@@ -51,7 +51,7 @@ export class InviteFormComponent
     loadCurrentActiveProperty(userId: number){
         this.propertyService.getCurrentActivePropertyId(userId)
             .subscribe(p => {
-                this.resourceForm.controls['idProperty'].setValue(p.id)
+                this.resourceForm.controls['idProperty'].setValue(p)
                 this.currentProperty = p;
                 if(p.id != null && p.id != '')
                     this.existsActiveProperty = true;

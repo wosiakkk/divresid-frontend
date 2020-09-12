@@ -43,10 +43,21 @@
                         <fa-icon [icon]="faSearch" size="lg"></fa-icon>
                     </a>
                 </div>
-               
+            </div>
+            <div class="form-row">
+                <div class="alert alert-success" role="alert"
+                    *ngIf="userFound">
+                    Usuário do email informado foi encontrado, 
+                    para enviar o convite clique em Enviar.
+                  </div>
             </div>
         </div>
     </div>
 
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3"
+        *ngIf="userFound">
+         Enviar Convite
+    </button>
 
 </form>
