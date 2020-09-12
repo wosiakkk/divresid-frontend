@@ -15,6 +15,8 @@ import { ViaCepService } from '../shared/viacep.service'
 })
 export class PropertyFormComponent extends BaseResourceFormComponent<Property> {
  
+    onLoading: boolean = false;
+
     constructor(
         protected propertyService: PropertyService,
         protected injector: Injector,
@@ -56,9 +58,11 @@ export class PropertyFormComponent extends BaseResourceFormComponent<Property> {
     }
 
     getDataFromCep(){
+        this.onLoading = true
         let cep = this.resourceForm.controls['zipCode'].value;
         this.cepService.getDataFromCep(cep).subscribe(
             response =>{
+                this.onLoading = false;
                 this.resourceForm.controls['street']
                     .setValue(response.logradouro);
                 this.resourceForm.controls['city']

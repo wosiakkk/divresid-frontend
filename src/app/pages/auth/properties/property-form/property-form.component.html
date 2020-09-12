@@ -61,12 +61,20 @@
                 <!--CEP-->
                 <div class="form-group col-md-2">
                     <label for="zipCode">CEP</label>
+                    
                     <input type="number" class="form-control"
                         id="zipCode" formControlName="zipCode"
                         (blur)="getDataFromCep()">
+                        
+                </div>
+                <!--Loading spin-->
+                <div class="form-group col-md-1 mt-4" *ngIf="onLoading">
+                    <p-progressSpinner [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
+                    <br>
+                        <small>Buscando CEP</small>
                 </div>
                 <!--Street-->
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                     <label for="street">Rua</label>
                     <input type="text" class="form-control"
                         id="street" formControlName="street">
