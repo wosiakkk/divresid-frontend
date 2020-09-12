@@ -75,6 +75,36 @@ export class ToastMessagesService {
         toastr.success("Dado salvo com sucesso!", "Sucesso");
     }
 
+
+
+
+
+
+    /*refatorar esses métodos, deixaer generico como este*/
+    loadCreatedResourceSuccessMsg(msg: string, position: string){
+        toastr.options.positionClass = position;
+        toastr.success(msg);
+    }
+    loadErrorToast(msg: string, position: string){
+        toastr.options.positionClass = position;
+        toastr.options.onclick = null;
+        toastr.options.tapToDismiss = false;
+        toastr.options.timeOut = 0;
+        toastr.options.extendedTimeOut = 0;
+        toastr.options.closeButton = true;
+        toastr.error(msg);
+    }
+
+
+
+
+
+
+
+
+
+
+
     loadUpdateResourceSuccess(){
         toastr.options.positionClass = 'toast-bottom-center';
         toastr.success("Dado atualizado com sucesso!", "Sucesso");

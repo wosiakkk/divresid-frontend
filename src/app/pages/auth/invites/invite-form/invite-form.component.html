@@ -26,13 +26,24 @@
             <div class="form-row">
                 <!--SearchUser-->
                 <div class="form-group col-md-6">
-                    <label for="searchUser">Buscar Usuário</label>
+                    <label for="searchUser">Email para a busca</label>
                     <input type="text" class="form-control"
                         id="searchUser" formControlName="email">
                     <app-form-field-error
                         [form-control]="resourceForm.get('email')">
                     </app-form-field-error>
                 </div>
+                <div class="form-group col-md-2">
+                    <label for="sbtn">Buscar</label>
+                    <br>
+                    <a id="sbtn" class="btn btn-outline-info btn-sm" 
+                        (click)= "findUserToSendInvite()"
+                        [class.disabled]="resourceForm.invalid"
+                    >
+                        <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+                    </a>
+                </div>
+               
             </div>
         </div>
     </div>
