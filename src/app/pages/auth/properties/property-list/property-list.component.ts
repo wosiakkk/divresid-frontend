@@ -6,6 +6,7 @@ import { ToastMessagesService } from 'src/app/shared/services/toast-messages.ser
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { PropertyService } from '../shared/property.service'
 
+
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',

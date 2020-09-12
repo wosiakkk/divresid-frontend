@@ -7,6 +7,7 @@ import { IMaskModule } from 'angular-imask'
 import { PropertyFormComponent } from './property-form/property-form.component'
 import { PropertyListComponent } from './property-list/property-list.component'
 import { PropertiesRoutingModule } from './properties-routing.module'
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PropertiesRoutingModule } from './properties-routing.module'
         PaginatorModule,
         InputSwitchModule,
         PropertiesRoutingModule,
-        IMaskModule
+        IMaskModule,
+        ProgressSpinnerModule
     ],
     declarations: [PropertyFormComponent, PropertyListComponent]
 })
