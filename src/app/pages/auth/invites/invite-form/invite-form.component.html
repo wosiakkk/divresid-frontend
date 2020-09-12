@@ -1,6 +1,7 @@
 <app-page-header
     page-title = {{pageTitle}}
-    page-sub-title = "Envie um novo convite para um usuário cadastrado"
+    page-sub-title = "Envie um novo convite
+        para um usuário cadastrado em seu imóvel ativo"
     page-new-button-text = "Voltar"
     page-button-link = "/invites"
     icon-button = "backIcon"
@@ -11,22 +12,52 @@
 
     <div class="card">
         <div class="card-header">
-            Busque pelo usuário e envie o convite
+            <div *ngIf="existsActiveProperty">
+                Busque pelo usuário e envie o convite para imóvel: 
+                <strong> {{currentProperty.name}}</strong> 
+            </div>
+            <div *ngIf="!existsActiveProperty">
+                <strong>
+                    Você não possui nenhum imóvel ativo no momento!
+                </strong>
+            </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="existsActiveProperty">
             <div class="form-row">
                 <!--SearchUser-->
                 <div class="form-group col-md-6">
-                    <label for="searchUser">Buscar Usuário</label>
+                    <label for="searchUser">Email para a busca</label>
                     <input type="text" class="form-control"
                         id="searchUser" formControlName="email">
                     <app-form-field-error
                         [form-control]="resourceForm.get('email')">
                     </app-form-field-error>
                 </div>
+                <div class="form-group col-md-2">
+                    <label for="sbtn">Buscar</label>
+                    <br>
+                    <a id="sbtn" class="btn btn-outline-info btn-sm" 
+                        (click)= "findUserToSendInvite()"
+                        [class.disabled]="resourceForm.invalid"
+                    >
+                        <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+                    </a>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="alert alert-success" role="alert"
+                    *ngIf="userFound">
+                    Usuário do email informado foi encontrado, 
+                    para enviar o convite clique em Enviar.
+                  </div>
             </div>
         </div>
     </div>
 
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3"
+        *ngIf="userFound">
+         Enviar Convite
+    </button>
 
 </form>
