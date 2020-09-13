@@ -21,4 +21,11 @@ export class PropertyService extends BaseResourceService<Property>{
             .get(`${this.apiPath}/currentActive?userId=${userId}`)
                 .pipe(catchError(this.handleError))
     }
+
+    removeResident(userId: number, propertyId: number){
+        return this.http.delete(`${this.apiPath}`+
+            `/removeResident?userId=${userId}&propertyId=${propertyId}`)
+            .pipe(catchError(this.handleError))
+    }
+
 }
