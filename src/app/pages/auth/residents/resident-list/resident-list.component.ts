@@ -18,6 +18,7 @@ export class ResidentListComponent
     extends BaseResourceListNoLazy<Resident> {
 
     faSearch = faSearch;
+    propertyId: number;
     
     cols: any[] = [
         {field: 'name', header: 'Nome'},
@@ -45,6 +46,7 @@ export class ResidentListComponent
                 .getCurrentActivePropertyId(userAuth.id).subscribe(
                     p => {
                         this.resources = p.residents;
+                        this.propertyId = p.id;
                         this.loading = false;
                         if(this.resources.length <=0)
                             this.emptyList = true;
@@ -57,17 +59,20 @@ export class ResidentListComponent
         }, 300); 
     }
 
+    //override
     deleteResource(resource : Resident){
         const mustDelete = confirm('Deseja realmente excluir?');
         if(mustDelete){
-        /*  this.resourcesService.delete(resource.id).subscribe(
-            () =>{ 
-                this.resources = 
-                    this.resources.filter(element => element != resource);
-                this.toastMessageService.loadDeleteResourceSucess();
-            },
-            () => this.toastMessageService.loadDeleteResourceError()
-          )*/
+          this.propertySerive.removeResident(resource.id,this.propertyId)
+            .subscribe(
+                () =>{ 
+                    this.resources = 
+                        this.resources.filter(
+                            element => element != resource);
+                    this.toastService.loadDeleteResourceSucess();
+                },
+                () => this.toastService.loadDeleteResourceError()
+          )
         }
       }
 }
