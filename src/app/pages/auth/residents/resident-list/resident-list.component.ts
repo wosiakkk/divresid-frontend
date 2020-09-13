@@ -53,7 +53,17 @@ export class ResidentListComponent
                         this.change.detectChanges();
                     },
                     error => {
-                        this.toastService.loadServerListErrorToast();
+                        if(error.status === 404){
+                            this.loading = false;
+                            this.emptyList = true;
+                            this.change.detectChanges();
+                            this.toastService
+                                .loadErrorToast(
+                                    "Você não possui imóvel ativo"
+                                    ,"toast-bottom-center")
+                        }else{
+                            this.toastService.loadServerListErrorToast();
+                        }
                     }
                 )
         }, 300); 
