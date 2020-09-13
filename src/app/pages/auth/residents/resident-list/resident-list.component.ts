@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
-import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
+import { BaseResourceListNoLazy } from 'src/app/shared/components/base-resource-list/base-resource-list-no-lazy.component';
 import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
 import { Resident } from '../shared/resident.model'
 import { ResidentService } from '../shared/resident.service'
@@ -14,12 +14,10 @@ import { User } from 'src/app/security/models/user.model';
   templateUrl: './resident-list.component.html',
   styleUrls: ['./resident-list.component.css']
 })
-export class ResidentListComponent implements OnInit {
-//component sem lazyloading, não implementnado o base list resource
+export class ResidentListComponent 
+    extends BaseResourceListNoLazy<Resident> {
 
     faSearch = faSearch;
-    residents: Resident[] = [];
-    loading: boolean;
     
     cols: any[] = [
         {field: 'name', header: 'Nome'},
@@ -33,25 +31,30 @@ export class ResidentListComponent implements OnInit {
         private change: ChangeDetectorRef,
         private toastService: ToastMessagesService,
         private tokenService: TokenStorageService
-    ){ }
+    ){
+        super(residentService,change,toastService,tokenService);
+     }
 
+    //override
     ngOnInit(){
-        this.change.detectChanges();
         this.loading = true;
-        let userAuth = this.loadAuthResource();
-        this.propertySerive.getCurrentActivePropertyId(userAuth.id).subscribe(
-            p => {
-                this.residents = p.residents;
-                this.loading = false; 
-                this.change.detectChanges();
-            },
-            error => alert('problema ao carregar moradores')
-        )
-    }
-
-    private loadAuthResource(){
-        return new User(this.tokenService.getUser().id);
-
+        this.change.detectChanges();
+        setTimeout(() => {
+            let userAuth = this.loadAuthResource();
+            this.propertySerive
+                .getCurrentActivePropertyId(userAuth.id).subscribe(
+                    p => {
+                        this.resources = p.residents;
+                        this.loading = false;
+                        if(this.resources.length <=0)
+                            this.emptyList = true;
+                        this.change.detectChanges();
+                    },
+                    error => {
+                        this.toastService.loadServerListErrorToast();
+                    }
+                )
+        }, 300); 
     }
 
     deleteResource(resource : Resident){
