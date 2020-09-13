@@ -23,6 +23,7 @@ export class ResidentListComponent
     cols: any[] = [
         {field: 'name', header: 'Nome'},
         {field: 'email', header: 'E-mail'},
+        {field: 'role', header: 'Permissão'},
         {field: 'actions', header: 'Ações'}
     ]
 

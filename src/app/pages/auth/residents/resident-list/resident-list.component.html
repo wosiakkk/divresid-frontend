@@ -43,10 +43,19 @@
                     {{resources.email}}
                 </td>
                 <td class="text-center">
+                    <div *ngIf="resources.roles[0].name === 'ROLE_RESIDENT'">
+                        Morador
+                    </div>
+                    <div *ngIf="resources.roles[0].name === 'ROLE_MODERATOR'">
+                        Moderador
+                    </div>
+                    
+                </td>
+                <td class="text-center">
                     <a class="btn btn-outline-info btn-sm mr-2" 
                         [routerLink]="[resources.id, 'edit']"
                     >
-                        Editar
+                        Editar Permissão
                     </a>
                     <button class="btn btn-outline-danger btn-sm"
                         (click)="deleteResource(resources)"
