@@ -1,11 +1,12 @@
 import { BaseResourceModel } from "../../../../shared/models/base-resource.model";
+import { Role } from '../../../../security/models/role.model'
 
 export class Resident extends BaseResourceModel{
     constructor(
         id?: number,
         name?: string,
         email?: string,
-        roles?: string[]
+        roles?: Role[]
     ){
         super();
     }
