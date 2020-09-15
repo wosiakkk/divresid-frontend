@@ -1,1 +1,48 @@
-<p>resident-form works!</p>
+<app-page-header
+    page-title = {{pageTitle}}
+    page-sub-title = "Selecione o nível de permissão para o usuário."
+    page-new-button-text = "Voltar"
+    page-button-link = "/residents"
+    icon-button =  "backIcon"
+>
+</app-page-header>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Dados 
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="nome">Nome do Morador</label>
+                    <input type="text" class="form-control" 
+                        id="name" formControlName="name" disabled=true>
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('name')" >
+                    </app-form-field-error>    
+                </div>
+                <div class="form-group col-md-4 ml-4 ">
+                    <label for="options">
+                        Selecione a nova permissão
+                    </label>
+                    <div id="options" >
+                        <p-radioButton name="grouprole" label="Morador" 
+                            value="ROLE_RESIDENT" formControlName="roles">
+                        </p-radioButton>
+                        <br>
+                        <p-radioButton name="grouprole" label="Moderador"
+                            value="ROLE_MODERATOR" formControlName="roles">
+                        </p-radioButton>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3">
+        Salvar
+    </button>
+</form>
