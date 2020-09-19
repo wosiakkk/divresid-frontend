@@ -45,7 +45,8 @@ export class PropertyFormComponent extends BaseResourceFormComponent<Property> {
             state: [null],
             user: [this.loadAuthResource()],
             residents: [null],
-            active: [true]
+            active: [true],
+            rules: [null]
         })
     }
     //sobrescrita dos valores default de titulos de página

@@ -19,12 +19,10 @@
                 </p>
             </div>
         </div>
-        <div class="jumbotron jumbotron-fluid" *ngIf="propertyActive.rules === null">
-            <div class="container">
-                <p class="lead">
-                    Você ainda não definiu as regras para esse imóvel!
-                </p>
-            </div>
+        <div *ngIf="propertyActive.rules == null">
+            <p class="lead">
+                Você ainda não definiu as regras para esse imóvel!
+            </p>
         </div>
     </div>
 </div>
