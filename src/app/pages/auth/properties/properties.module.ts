@@ -10,7 +10,7 @@ import { PropertiesRoutingModule } from './properties-routing.module'
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PropertyRulesViewComponent } from './property-rules-view/property-rules-view.component';
 import { PropertyRulesFormComponent } from './property-rules-form/property-rules-form.component';
-//import { EditorModule } from 'primeng/editor';
+import { EditorModule } from 'primeng/editor';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { PropertyRulesFormComponent } from './property-rules-form/property-rules
         PropertiesRoutingModule,
         IMaskModule,
         ProgressSpinnerModule,
-        //EditorModule
+        EditorModule
     ],
     declarations: [PropertyFormComponent, PropertyListComponent, PropertyRulesViewComponent, PropertyRulesFormComponent]
 })
