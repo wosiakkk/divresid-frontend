@@ -12,9 +12,9 @@ const routes: Routes = [
     {path: 'new', component: PropertyFormComponent, canActivate: [AuthGuard]},
     {path: ':id/edit', component: PropertyFormComponent,
         canActivate: [AuthGuard]},
-    {path: '/rules', component: PropertyRulesViewComponent,
+    {path: 'rules', component: PropertyRulesViewComponent,
         canActivate: [AuthGuard]},
-    {path: 'rules/edit', component: PropertyRulesFormComponent,
+    {path: 'rules/editor', component: PropertyRulesFormComponent,
         canActivate: [AuthGuard]}
 ]
 

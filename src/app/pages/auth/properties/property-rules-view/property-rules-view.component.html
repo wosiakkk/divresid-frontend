@@ -1,1 +1,30 @@
-<p>property-rules-view works!</p>
+<app-page-header
+    page-title = "Regras do Imóvel"
+    page-sub-title = "Descrição das regras do imóvel ativo."
+    page-new-button-text = "Editar/Cadastrar"
+    page-button-link = "editor"
+    icon-button = "editIcon">
+>
+</app-page-header>
+
+<div class="card">
+    <div class="card-header">
+        Descrição
+    </div>
+    <div class="card-body">
+        <div class="jumbotron jumbotron-fluid" *ngIf="propertyActive.rules != null">
+            <div class="container">
+                <p class="lead">
+                    {{propertyActive.rules}}
+                </p>
+            </div>
+        </div>
+        <div class="jumbotron jumbotron-fluid" *ngIf="propertyActive.rules === null">
+            <div class="container">
+                <p class="lead">
+                    Você ainda não definiu as regras para esse imóvel!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

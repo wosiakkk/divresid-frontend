@@ -24,6 +24,9 @@ import { EditorModule } from 'primeng/editor';
         ProgressSpinnerModule,
         EditorModule
     ],
-    declarations: [PropertyFormComponent, PropertyListComponent, PropertyRulesViewComponent, PropertyRulesFormComponent]
+    declarations: [
+        PropertyFormComponent, PropertyListComponent,
+        PropertyRulesViewComponent, PropertyRulesFormComponent
+    ]
 })
 export class PropertiesModule{}
