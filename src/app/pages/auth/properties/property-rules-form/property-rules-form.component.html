@@ -1,2 +1,31 @@
-<p-editor [(ngModel)]="text" [style]="{'height':'320px'}"></p-editor>
+<app-page-header
+    page-title = "Regras do Imóvel"
+    page-sub-title = "Informe ou atualize as informações."
+    page-new-button-text = "Voltar"
+    page-button-link = "/properties/rules"
+    icon-button = "backIcon">
+>
+</app-page-header>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+    <div class="card">
+        <div class="card-header">
+            Regras
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <p-editor 
+                        formControlName="rules"
+                        [style]="{'height':'320px'}">
+                    </p-editor>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3">
+        Salvar
+    </button>
+</form>
 
