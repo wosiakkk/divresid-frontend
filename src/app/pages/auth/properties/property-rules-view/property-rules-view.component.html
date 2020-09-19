@@ -11,14 +11,14 @@
     <div class="card-header">
         Descrição
     </div>
-    <div class="card-body">
-        <div class="jumbotron jumbotron-fluid"
-            *ngIf="propertyActive.rules != null">
-            <div class="container">
-                <p class="lead">
-                    {{propertyActive.rules}}
-                </p>
-            </div>
+    <div class="card-body" *ngIf="onLoading">
+        <p-progressSpinner 
+            [style]="{width: '40px', height: '40px'}">
+        </p-progressSpinner>
+    </div>
+    <div class="card-body" *ngIf="!onLoading">
+        <div *ngIf="propertyActive.rules != null">
+            <div [innerHTML]="propertyActive.rules"></div>
         </div>
         <div *ngIf="propertyActive.rules == null">
             <p class="lead">

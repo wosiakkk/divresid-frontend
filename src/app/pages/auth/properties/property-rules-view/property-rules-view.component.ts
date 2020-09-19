@@ -13,7 +13,8 @@ import { PropertyService } from '../shared/property.service';
 export class PropertyRulesViewComponent implements OnInit {
 
     authUser : User;
-    propertyActive: Property;
+    propertyActive: Property = new Property();
+    onLoading: boolean = false;
 
     constructor(
         private propertyService: PropertyService,
@@ -23,14 +24,21 @@ export class PropertyRulesViewComponent implements OnInit {
     { }
 
     ngOnInit(): void {
+        this.onLoading = true;
         this.authUser = this.tokenService.currentUser;
         this.propertyService
             .getCurrentActivePropertyId(this.authUser.id).subscribe(
-                propery => this.propertyActive = propery,
-                error => this.toastService
+                propery => {
+                    this.onLoading = false;
+                    this.propertyActive = propery
+                },
+                error => {
+                    this.onLoading = false;
+                    this.toastService
                     .loadErrorToast("Problema ao carregar imóvel ativo"
                         + error,
                         "toast-bottom-center")
+                }
             )
     }
 
