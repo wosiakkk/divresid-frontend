@@ -8,6 +8,9 @@ import { PropertyFormComponent } from './property-form/property-form.component'
 import { PropertyListComponent } from './property-list/property-list.component'
 import { PropertiesRoutingModule } from './properties-routing.module'
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { PropertyRulesViewComponent } from './property-rules-view/property-rules-view.component';
+import { PropertyRulesFormComponent } from './property-rules-form/property-rules-form.component';
+import { EditorModule } from 'primeng/editor';
 
 
 @NgModule({
@@ -18,8 +21,12 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
         InputSwitchModule,
         PropertiesRoutingModule,
         IMaskModule,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        EditorModule
     ],
-    declarations: [PropertyFormComponent, PropertyListComponent]
+    declarations: [
+        PropertyFormComponent, PropertyListComponent,
+        PropertyRulesViewComponent, PropertyRulesFormComponent
+    ]
 })
 export class PropertiesModule{}

@@ -69,7 +69,9 @@
                 </div>
                 <!--Loading spin-->
                 <div class="form-group col-md-1 mt-4" *ngIf="onLoading">
-                    <p-progressSpinner [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
+                    <p-progressSpinner 
+                        [style]="{width: '40px', height: '40px'}">
+                    </p-progressSpinner>
                     <br>
                         <small>Buscando CEP</small>
                 </div>

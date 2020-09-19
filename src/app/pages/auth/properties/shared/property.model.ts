@@ -15,7 +15,8 @@ export class Property extends BaseResourceModel{
         public city?: string,
         public state?: string,
         public residents?: User[],
-        public active?: boolean
+        public active?: boolean,
+        public rules?: string
     ){
         super();
     }
