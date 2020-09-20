@@ -1,6 +1,8 @@
 import { Injectable, Injector } from '@angular/core'
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { User } from 'src/app/security/models/user.model';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { BaseResourceService } from '../../../../shared/services/base-resource.service'
 import { Property } from './property.model'
 
@@ -9,7 +11,10 @@ import { Property } from './property.model'
 })
 export class PropertyService extends BaseResourceService<Property>{
 
-    constructor( protected injector: Injector) {
+    constructor( 
+            protected injector: Injector,
+            private tokenService: TokenStorageService
+        ) {
         super(
             "http://localhost:4200/api/auth/properties", injector, 
             Property.fromJson, Property.paginationFromJson
@@ -17,6 +22,12 @@ export class PropertyService extends BaseResourceService<Property>{
     }
 
     getCurrentActivePropertyId(userId: number): Observable<any>{
+        let userAuth: User = this.tokenService.currentUser;
+        if(userAuth.roles[0] == 'ROLE_RESIDENT'){
+            console.log('é morador!!! = currentActiveOfResident')
+        } else{
+            console.log('não é morador!!! = currentActive')
+        }
         return this.http
             .get(`${this.apiPath}/currentActive?userId=${userId}`)
                 .pipe(catchError(this.handleError))
