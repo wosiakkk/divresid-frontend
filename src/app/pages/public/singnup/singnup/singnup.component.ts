@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicService } from '../../public.service';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-singnup',
@@ -15,7 +17,11 @@ export class SingnupComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private publicService: PublicService) { }
+  constructor(
+        private publicService: PublicService,
+        private toastoService: ToastMessagesService,
+        private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +32,10 @@ export class SingnupComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.toastoService
+            .loadCreatedResourceSuccessMsg("Cadastro criado com sucesso!",
+                "toast-bottom-center");
+        this.router.navigateByUrl("/login");
       },
       err => {
         this.errorMessage = err.error.message;

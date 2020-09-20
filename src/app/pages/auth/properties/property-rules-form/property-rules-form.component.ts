@@ -70,5 +70,12 @@ export class PropertyRulesFormComponent
                 );
         }
     }
+    
+    //ovierride
+    protected actionsForSuccess() {
+        this.toastMessagesService.loadUpdateResourceSuccess();
+        this.router.navigateByUrl('/properties/rules')
+    }
+
 
 }
