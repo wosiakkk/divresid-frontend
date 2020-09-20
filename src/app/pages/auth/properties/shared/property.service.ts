@@ -24,13 +24,14 @@ export class PropertyService extends BaseResourceService<Property>{
     getCurrentActivePropertyId(userId: number): Observable<any>{
         let userAuth: User = this.tokenService.currentUser;
         if(userAuth.roles[0] == 'ROLE_RESIDENT'){
-            console.log('é morador!!! = currentActiveOfResident')
+            return this.http
+            .get(`${this.apiPath}/currentActiveOfResident?userId=${userId}`)
+                .pipe(catchError(this.handleError))
         } else{
-            console.log('não é morador!!! = currentActive')
-        }
-        return this.http
+            return this.http
             .get(`${this.apiPath}/currentActive?userId=${userId}`)
                 .pipe(catchError(this.handleError))
+        }
     }
 
     removeResident(userId: number, propertyId: number){
