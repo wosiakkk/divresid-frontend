@@ -69,8 +69,9 @@
                 </a>
             </li>
             <li>
-                <a class="scroll-link list-group-item
-                  list-group-item-action bg-light" href="#section-3"
+                <a class="list-group-item list-group-item-action" 
+                  routerLinkActive="active" 
+                  routerLink="/properties/profile"
                 >
                   <div class="ml-4">  
                           <fa-icon [icon]="faBuilding" size="lg"></fa-icon>
@@ -83,7 +84,10 @@
                 routerLinkActive="active" routerLink="/properties/rules"
                 >
                   <div class="ml-4">  
-                        <fa-icon [icon]="faExclamationCircle" size="lg"></fa-icon>
+                        <fa-icon 
+                            [icon]="faExclamationCircle" 
+                            size="lg">
+                        </fa-icon>
                         Regras do Imóvel
                   </div>
                 </a>
