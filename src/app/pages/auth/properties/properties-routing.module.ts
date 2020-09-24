@@ -6,6 +6,7 @@ import { PropertyRulesViewComponent } from './property-rules-view/property-rules
 import { PropertyRulesFormComponent } from './property-rules-form/property-rules-form.component'
 import { AuthGuard } from '../../../security/guards/auth/auth.guard';
 import { AdminGuard } from '../../../security/guards/admin/admin.guard';
+import { PropertyProfileComponent } from './property-profile/property-profile.component'
 
 
 const routes: Routes = [
@@ -17,7 +18,9 @@ const routes: Routes = [
     {path: 'rules', component: PropertyRulesViewComponent,
         canActivate: [AuthGuard]},
     {path: 'rules/editor', component: PropertyRulesFormComponent,
-        canActivate: [AuthGuard, AdminGuard]}
+        canActivate: [AuthGuard, AdminGuard]},
+    {path: 'profile', component: PropertyProfileComponent,
+        canActivate: [AuthGuard]}
 ]
 
 @NgModule({

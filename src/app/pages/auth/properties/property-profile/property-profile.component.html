@@ -1,0 +1,152 @@
+<app-page-header
+    page-title = "Perfil do Imóvel"
+    page-sub-title = "Informações do imóvel ativo"
+    page-new-button-text = "Home"
+    page-button-link = "/home"
+    icon-button =  "backIcon"
+>
+</app-page-header>
+
+
+<div class="card">
+    <div class="card-header">
+        Perfil
+    </div>
+    <div class="card-body">
+        <strong>Informações</strong>
+        <hr>
+        <div  *ngIf="propertyActive.name">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Nome
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.name}}"
+                >
+            </div>
+        </div>
+        <div *ngIf="propertyActive.description">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Descrição
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.description}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.landLordName">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Proprietário
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.landLordName}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.landLordPhone">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Tel. Proprietário
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.landLordPhone}}">
+            </div>
+        </div>
+        <strong>Endereço:</strong>
+        <hr>
+        <div *ngIf="propertyActive.zipCode">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">CEP
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.zipCode}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.street">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Rua
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.street}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.number">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Número
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.number}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.addressDetails">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Complemento
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.addressDetails}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.city">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Cidade
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.city}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.state">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Estado
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{propertyActive.state}}">
+            </div>
+        </div>
+        <strong>Moradores:</strong>
+        <hr>
+        <div *ngIf="propertyActive.residents">
+            <div class="input-group mb-3" 
+                *ngFor="let user of propertyActive.residents;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Nome Morador
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{user.name}}">
+            </div>
+        </div>
+        <div *ngIf="propertyActive.rules">
+            <strong>Regras:</strong>
+            <hr>
+            <div [innerHTML]="propertyActive.rules"></div>
+        </div>
+    </div>
+</div>
+
