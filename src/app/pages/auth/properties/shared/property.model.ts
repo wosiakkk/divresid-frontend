@@ -6,7 +6,7 @@ export class Property extends BaseResourceModel{
     constructor(
         public name?: string,
         public description?: string,
-        public landLordLand?: string,
+        public landLordName?: string,
         public landLordPhone?: string,
         public zipCode?: string,
         public street?: string,
