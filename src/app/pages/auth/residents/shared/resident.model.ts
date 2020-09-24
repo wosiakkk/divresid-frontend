@@ -4,6 +4,8 @@ import { ResidentFormComponent } from '../resident-form/resident-form.component'
 
 export class Resident extends BaseResourceModel{
     roles: Role[];
+    name: string;
+    email: string;
     constructor(
         id?: number,
         name?: string,

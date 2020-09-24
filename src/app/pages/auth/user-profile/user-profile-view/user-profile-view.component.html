@@ -1,1 +1,43 @@
-<p>user-profile-view works!</p>
+<app-page-header
+    page-title = "Perfil do Usuário"
+    page-sub-title = "Informações do usuário"
+    page-new-button-text = "Home"
+    page-button-link = "/home"
+    icon-button =  "backIcon"
+>
+</app-page-header>
+
+
+<div class="card">
+    <div class="card-header">
+        Perfil
+    </div>
+    <div class="card-body">
+        <strong>Informações</strong>
+        <hr>
+        <div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Nome
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{userAuth.name}}"
+                >
+            </div>
+        </div>
+        <div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" 
+                        id="basic-addon1">Email
+                    </span>
+                </div>
+                <input type="text" class="form-control" disabled="true" 
+                    value="{{userAuth.email}}">
+            </div>
+        </div>
+    </div>
+</div>
+
