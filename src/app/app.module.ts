@@ -8,6 +8,7 @@ import { AuthService } from './security/services/auth.service'
 import { TokenStorageService } from './security/services/token-storage.service';
 import { CoreModule } from "./core/core.module";
 import { LoginModule } from './pages/public/login/login.module';
+import { UserProfileViewComponent } from './pages/auth/user-profile/user-profile-view/user-profile-view.component';
 
 
 
@@ -17,6 +18,7 @@ import { LoginModule } from './pages/public/login/login.module';
 @NgModule({
   declarations: [
     AppComponent,
+    UserProfileViewComponent,
   ],
   imports: [
     CoreModule,
