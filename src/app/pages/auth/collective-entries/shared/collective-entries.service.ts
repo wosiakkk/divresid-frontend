@@ -8,7 +8,7 @@ import { Injectable, Injector } from '@angular/core'
 export class CollectiveEntriesService extends BaseResourceService<CollectiveEntry> {
 
     constructor(protected injector: Injector){
-        super("http://localhost:4200/api/auth/#####",injector,
+        super("http://localhost:4200/api/auth/entries/collective",injector,
             CollectiveEntry.fromJson,CollectiveEntry.paginationFromJson);
     }
 

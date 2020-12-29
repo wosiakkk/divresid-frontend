@@ -86,6 +86,10 @@
                         [class.badge-success]="resources.type == 'revenue'"
                         [class.badge-danger]="resources.type == 'expense'"
                     >{{resources.type == 'revenue'? 'receita':'despesa'}}</span>
+                    <span class="badge float-left mr-2 badge-primary"
+                        *ngIf="resources.collective"
+                    >coletiva</span>
+                    
                     <strong>{{resources.name}}</strong> 
                     <br>
                     {{resources.description}}
