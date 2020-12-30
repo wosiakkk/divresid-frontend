@@ -1,1 +1,82 @@
-<p>collective-entry-list works!</p>
+<app-page-header
+    page-title = "Lançamentos Coletivos"
+    page-sub-title = "Lista de Lançamentos Coletivos cadastrados."
+    page-new-button-text = "Lançamento"
+    page-button-link = "new"
+    icon-button = "newIcon">
+</app-page-header>
+
+<div class="row  mb-2">
+    <div class="input-group-prepend ml-3">
+        <label class="input-group-text" for="filterGlobal">
+            <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+        </label>
+    </div>  
+    <input id="filterGlobal" class="form-control" type="text"
+        pInputText style="width:25%"
+        placeholder="Busca dinâmica"
+        (input)="tt.filterGlobal($event.target.value, 'contains')">
+</div>
+
+<div class="table-responsive">
+
+    <p-table #tt [columns]="cols"
+        [value]="resources" [paginator]="true" [rows]="5" 
+        [resizableColumns]="true"
+        [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
+        [totalRecords]="totalRecords" [loading]="loading">
+        
+        <ng-template pTemplate="header" let-columns>
+            <tr class="text-center">
+                <th *ngFor="let col of columns" pResizableColumn  
+                    class="bg-info text-light">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-resources>
+            <tr>
+                <!--Date-->
+                <td class="text-center">
+                    <strong>{{resources.date  | date:'mediumDate'}}</strong> 
+                </td>
+                <!-- Name/Description-->
+                <td>
+                    <strong>{{resources.name}}</strong> 
+                    <br>
+                    {{resources.description}}
+                </td>
+               <!--Amount-->
+                <td class="text-center">
+                    <strong 
+                        [class.text-success]="resources.type == 'revenue'"
+                        [class.text-danger]="resources.type == 'expense'"
+                    >
+                        {{resources.amount | currency:'BRL'}}
+                    </strong> 
+                </td>
+                <!--Actions-->
+                <td class="text-center">
+                    <a class="btn btn-outline-info btn-sm mr-2" 
+                        [routerLink]="[resources.id, 'edit']"
+                    >
+                        Editar
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm"
+                        (click)="deleteResource(resources)"
+                    >
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length">
+                    Você ainda não cadastrou nenhum Lançamento Coletivo!
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
