@@ -11,6 +11,7 @@ export class Entry extends BaseResourceModel{
         public amount?: number,
         public date?: Date,
         public paid?: boolean,
+        public collective?: boolean,
         public categoryId?: number,
         public category?: Category,
     ){
