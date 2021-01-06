@@ -15,8 +15,10 @@ export class CollectiveEntry extends BaseResourceModel {
         public paid?: boolean,
         public collective?: boolean,
         public category?: Category,
+        public categoryId?: number,
         public property?: Property,
         public residents?: User[],
+        public selectedResidents?: User[]
     ){
         super();
     }

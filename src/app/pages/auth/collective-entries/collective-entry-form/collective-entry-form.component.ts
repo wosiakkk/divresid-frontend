@@ -57,11 +57,13 @@ export class CollectiveEntryFormComponent
             id: [null],
             name: [null, [Validators.required]],
             description: [null],
+            type: ["expense"],
             amount: [null],
             date: [null],
             categoryId: [null, [Validators.required]],
             user: [this.loadAuthResource()],
-            selectedResidents: [null, [Validators.required]]
+            selectedResidents: [null, [Validators.required]],
+            property: [null]
         })
     }
 
@@ -89,7 +91,7 @@ export class CollectiveEntryFormComponent
         this.propertyservice
             .getCurrentActivePropertyId(this.authUser.id).subscribe(
                 property => {
-                    this.activeProperty = property;
+                    this.resourceForm.controls['property'].setValue(property);
                     this.residents = property.residents;
                 },
                 error => this.toastService
@@ -108,12 +110,12 @@ export class CollectiveEntryFormComponent
 
     //sobrescrevendo os métodos para o título da página, para não utilizar o valor padrão
     protected creationPageTitle(): string{
-        return "Cadastro de novo Lançamento";
+        return "Cadastro de novo Lançamento Coletivo";
     }
 
     protected editionPageTitle(): string{
         const resourceName = this.resource.name || ""; //caso ainda nao tenha sido carregado o dado, "" será exibido, evitnado o undefined
-        return "Editando Lançamento: "+ resourceName;
+        return "Editando Lançamento Coletivo: "+ resourceName;
     }
 
 }
