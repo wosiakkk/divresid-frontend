@@ -10,6 +10,7 @@ import { CategoryService } from '../../categories/shared/category.service';
 import { User } from 'src/app/security/models/user.model';
 import { PropertyService } from '../../properties/shared/property.service';
 import { Property } from '../../properties/shared/property.model';
+import { AuthService } from 'src/app/security/services/auth.service';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class CollectiveEntryFormComponent
         protected toastService: ToastMessagesService,
         protected tokenService: TokenStorageService,
         protected categoryService: CategoryService,
-        protected propertyservice: PropertyService
+        protected propertyservice: PropertyService,
+        protected authService: AuthService
     ) {
         super(
             injector, new CollectiveEntry(),
@@ -91,6 +93,7 @@ export class CollectiveEntryFormComponent
         this.propertyservice
             .getCurrentActivePropertyId(this.authUser.id).subscribe(
                 property => {
+                    property.residents.push(this.authUserToResident());
                     this.resourceForm.controls['property'].setValue(property);
                     this.residents = property.residents;
                 },
@@ -106,6 +109,12 @@ export class CollectiveEntryFormComponent
             .getAllByAuthUser(user).subscribe(
                 c => this.categories = c
             )
+    }
+
+    private authUserToResident(): User{
+        let user: User = new User(this.authUser.id);
+        user.name = this.authUser.name;
+        return user;
     }
 
     //sobrescrevendo os métodos para o título da página, para não utilizar o valor padrão
