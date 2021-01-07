@@ -91,18 +91,17 @@ export class CollectiveEntryFormComponent
         super.ngOnInit()
     }
 
-    private loadActiveProperty(){
+    private loadActiveProperty() {
         this.authUser = this.tokenService.currentUser;
         this.propertyservice
             .getCurrentActivePropertyId(this.authUser.id).subscribe(
                 property => {
-                  //  property.residents.push(this.authUserToResident());
                     this.resourceForm.controls['property'].setValue(property);
                     this.residents = property.residents;
                 },
                 error => this.toastService
                     .loadErrorToast("Problema ao carregar imóvel ativo"
-                     + error, "toast-bottom-center")
+                        + error, "toast-bottom-center")
             )
     }
 
@@ -114,26 +113,20 @@ export class CollectiveEntryFormComponent
             )
     }
 
-    private setCurrentSelectedResidents(resource: any){
+    private setCurrentSelectedResidents(resource: any) {
         let residentsListWithCollEntry: User[] = new Array();
         resource.generatedEntries.forEach(
-            entry =>{
+            entry => {
                 residentsListWithCollEntry.push(entry.user);
             }
         )
         this.resourceForm.controls['selectedResidents']
             .setValue(residentsListWithCollEntry);
-        
+
     }
 
-    private authUserToResident(): User{
-        let user: User = new User(this.authUser.id);
-        user.name = this.authUser.name;
-        return user;
-    }
-
-      //overirde para carregar moradores selecionados
-      protected loadResource() {
+    //overirde para carregar moradores selecionados
+    protected loadResource() {
         if (this.currentAction == "edit") {
             console.log('entrando no metodo')
             this.route.paramMap.pipe(
@@ -146,7 +139,7 @@ export class CollectiveEntryFormComponent
                         this.resourceForm.patchValue(resource);
                         this.setCurrentSelectedResidents(resource);
                     },
-                    error => 
+                    error =>
                         this.toastMessagesService.loadServerErrorToast()
                 );
         }
@@ -154,13 +147,13 @@ export class CollectiveEntryFormComponent
 
 
     //sobrescrevendo os métodos para o título da página, para não utilizar o valor padrão
-    protected creationPageTitle(): string{
+    protected creationPageTitle(): string {
         return "Cadastro de novo Lançamento Coletivo";
     }
 
-    protected editionPageTitle(): string{
+    protected editionPageTitle(): string {
         const resourceName = this.resource.name || ""; //caso ainda nao tenha sido carregado o dado, "" será exibido, evitnado o undefined
-        return "Editando Lançamento Coletivo: "+ resourceName;
+        return "Editando Lançamento Coletivo: " + resourceName;
     }
 
 }
