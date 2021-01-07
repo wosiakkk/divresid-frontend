@@ -11,6 +11,7 @@ import { User } from 'src/app/security/models/user.model';
 import { PropertyService } from '../../properties/shared/property.service';
 import { Property } from '../../properties/shared/property.model';
 import { AuthService } from 'src/app/security/services/auth.service';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CollectiveEntryFormComponent
     activeProperty: Property = new Property();
     authUser: User;
     residents: User[];
+    collectiveEntry: CollectiveEntry;
     //selectedResidents: User[];
 
     constructor(
@@ -85,7 +87,8 @@ export class CollectiveEntryFormComponent
     ngOnInit(): void {
         this.loadCategories();
         this.loadActiveProperty();
-        super.ngOnInit();
+        this.loadResource();
+        super.ngOnInit()
     }
 
     private loadActiveProperty(){
@@ -93,7 +96,7 @@ export class CollectiveEntryFormComponent
         this.propertyservice
             .getCurrentActivePropertyId(this.authUser.id).subscribe(
                 property => {
-                    property.residents.push(this.authUserToResident());
+                  //  property.residents.push(this.authUserToResident());
                     this.resourceForm.controls['property'].setValue(property);
                     this.residents = property.residents;
                 },
@@ -111,11 +114,44 @@ export class CollectiveEntryFormComponent
             )
     }
 
+    private setCurrentSelectedResidents(resource: any){
+        let residentsListWithCollEntry: User[] = new Array();
+        resource.generatedEntries.forEach(
+            entry =>{
+                residentsListWithCollEntry.push(entry.user);
+            }
+        )
+        this.resourceForm.controls['selectedResidents']
+            .setValue(residentsListWithCollEntry);
+        
+    }
+
     private authUserToResident(): User{
         let user: User = new User(this.authUser.id);
         user.name = this.authUser.name;
         return user;
     }
+
+      //overirde para carregar moradores selecionados
+      protected loadResource() {
+        if (this.currentAction == "edit") {
+            console.log('entrando no metodo')
+            this.route.paramMap.pipe(
+                switchMap(params =>
+                    this.collectiveService.getById(+params.get("id")))
+            )
+                .subscribe(
+                    resource => {
+                        this.collectiveEntry = resource;
+                        this.resourceForm.patchValue(resource);
+                        this.setCurrentSelectedResidents(resource);
+                    },
+                    error => 
+                        this.toastMessagesService.loadServerErrorToast()
+                );
+        }
+    }
+
 
     //sobrescrevendo os métodos para o título da página, para não utilizar o valor padrão
     protected creationPageTitle(): string{
