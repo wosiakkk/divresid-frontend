@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <div>
+      <div *ngIf="(authService.authAdmin$ | async) === true">
         <a href="#menuFinColetivas" data-toggle="collapse" aria-expanded="false" 
           class="list-group-item list-group-item-action bg-light" role="button" 
             aria-controls="menuFinColetivas"

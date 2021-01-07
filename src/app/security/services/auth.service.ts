@@ -49,8 +49,13 @@ export class AuthService {
         this.authMod$.next(true);
         this.isMod = true;
       }
-      else
+      else{
         this.authUser$.next(true);
+        this.authMod$.next(false);
+        this.authAdmin$.next(false);
+        this.isMod = false;
+        this.isAdmin = false;
+      }
     });
   }
 
