@@ -19,6 +19,7 @@ export class ResidentListComponent
 
     faSearch = faSearch;
     propertyId: number;
+    userAuth;
     
     cols: any[] = [
         {field: 'name', header: 'Nome'},
@@ -43,6 +44,7 @@ export class ResidentListComponent
         this.change.detectChanges();
         setTimeout(() => {
             let userAuth = this.loadAuthResource();
+            this.userAuth = userAuth;
             this.propertySerive
                 .getCurrentActivePropertyId(userAuth.id).subscribe(
                     p => {
