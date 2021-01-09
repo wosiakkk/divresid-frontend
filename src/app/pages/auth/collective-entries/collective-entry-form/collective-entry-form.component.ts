@@ -29,7 +29,7 @@ export class CollectiveEntryFormComponent
     authUser: User;
     residents: User[];
     collectiveEntry: CollectiveEntry;
-    //selectedResidents: User[];
+    onLoading: boolean = false;
 
     constructor(
         protected injector: Injector,
@@ -122,12 +122,13 @@ export class CollectiveEntryFormComponent
         )
         this.resourceForm.controls['selectedResidents']
             .setValue(residentsListWithCollEntry);
-
+            this.onLoading = false;
     }
 
     //overirde para carregar moradores selecionados
     protected loadResource() {
         if (this.currentAction == "edit") {
+            this.onLoading = true;
             console.log('entrando no metodo')
             this.route.paramMap.pipe(
                 switchMap(params =>
@@ -138,6 +139,7 @@ export class CollectiveEntryFormComponent
                         this.collectiveEntry = resource;
                         this.resourceForm.patchValue(resource);
                         this.setCurrentSelectedResidents(resource);
+                        this.onLoading = false;
                     },
                     error =>
                         this.toastMessagesService.loadServerErrorToast()

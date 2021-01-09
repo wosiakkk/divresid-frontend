@@ -2,10 +2,11 @@
     page-title = {{pageTitle}}
     page-sub-title = "Informe ou atualize informações."
     page-new-button-text = "Voltar"
-    page-button-link = "/entries"
+    page-button-link = "/collective"
     icon-button =  "backIcon"
 >
 </app-page-header>
+
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
 
@@ -64,6 +65,7 @@
             </div>
 
             <div class="form-row">
+               
 
                 <!-- categoryId -->
                 <div class="form-group col-md-3">
@@ -95,6 +97,14 @@
                     <app-form-field-error 
                         [form-control]="resourceForm.get('selectedResidents')">
                     </app-form-field-error>
+                </div>
+                 <!--Loading spin-->
+                 <div class="form-group col-md-1 mt-4" *ngIf="onLoading">
+                    <p-progressSpinner 
+                        [style]="{width: '40px', height: '40px'}">
+                    </p-progressSpinner>
+                    <br>
+                        <small>Buscando Moradores</small>
                 </div>
 
                 <!-- description -->

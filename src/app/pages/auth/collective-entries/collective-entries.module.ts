@@ -8,6 +8,7 @@ import { PaginatorModule } from 'primeng/paginator'
 import { CalendarModule } from "primeng/calendar";
 import { IMaskModule } from "angular-imask";
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
     declarations:[CollectiveEntryListComponent,
@@ -15,7 +16,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     imports:[
         SharedModule, CollectiveEntriesRoutingModule,
         TableModule, PaginatorModule, IMaskModule, 
-        CalendarModule, MultiSelectModule
+        CalendarModule, MultiSelectModule, ProgressSpinnerModule
     ]
 })
 export class CollectiveEntriesModule {}
