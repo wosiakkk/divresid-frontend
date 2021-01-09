@@ -49,9 +49,12 @@
                     <div *ngIf="resources.roles[0].name === 'ROLE_MODERATOR'">
                         Moderador
                     </div>
+                    <div *ngIf="userAuth.id === resources.id">
+                        <strong>Administrador</strong>
+                    </div>
                     
                 </td>
-                <td class="text-center">
+                <td class="text-center" *ngIf="userAuth.id !== resources.id">
                     <a class="btn btn-outline-info btn-sm mr-2" 
                         [routerLink]="[resources.id, 'edit']"
                     >

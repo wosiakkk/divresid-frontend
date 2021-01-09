@@ -1,6 +1,7 @@
 import { User } from '../../../../security/models/user.model';
 import { BaseResourceModel } from  '../../../../shared/models/base-resource.model'
 import { Category } from '../../categories/shared/category.model'
+import { Entry } from '../../entries/shared/entry.model';
 import { Property } from '../../properties/shared/property.model'
 
 
@@ -15,8 +16,11 @@ export class CollectiveEntry extends BaseResourceModel {
         public paid?: boolean,
         public collective?: boolean,
         public category?: Category,
+        public categoryId?: number,
         public property?: Property,
         public residents?: User[],
+        public selectedResidents?: User[],
+        public generatedEntries?: Entry[]
     ){
         super();
     }

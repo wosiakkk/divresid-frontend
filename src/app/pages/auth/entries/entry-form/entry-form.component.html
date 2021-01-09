@@ -17,10 +17,10 @@
 
             <div class="form-row">
                 <!-- type -->
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-2" >
                     <label for="type">Tipo</label>
                     <select name="type" id="type" class="form-control"
-                        formControlName="type">
+                        formControlName="type" >
                         <option *ngFor="let option of types" 
                                 [value]="option.value">{{option.text}}
                         </option>
@@ -128,4 +128,4 @@
     </button>
 
 </form>
-<!--<pre>{{resourceForm.value | json}}</pre>-->
+<pre>{{resourceForm.value | json}}</pre>

@@ -8,6 +8,7 @@ import { TokenStorageService } from 'src/app/security/services/token-storage.ser
 import { CategoryService } from '../../categories/shared/category.service';
 import { Validators } from '@angular/forms';
 import { User } from 'src/app/security/models/user.model';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -28,13 +29,15 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
                 date: [null],
                 paid: [null],
                 categoryId: [null, [Validators.required]],
-                user: [this.loadAuthResource()]
+                user: [this.loadAuthResource()],
+                collective: [null]
             });
           }
         
 
     categories: Array<Category>;
     types: Array<any>;
+    disabled: boolean;
 
    imaskConfig = {
         mask: Number,
@@ -76,6 +79,31 @@ export class EntryFormComponent extends BaseResourceFormComponent<Entry>
         super.ngOnInit()
      }
 
+     //carregando recurso para edição
+     protected loadResource() {
+        if (this.currentAction == "edit") {
+            this.route.paramMap.pipe(
+                switchMap(params =>
+                    this.resourceService.getById(+params.get("id")))
+            )
+                .subscribe(
+                    resource => {
+                        this.resource = resource;
+                        this.resourceForm.patchValue(resource);
+                        if(resource.collective){
+                            this.resourceForm.get('type').disable();
+                            this.resourceForm.get('name').disable();
+                            this.resourceForm.get('description').disable();
+                            this.resourceForm.get('amount').disable();
+                            this.resourceForm.get('date').disable();
+                            this.resourceForm.get('categoryId').disable();
+                        }
+                    },
+                    error => 
+                        this.toastMessagesService.loadServerErrorToast()
+                );
+        }
+    }
 
     private setTypeOptions(): Array<any>{
         return Object.entries(Entry.types).map(
