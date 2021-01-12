@@ -42,7 +42,6 @@ export class EntryListComponent extends BaseResourceListComponent<Entry> {
 
     //override para poder usar filter
     loadLazyData(event: LazyLoadEvent) {
-        console.log("event: "+ JSON.stringify(event));
         this.loading = true;
         this.change.detectChanges();
 
@@ -69,7 +68,6 @@ export class EntryListComponent extends BaseResourceListComponent<Entry> {
                             if(this.resources.length<=0)
                                 this.emptyList=true;
                             this.change.detectChanges();
-                            console.log("DEUS: "+JSON.stringify(this.resources));
                         },
                         error => {
                             this.toastService.loadServerListErrorToast();
