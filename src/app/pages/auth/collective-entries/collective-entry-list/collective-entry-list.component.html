@@ -16,6 +16,39 @@
         pInputText style="width:25%"
         placeholder="Busca dinâmica"
         (input)="tt.filterGlobal($event.target.value, 'contains')">
+    <div class="input-group-prepend ml-5">
+        <label class="input-group-text" for="selectMonth">
+                Filtrar por data:
+        </label>
+    </div>
+    <select #month class="custom-select" id="selectMonth" style="width:15%">
+        <option value="">Selecione um mês</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+    </select>
+    <input #year type="number" id="year" style="width:15%" 
+        name="year" value="" placeholder="Informe o ano" class="form-control">
+            
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="loadLazyData($event)"
+    >
+        <fa-icon [icon]="faFilter"></fa-icon> Filtrar
+    </button>
+    <button type="button" class="btn btn-info ml-1" 
+        (click)="clearFilter()"
+    >
+        <fa-icon [icon]="faEraser"></fa-icon> Limpar
+    </button>
 </div>
 
 <div class="table-responsive">
