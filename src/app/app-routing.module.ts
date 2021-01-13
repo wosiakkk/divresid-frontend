@@ -25,6 +25,9 @@ const routes: Routes = [
     {path: 'properties',
         loadChildren: () => import('./pages/auth/properties/properties.module')
             .then(m => m.PropertiesModule)},
+    {path: 'inventory',
+        loadChildren: () => import('./pages/auth/inventory/inventory.module')
+            .then(m => m.InventoryModule)},
     {path: 'invites', 
         loadChildren: () => import('./pages/auth/invites/invites.module')
             .then(m => m.InvitesModule)},
