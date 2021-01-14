@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
 import { User } from 'src/app/security/models/user.model';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
@@ -8,6 +9,7 @@ import { Property } from '../../properties/shared/property.model';
 import { PropertyService } from '../../properties/shared/property.service';
 import { InventoryService } from '../shared/inventory.service';
 import { PropertyItem } from '../shared/propertyItem.model';
+import { PropertyItemImage } from '../shared/propertyItemImage.model';
 
 @Component({
   selector: 'app-inventory-form',
@@ -20,6 +22,9 @@ export class InventoryFormComponent
     authUser: User;
     activeProperty: Property = new Property();
     residents: User[];
+    canAddPhoto: boolean = false;
+    base64String: string = null;
+    imageObject: PropertyItemImage = null;
 
     constructor(
         protected inventoryService: InventoryService,
@@ -39,14 +44,57 @@ export class InventoryFormComponent
             description: [null],
             owner: [null, [Validators.required]],
             property: [null],
-            user: [this.loadAuthResource()]
+            user: [this.loadAuthResource()],
+            image: [null],
+            image64:[this.base64String]
         })
     }
 
     ngOnInit(): void {
+        this.setCurrentAction();
+        this.buildResourceForm();
         this.loadActiveProperty();
-        super.ngOnInit()
+        this.loadResource();
+        this.loadAuthResource();
+        this.canAddPhotoCheck();
     }
+
+     //override
+     protected loadResource() {
+        if (this.currentAction == "edit") {
+            this.route.paramMap.pipe(
+                switchMap(params =>
+                    this.inventoryService.getById(+params.get("id")))
+            )
+                .subscribe(
+                    resource => {
+                        this.resource = resource;
+                        this.resourceForm.patchValue(resource);
+                        this.resourceForm.controls['image64']
+                            .setValue('data:image/png;base64,'+ resource.image.base64Image);
+                        this.base64String = 'data:image/png;base64,'+ resource.image.base64Image;
+                        this.imageObject = resource.image;
+                    },
+                    error => 
+                        this.toastMessagesService.loadServerErrorToast()
+                );
+        }
+    }
+
+    //override
+    protected loadAuthResource(){
+        return new User(this.tokerStorageService.getUser().id);
+
+    }
+
+    //override
+    protected setCurrentAction() {
+        if (this.route.snapshot.url[0].path == "new")
+            this.currentAction = "new";
+        else
+            this.currentAction = "edit";
+    }
+
 
     private loadActiveProperty() {
         this.authUser = this.tokenService.currentUser;
@@ -62,6 +110,33 @@ export class InventoryFormComponent
             )
     }
 
+    myUploader(event) {
+        let file: File = event.files[0];
+        let formData:FormData = new FormData(); 
+            
+        if(file != null){
+            formData.append("file", file);
+            formData.append("idItem", this.resourceForm.controls['id'].value);
+            if(this.imageObject !== null)
+                formData.append("idImage", String(this.imageObject.id));
+            else
+                formData.append("idImage", "0");
+        }
+        this.inventoryService.uploadFile(formData).subscribe(
+            image => {
+                this.base64String = 'data:image/png;base64,'+image.base64Image;
+                this.toastService
+                    .loadCreatedResourceSuccessMsg
+                        ('Upload realizado com sucesso!','toast-bottom-center')
+            }
+        )
+    }
+
+    private canAddPhotoCheck(){
+        if(this.currentAction === 'edit'){
+            this.canAddPhoto = true;
+        }
+    }
 
      //sobrescrita dos valores default de titulos de página
     protected creationPageTitle(): string{

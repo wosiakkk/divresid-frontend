@@ -1,15 +1,15 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { LazyLoadEvent } from 'primeng/api';
+import { User } from 'src/app/security/models/user.model';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
-import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
-import { PropertyItem } from '../shared/propertyItem.model';
-import { InventoryService } from '../shared/inventory.service'
-import { User } from 'src/app/security/models/user.model';
-import { PropertyService } from '../../properties/shared/property.service';
-import { Property } from '../../properties/shared/property.model';
-import { LazyLoadEvent } from 'primeng/api';
 import { Pageable } from 'src/app/shared/interfaces/pageable.interface';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { Property } from '../../properties/shared/property.model';
+import { PropertyService } from '../../properties/shared/property.service';
+import { InventoryService } from '../shared/inventory.service';
+import { PropertyItem } from '../shared/propertyItem.model';
 
 @Component({
   selector: 'app-inventory-list',
@@ -31,7 +31,7 @@ export class InventoryListComponent
 
     faSearch = faSearch;
 
-    activeProperty: Property;
+    activeProperty: Property = new Property();
 
     cols: any[] =  [
         { field: 'id', header: 'Categorias' },
@@ -39,22 +39,15 @@ export class InventoryListComponent
       ];
 
     //override
-    ngOnInit(): void { 
+    async ngOnInit(){
+        this.loading = true;
         let user:User = this.loadAuthResource();
-        this.propertyService
-            .getCurrentActivePropertyId(user.id).subscribe(
-                property => this.activeProperty = property
-            )
-        this.inventoryService.getNumberOfResources(this.activeProperty)
-            .subscribe(
-                count => this.totalRecords = count
-            )
-       
+        this.activeProperty =  await this.loadActiveProperty(user);
+        setTimeout(() => {},300);
     }
 
     //override
     loadLazyData(event: LazyLoadEvent) {
-        console.log("event: "+ JSON.stringify(event));
         this.loading = true;
         this.change.detectChanges();
         const pageableData: Pageable = {
@@ -64,7 +57,7 @@ export class InventoryListComponent
         }
 
         setTimeout(() => {
-            let user:User = this.loadAuthResource();
+            this.change.detectChanges();
             this.inventoryService
                 .getAllPagination(pageableData,this.activeProperty).subscribe(
                     resources => {
@@ -82,5 +75,9 @@ export class InventoryListComponent
         }, 300 );   
     }
 
+    loadActiveProperty(user: User): Promise<Property>{
+        return this.propertyService
+            .getCurrentActivePropertyId(user.id).toPromise();
+    }
 
 }
