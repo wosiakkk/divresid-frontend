@@ -1,17 +1,15 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { LazyLoadEvent } from 'primeng/api';
+import { User } from 'src/app/security/models/user.model';
 import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
-import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
-import { PropertyItem } from '../shared/propertyItem.model';
-import { InventoryService } from '../shared/inventory.service'
-import { User } from 'src/app/security/models/user.model';
-import { PropertyService } from '../../properties/shared/property.service';
-import { Property } from '../../properties/shared/property.model';
-import { LazyLoadEvent } from 'primeng/api';
 import { Pageable } from 'src/app/shared/interfaces/pageable.interface';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { map } from 'rxjs/operators';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { ToastMessagesService } from 'src/app/shared/services/toast-messages.service';
+import { Property } from '../../properties/shared/property.model';
+import { PropertyService } from '../../properties/shared/property.service';
+import { InventoryService } from '../shared/inventory.service';
+import { PropertyItem } from '../shared/propertyItem.model';
 
 @Component({
   selector: 'app-inventory-list',

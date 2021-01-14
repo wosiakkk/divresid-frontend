@@ -1,6 +1,7 @@
 import { BaseResourceModel } from '../../../../shared/models/base-resource.model'
 import { Resident } from '../../residents/shared/resident.model'
 import { Property } from '../../properties/shared/property.model'
+import { PropertyItemImage } from './propertyItemImage.model'
 
 export class PropertyItem extends BaseResourceModel {
 
@@ -8,7 +9,8 @@ export class PropertyItem extends BaseResourceModel {
         public name?: string,
         public description?: string,
         public owner?: Resident,
-        public property?: Property
+        public property?: Property,
+        public image?: PropertyItemImage
     ){
         super();
     }
