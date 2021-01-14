@@ -5,9 +5,11 @@ import { InventoryRoutingModule } from './inventory-routing.module'
 import { SharedModule } from '../../../shared/shared.module'
 import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
+import {ListboxModule} from 'primeng/listbox';
 
 @NgModule({
     declarations: [InventoryFormComponent, InventoryListComponent],
-    imports: [SharedModule, TableModule, PaginatorModule, InventoryRoutingModule]
+    imports: [SharedModule, TableModule, PaginatorModule,
+         InventoryRoutingModule, ListboxModule]
 })
 export class InventoryModule {}

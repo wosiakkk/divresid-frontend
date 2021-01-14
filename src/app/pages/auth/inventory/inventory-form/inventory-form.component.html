@@ -1,1 +1,63 @@
-<p>inventory-form works!</p>
+<app-page-header
+    page-title = {{pageTitle}}
+    page-sub-title = "Informe ou atualize informações."
+    page-new-button-text = "Voltar"
+    page-button-link = "/inventory"
+    icon-button =  "backIcon"
+>
+</app-page-header>
+
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Informações sobre o Item do Inventário
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <!-- entry name -->
+                <div class="form-group col-md-5">
+                    <label for="name">Nome</label>
+                    <input type="text" class="form-control" 
+                        id="name" formControlName="name">
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('name')">
+                    </app-form-field-error>
+                </div>
+                
+                <!-- description -->
+                <div class="form-group col-md-7">
+                    <label for="description">Descrição</label>
+                    <input type="text" class="form-control" id="description"
+                        formControlName="description">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                 <!-- residents -->
+                 <div class="form-group col-md-12">
+                    <label for="selResid">Proprietário do Item</label>
+                    <div id="selResid">
+                        <p-listbox 
+                            [options]="residents"
+                            formControlName="owner"
+                            optionLabel="name" 
+                            optionValue="id">
+                        </p-listbox>
+                    </div>
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('owner')">
+                    </app-form-field-error>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3">
+        Salvar
+    </button>
+
+</form>
+<pre>{{resourceForm.value | json}}</pre>
