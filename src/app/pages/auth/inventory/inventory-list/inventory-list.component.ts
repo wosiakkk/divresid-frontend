@@ -10,6 +10,8 @@ import { Property } from '../../properties/shared/property.model';
 import { LazyLoadEvent } from 'primeng/api';
 import { Pageable } from 'src/app/shared/interfaces/pageable.interface';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { map } from 'rxjs/operators';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-inventory-list',
@@ -31,7 +33,7 @@ export class InventoryListComponent
 
     faSearch = faSearch;
 
-    activeProperty: Property;
+    activeProperty: Property = new Property();
 
     cols: any[] =  [
         { field: 'id', header: 'Categorias' },
@@ -39,22 +41,15 @@ export class InventoryListComponent
       ];
 
     //override
-    ngOnInit(): void { 
+    async ngOnInit(){
+        this.loading = true;
         let user:User = this.loadAuthResource();
-        this.propertyService
-            .getCurrentActivePropertyId(user.id).subscribe(
-                property => this.activeProperty = property
-            )
-        this.inventoryService.getNumberOfResources(this.activeProperty)
-            .subscribe(
-                count => this.totalRecords = count
-            )
-       
+        this.activeProperty =  await this.loadActiveProperty(user);
+        setTimeout(() => {},300);
     }
 
     //override
     loadLazyData(event: LazyLoadEvent) {
-        console.log("event: "+ JSON.stringify(event));
         this.loading = true;
         this.change.detectChanges();
         const pageableData: Pageable = {
@@ -64,7 +59,7 @@ export class InventoryListComponent
         }
 
         setTimeout(() => {
-            let user:User = this.loadAuthResource();
+            this.change.detectChanges();
             this.inventoryService
                 .getAllPagination(pageableData,this.activeProperty).subscribe(
                     resources => {
@@ -82,5 +77,9 @@ export class InventoryListComponent
         }, 300 );   
     }
 
+    loadActiveProperty(user: User): Promise<Property>{
+        return this.propertyService
+            .getCurrentActivePropertyId(user.id).toPromise();
+    }
 
 }
