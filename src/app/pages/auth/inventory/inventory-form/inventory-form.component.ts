@@ -9,6 +9,7 @@ import { Property } from '../../properties/shared/property.model';
 import { PropertyService } from '../../properties/shared/property.service';
 import { InventoryService } from '../shared/inventory.service';
 import { PropertyItem } from '../shared/propertyItem.model';
+import { PropertyItemImage } from '../shared/propertyItemImage.model';
 
 @Component({
   selector: 'app-inventory-form',
@@ -23,6 +24,7 @@ export class InventoryFormComponent
     residents: User[];
     canAddPhoto: boolean = false;
     base64String: string = null;
+    imageObject: PropertyItemImage = null;
 
     constructor(
         protected inventoryService: InventoryService,
@@ -71,6 +73,7 @@ export class InventoryFormComponent
                         this.resourceForm.controls['image64']
                             .setValue('data:image/png;base64,'+ resource.image.base64Image);
                         this.base64String = 'data:image/png;base64,'+ resource.image.base64Image;
+                        this.imageObject = resource.image;
                     },
                     error => 
                         this.toastMessagesService.loadServerErrorToast()
@@ -114,6 +117,10 @@ export class InventoryFormComponent
         if(file != null){
             formData.append("file", file);
             formData.append("idItem", this.resourceForm.controls['id'].value);
+            if(this.imageObject !== null)
+                formData.append("idImage", String(this.imageObject.id));
+            else
+                formData.append("idImage", "0");
         }
         this.inventoryService.uploadFile(formData).subscribe(
             json => console.log(JSON.stringify(json))
