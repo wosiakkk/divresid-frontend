@@ -123,7 +123,12 @@ export class InventoryFormComponent
                 formData.append("idImage", "0");
         }
         this.inventoryService.uploadFile(formData).subscribe(
-            json => console.log(JSON.stringify(json))
+            image => {
+                this.base64String = 'data:image/png;base64,'+image.base64Image;
+                this.toastService
+                    .loadCreatedResourceSuccessMsg
+                        ('Upload realizado com sucesso!','toast-bottom-center')
+            }
         )
     }
 
