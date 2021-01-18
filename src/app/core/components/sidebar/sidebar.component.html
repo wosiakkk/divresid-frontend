@@ -4,8 +4,9 @@
     <div class="list-group list-group-flush">
 
      
-        <a href="#" class="list-group-item list-group-item-action bg-light"
-        routerLinkActive="active" routerLink="/profile">
+        <a href="#menuPerfil" class="list-group-item list-group-item-action"
+        routerLinkActive="active" routerLink="/profile" role="button"
+        aria-expanded="false">
           <fa-icon [icon]="faIdBadge" size="lg"></fa-icon>
           <span class="ml-2">Perfil</span>
          
@@ -99,10 +100,23 @@
                 >
                   <div class="ml-4">  
                         <fa-icon 
-                            [icon]="faExclamationCircle" 
+                            [icon]="faBoxes" 
                             size="lg">
                         </fa-icon>
                         Inventário do Imóvel
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class=" list-group-item list-group-item-action" 
+                routerLinkActive="active" routerLink="/tasks"
+                >
+                  <div class="ml-4">  
+                        <fa-icon 
+                            [icon]="faTasks" 
+                            size="lg">
+                        </fa-icon>
+                        Tarefas e Atividades
                   </div>
                 </a>
               </li>

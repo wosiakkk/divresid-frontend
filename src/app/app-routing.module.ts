@@ -40,6 +40,9 @@ const routes: Routes = [
     {path: 'collective',
         loadChildren: ()=> import('./pages/auth/collective-entries/collective-entries.module')
             .then(m => m.CollectiveEntriesModule) },
+    {path: 'tasks',
+        loadChildren: ()=> import('./pages/auth/tasks/task.module')
+            .then(m => m.TaskModule)},
     {path: 'reports',  
         loadChildren: () => import('./pages/auth/reports/reports.module')
             .then(m => m.ReportsModule)},

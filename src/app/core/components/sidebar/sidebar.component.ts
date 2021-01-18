@@ -19,7 +19,9 @@ import {
   faIdCard,
   faClipboardList,
   faExclamationCircle,
-  faMoneyCheckAlt
+  faMoneyCheckAlt,
+  faBoxes,
+  faTasks
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -48,6 +50,8 @@ export class SidebarComponent implements OnInit {
    faClipboardList = faClipboardList;
    faExclamationCircle = faExclamationCircle;
    faMoneyCheckAlt = faMoneyCheckAlt;
+   faBoxes = faBoxes;
+   faTasks = faTasks;
 
   constructor(public authService: AuthService) { }
 

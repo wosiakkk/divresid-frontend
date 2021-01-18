@@ -8,8 +8,6 @@ import { AuthService } from './security/services/auth.service'
 import { TokenStorageService } from './security/services/token-storage.service';
 import { CoreModule } from "./core/core.module";
 import { LoginModule } from './pages/public/login/login.module';
-import { TaskFormComponent } from './pages/auth/tasks/task-form/task-form.component';
-import { TaskListComponent } from './pages/auth/tasks/task-list/task-list.component';
 
 
 
@@ -21,8 +19,6 @@ import { TaskListComponent } from './pages/auth/tasks/task-list/task-list.compon
 @NgModule({
   declarations: [
     AppComponent,
-    TaskFormComponent,
-    TaskListComponent
   ],
   imports: [
     CoreModule,

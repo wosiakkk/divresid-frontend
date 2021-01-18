@@ -12,7 +12,7 @@ export class BaseTaskService extends BaseResourceService<Task>{
     //override
     getNumberOfResources(property: Property): Observable<any>{
         const url =
-            `${this.apiPath}/pagination/count?property=${property.id}`;
+            `${this.apiPath}/pagination/items/count?property=${property.id}`;
         return this.http.get(url).pipe(
             catchError(this.handleError)
         )
@@ -24,11 +24,11 @@ export class BaseTaskService extends BaseResourceService<Task>{
 
         if(pageable.sort === null)
             pageable.sort = "not";
-        const url = `${this.apiPath}/pagination?page=${pageable.page}`
+        const url = `${this.apiPath}/pagination/items?page=${pageable.page}`
                     +`&size=${pageable.size}&searchString=${pageable.sort}`
                     +`&property=${property.id}`;
         return this.http.get(url).pipe(
-            map(this.paginationJsonDataToResourceFn.bind(this)),
+            map(this.jsonDataToResourcesPagination.bind(this)),
             catchError(this.handleError)
         );
     }
