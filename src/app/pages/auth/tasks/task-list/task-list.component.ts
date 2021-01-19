@@ -42,12 +42,10 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
         this.loading = true;
         let user:User = this.loadAuthResource();
         this.activeProperty =  await this.loadActiveProperty(user);
-        setTimeout(() => {},300);
     }
 
     //override
     loadLazyData(event: LazyLoadEvent) {
-        console.log("CARALHO")
         this.loading = true;
         this.change.detectChanges();
         const pageableData: Pageable = {
