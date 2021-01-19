@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { LazyLoadEvent } from 'primeng/api';
 import { User } from 'src/app/security/models/user.model';
@@ -26,7 +27,8 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
         private toastService: ToastMessagesService,
         private tokenStorage: TokenStorageService,
         private taskService: TaskService,
-        private propertyService: PropertyService
+        private propertyService: PropertyService,
+        private _router: Router
     ) {
         super(taskService,change,toastService,tokenStorage);
     }
@@ -34,6 +36,8 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
     faSearch = faSearch;
     activeProperty: Property = new Property();
     authUser: User;
+    route: ActivatedRoute;
+    router: Router;
 
     cols: any[] =  [
         { field: 'name', header: 'Atividades',width:'45%' },
@@ -84,7 +88,18 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
 
     setDone(id: any){
         console.log('Finalizando atividade de id: '+ id)
-        
+        this.taskService.updateTaskStatus(id).subscribe(
+            response => {
+                this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+                this._router.onSameUrlNavigation = 'reload';
+                this._router.navigate(['/tasks']);
+                this.toastService
+                    .loadCreatedResourceSuccessMsg
+                        ("Atividade atualizada com sucesso",
+                         "toast-bottom-center");
+            },
+            error=> this.toastService.loadServerErrorToast()
+        )
     }
 
     loadActiveProperty(user: User): Promise<Property>{
