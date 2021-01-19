@@ -1,5 +1,5 @@
 <app-page-header
-    page-title = "Tarefas"
+    page-title = "Tarefas e Atividades"
     page-sub-title = "Lista de Tarefas do imóvel ativo."
     page-new-button-text = "Atividade"
     page-button-link = "new"
@@ -30,7 +30,8 @@
         <ng-template pTemplate="header" let-columns>
             <tr class="text-center">
                 <th *ngFor="let col of columns" pResizableColumn  
-                    class="bg-info text-light">
+                    class="bg-info text-light"
+                    [ngStyle]="{'width': col.width}">
                     {{col.header}}
                 </th>
             </tr>
@@ -38,18 +39,45 @@
 
         <ng-template pTemplate="body" let-resources>
             <tr>
-                <td>
-                    <strong>{{resources.description}}</strong> 
+                <td class="text-left">
+                    <strong>{{resources.name}}</strong> 
+                </td>
+
+                <td class="text-center">
+                    {{resources.targetUser.name}}
+                </td>
+
+                <td class="text-center">
+                    {{resources.date | date:'mediumDate'}}
+                </td>
+
+                <td class="text-center">
+                    <strong class="text-success" *ngIf="resources.done">
+                        Finalizada
+                    </strong>
+                    <strong class="text-warning" *ngIf="!resources.done">
+                        Pendente
+                    </strong>
                 </td>
                
                 <td class="text-center">
+                    <a class="btn btn-outline-warning btn-sm mr-2" 
+                        (click)="setDone(resources.id)"
+                        *ngIf="(resources.targetUser.id === authUser.id
+                         || (authService.authAdmin$ | async) === true)
+                         && resources.done === false"
+                    >
+                    <strong style="color:rgb(80, 192, 90);">Finalizar</strong>
+                    </a>
                     <a class="btn btn-outline-info btn-sm mr-2" 
                         [routerLink]="[resources.id, 'edit']"
+                        *ngIf="(authService.authAdmin$ | async) === true"
                     >
                         Editar
                     </a>
                     <button class="btn btn-outline-danger btn-sm"
                         (click)="deleteResource(resources)"
+                        *ngIf="(authService.authAdmin$ | async) === true"
                     >
                         Excluir
                     </button>
@@ -60,7 +88,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="columns.length">
-                    Você ainda não cadastrou nenhuma Tarefa!
+                    Você ainda não cadastrou nenhuma Atividade!
                 </td>
             </tr>
         </ng-template>
