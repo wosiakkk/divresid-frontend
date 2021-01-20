@@ -1,5 +1,6 @@
 import { Injectable, Injector } from "@angular/core";
 import { catchError } from "rxjs/operators";
+import { Property } from "../../properties/shared/property.model";
 import { BaseTaskService } from "./base-task.service";
 import { Task } from "./task.model";
 

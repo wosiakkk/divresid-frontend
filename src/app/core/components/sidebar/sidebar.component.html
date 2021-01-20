@@ -5,6 +5,15 @@
 
      
         <a href="#menuPerfil" class="list-group-item list-group-item-action"
+        routerLinkActive="active" routerLink="/home" role="button"
+        aria-expanded="false">
+          <fa-icon [icon]="faHome" size="lg"></fa-icon>
+          <span class="ml-2">Home</span>
+         
+        </a>
+
+
+        <a href="#menuPerfil" class="list-group-item list-group-item-action"
         routerLinkActive="active" routerLink="/profile" role="button"
         aria-expanded="false">
           <fa-icon [icon]="faIdBadge" size="lg"></fa-icon>
@@ -53,7 +62,7 @@
           class="list-group-item list-group-item-action bg-light" role="button" 
             aria-controls="menuResidencias"
         >
-          <fa-icon [icon]="faHome" size="lg"></fa-icon>
+          <fa-icon [icon]="faBuilding" size="lg"></fa-icon>
           <span class="ml-2">Residências</span>
           <span class="dropdown-toggle float-right"></span>
         </a>
@@ -145,16 +154,6 @@
                   </div>
                 </a>
               </li>
-              <li>
-                <a class=" list-group-item list-group-item-action" 
-                  routerLinkActive="active" routerLink="/entries"
-                >
-                  <div class="ml-4">  
-                    <fa-icon [icon]="faFileInvoiceDollar" size="lg"></fa-icon>
-                    Outra opção
-                  </div>
-                </a>
-              </li>
           </ul>
         </div>
       </div>
@@ -210,17 +209,12 @@
             <li>
               <a class="scroll-link list-group-item 
                 list-group-item-action bg-light" routerLink="/reports"
-              >
-                <fa-icon [icon]="faMoneyBillAlt" size="lg"></fa-icon>
-                Lançamentos
+              > 
+                <div class="ml-4">
+                    <fa-icon [icon]="faMoneyBillAlt" size="lg"></fa-icon>
+                    Lançamentos
+                </div>
               </a>
-            </li>
-            <li>
-                <a class="scroll-link list-group-item 
-                  list-group-item-action bg-light" href="#section-4"
-                >
-                  We think that...
-                </a>
             </li>
           </ul>
         </div>
