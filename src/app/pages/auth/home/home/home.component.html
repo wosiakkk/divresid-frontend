@@ -1,6 +1,88 @@
-<div class="container">
+<!--<div class="container">
     <header class="jumbotron">
       <p>Bem vindo, está página só é exibida quando o usuário realiza o login.</p>
     </header>
+</div> -->
+<div class="row ml-5">
+    <div class="ml-5">
+        <p-card header="Residência" 
+            subheader="Informações resumidas do imóvel ativo"
+            [style]="{'width': '360px', 'height': '500px'}" styleClass="p-card-shadow">
+            <p-header>
+                <img alt="Card" src="assets/images/ap.jpg">
+            </p-header>
+            <hr class="featurette-divider">
+            <br>
+            <p><strong>Nome: </strong>{{activeProperty.name}}</p>
+            <p><strong>Descrição: </strong>{{activeProperty.description}}</p>
+            <ng-template pTemplate="footer">
+            </ng-template>
+            </p-card>
+        </div>
+        
+        <div class="ml-5">
+            <p-card 
+                header="Moradores"
+                subheader="Lista dos nomes dos moradores atuais"
+                [style]="{'width': '360px', 'height': '500px'}" 
+                styleClass="p-card-shadow">
+                <p-header>
+                    <img alt="Card" src="assets/images/fr.jpg">
+                </p-header>
+                <hr class="featurette-divider">
+                <br>
+                <p *ngFor="let res of residents" >
+                    <strong>Nome: </strong>{{res.name}}<br>
+                </p>
+                <br>
+                <ng-template pTemplate="footer">
+                </ng-template>
+            </p-card>
+        </div>
+
+        <div class="ml-5">
+            <p-card 
+                header="Finaceiro"
+                subheader="Resumo das suas finanças no mês"
+                [style]="{'width': '360px', 'height': '500px'}" 
+                styleClass="p-card-shadow">
+                <p-header>
+                    <img alt="Card" src="assets/images/mon.jpg">
+                </p-header>
+                <hr class="featurette-divider">
+                <br>
+                <p *ngIf="showEntries">
+                    <strong style="color:rgb(80, 192, 90);">
+                        Entradas: 
+                    </strong>{{revenueTotal}}
+                </p>
+                <p *ngIf="showEntries">
+                    <strong style="color:rgb(212, 27, 27);">
+                        Saídas: 
+                    </strong>{{expenseTotal}}
+                </p>
+                <p *ngIf="showEntries">
+                    <strong>Saldo: </strong>{{balance}}
+                </p>
+                <p *ngIf="showEntries === false">
+                    Você não possui Lançamentos nesse mês!
+                </p>
+                
+                <ng-template pTemplate="footer">
+                </ng-template>
+            </p-card>
+        </div>
+        
+    </div>
+
+<hr class="featurette-divider">
+
+<div class="container">
+    <header class="jumbotron">
+        <p>Atividades e Tarefas da Residência.</p>
+    </header>
 </div>
+
+<full-calendar [options]="calendarOptions"></full-calendar>
+
 
