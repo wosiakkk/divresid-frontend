@@ -35,8 +35,6 @@ export class HomeComponent implements OnInit {
     options: any;
 
     
-
-
     constructor(
         private change: ChangeDetectorRef,
         private tokenService: TokenStorageService,
@@ -57,11 +55,8 @@ export class HomeComponent implements OnInit {
         this.entryService.getByMonthAndYear
         ( this.currentMonth,this.currentYear,this.authUser)
             .subscribe(this.setValues.bind(this));
-
-        this.taskService.getAll().subscribe(this.setEvents.bind(this));
-
-        
-           
+        this.taskService.getAllActive(this.activeProperty)
+            .subscribe(this.setEvents.bind(this));
     }
 
 
@@ -102,7 +97,6 @@ export class HomeComponent implements OnInit {
                                         (revenueTotal-expenseTotal), 'BRL');
         }
     }
-
 
     setEvents(task: Task[]){
         Object.keys(task).forEach(e=>{

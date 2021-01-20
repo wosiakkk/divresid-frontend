@@ -33,4 +33,13 @@ export class BaseTaskService extends BaseResourceService<Task>{
         );
     }
 
+
+    getAllActive(property: Property){
+        const url = `${this.apiPath}/active?property=${property.id}`;
+        return this.http.get(url).pipe(
+            map(this.jsonDataToResources.bind(this)),
+            catchError(this.handleError)
+        );
+    }
+
 }
