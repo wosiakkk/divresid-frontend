@@ -21,7 +21,8 @@ import {
   faExclamationCircle,
   faMoneyCheckAlt,
   faBoxes,
-  faTasks
+  faTasks,
+
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

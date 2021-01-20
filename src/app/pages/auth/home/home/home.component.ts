@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
         console.log('valor de currentTasks: '+ JSON.stringify(this.currentTasks))
         this.currentTasks.forEach(t =>{
             let taskEvent = new TaskEvent();
-            taskEvent.title = t.name;
+            taskEvent.title = t.name + ' - ' + t.targetUser.name;
             taskEvent.date = t.date;
             console.log('add evento: '+ JSON.stringify(taskEvent))
             this.events.push(taskEvent);
