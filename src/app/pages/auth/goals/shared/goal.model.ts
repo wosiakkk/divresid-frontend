@@ -7,7 +7,8 @@ export class Goal extends BaseResourceModel{
         public id?: number,
         public name?: string,
         public value?: number,
-        public date?: Date
+        public date?: Date,
+        public percent?: any
     ){
         super();
     }
