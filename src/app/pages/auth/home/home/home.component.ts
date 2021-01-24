@@ -154,7 +154,8 @@ export class HomeComponent implements OnInit {
 
     calendarOptions: CalendarOptions = {
         initialView: 'dayGridMonth',
-        events: []
+        events: [],
+        locale: 'pt-br'
       };
 
 }
