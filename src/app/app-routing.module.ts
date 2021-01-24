@@ -46,6 +46,9 @@ const routes: Routes = [
     {path: 'goals', 
         loadChildren: () => import('./pages/auth/goals/goals.module')
             .then(m => m.GoalsModule)},
+    {path: 'newpass', 
+            loadChildren: () => import('./pages/auth/user-newpass/new-pass.module')
+                .then(m => m.NewPassModule)},
     {path: 'reports',  
         loadChildren: () => import('./pages/auth/reports/reports.module')
             .then(m => m.ReportsModule)},

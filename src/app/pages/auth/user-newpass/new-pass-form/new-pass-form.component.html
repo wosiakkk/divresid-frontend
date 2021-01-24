@@ -1,0 +1,60 @@
+<app-page-header
+    page-title = {{pageTitle}}
+    page-sub-title = "Atualize a senha de acesso ao Sistema."
+    page-new-button-text = "Voltar"
+    page-button-link = "/home"
+    icon-button =  "backIcon"
+>
+</app-page-header>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header">
+            Dados
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="currentPass">Senha atual</label>
+                    <input type="password" class="form-control" 
+                        id="currentPass" formControlName="currentPass">
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('currentPass')" >
+                    </app-form-field-error> 
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="newpass">Nova senha</label>
+                    <input type="password" class="form-control" 
+                        id="newpass" formControlName="newPass">
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('newPass')" >
+                    </app-form-field-error> 
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="confirm">Nova senha (Confirmar)</label>
+                    <input type="password" class="form-control" 
+                        id="confirm" formControlName="confirmPassword">
+                    <app-form-field-error 
+                        [form-control]="resourceForm.get('confirmPassword')" >
+                    </app-form-field-error>
+                    <div *ngIf="resourceForm.hasError('notSame')">
+                        <p style="color: tomato;">
+                            Senhas diferentes!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <button [disabled]="submittingForm || resourceForm.invalid" 
+        type="submit" class="btn btn-info btn-lg float-right mt-3">
+        Salvar
+    </button>
+
+</form>
+<pre>{{resourceForm.value | json}}</pre>
