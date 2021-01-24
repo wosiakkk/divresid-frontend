@@ -1,50 +1,65 @@
-<!--<div class="container">
-    <header class="jumbotron">
-      <p>Bem vindo, está página só é exibida quando o usuário realiza o login.</p>
-    </header>
-</div> -->
-<div class="row ml-5">
-    <div class="ml-5">
+<!--Loading spin-->
+<div class="text-center " *ngIf="loading" style="width: 100%; height: 100%;">
+        <p-progressSpinner 
+            [style]="{width: '340px', height: '340px'}" >
+        </p-progressSpinner>
+        <h3>Carregando Home ...</h3>
+</div>
+
+
+<div class="row ml-5" *ngIf="loading === false">
+    <div class="ml-2">
         <p-card header="Residência" 
-            subheader="Informações resumidas do imóvel ativo"
-            [style]="{'width': '360px', 'height': '500px'}" styleClass="p-card-shadow">
+            subheader="Resumo do imóvel ativo"
+            [style]="{'width': '360px', 'height': '550px'}" styleClass="p-card-shadow">
             <p-header>
                 <img alt="Card" src="assets/images/ap.jpg">
             </p-header>
             <hr class="featurette-divider">
             <br>
-            <p><strong>Nome: </strong>{{activeProperty.name}}</p>
-            <p><strong>Descrição: </strong>{{activeProperty.description}}</p>
-            <ng-template pTemplate="footer">
-            </ng-template>
-            </p-card>
-        </div>
+            <div *ngIf="activeProperty.id !== undefined ">
+                <p><strong>Nome: </strong>{{activeProperty.name}}</p>
+                <p><strong>Descrição: </strong>{{activeProperty.description}}</p>
+            </div>
+            <div *ngIf="activeProperty.name === undefined ">
+                Você não possui imóvel ativo!
+            </div>
+        </p-card>
+        <a class="btn btn-info" routerLink="/properties/profile">
+            Ver Mais
+        </a>
+    </div>
         
-        <div class="ml-5">
+        <div class="ml-2">
             <p-card 
                 header="Moradores"
-                subheader="Lista dos nomes dos moradores atuais"
-                [style]="{'width': '360px', 'height': '500px'}" 
+                subheader="Resumo dos moradores atuais"
+                [style]="{'width': '360px', 'height': '550px'}" 
                 styleClass="p-card-shadow">
                 <p-header>
                     <img alt="Card" src="assets/images/fr.jpg">
                 </p-header>
                 <hr class="featurette-divider">
                 <br>
-                <p *ngFor="let res of residents" >
-                    <strong>Nome: </strong>{{res.name}}<br>
-                </p>
-                <br>
-                <ng-template pTemplate="footer">
-                </ng-template>
+                <div *ngIf="residents.length > 0">
+                    <p *ngFor="let res of residents" >
+                        <strong>Nome: </strong>{{res.name}}<br>
+                    </p>
+                </div>
+                <div *ngIf="residents.length === 0">
+                    Você não possui moradores ou imóvel ativo!
+                </div>   
             </p-card>
+            <a class="btn btn-info" routerLink="/residents">
+                Ver Mais
+             </a>
         </div>
 
-        <div class="ml-5">
+        <div class="ml-2">
             <p-card 
                 header="Finaceiro"
                 subheader="Resumo das suas finanças no mês"
-                [style]="{'width': '360px', 'height': '500px'}" 
+                [style]="{'width': '360px', 'height': '550px'}" 
                 styleClass="p-card-shadow">
                 <p-header>
                     <img alt="Card" src="assets/images/mon.jpg">
@@ -67,22 +82,48 @@
                 <p *ngIf="showEntries === false">
                     Você não possui Lançamentos nesse mês!
                 </p>
-                
-                <ng-template pTemplate="footer">
-                </ng-template>
             </p-card>
+            <a class="btn btn-info" routerLink="/entries">
+                Ver Mais
+             </a>
         </div>
-        
+
+        <div class="ml-2">
+            <p-card 
+                header="Metas Financeiras"
+                subheader="Resumo das suas finanças no mês"
+                [style]="{'width': '360px', 'height': '550px'}" 
+                styleClass="p-card-shadow">
+                <p-header>
+                    <img alt="Card" src="assets/images/gg.jpg">
+                </p-header>
+                <hr class="featurette-divider">
+                <br>
+                <div *ngIf="goals.length > 0">
+                    <p *ngFor="let goal of goals" >
+                        <strong>Meta: </strong>{{goal.name}}<br>
+                        <p-progressBar [value]="goal.percent"></p-progressBar>
+                    </p>
+                </div>
+                <div *ngIf="goals.length === 0">
+                    Você não possui Metas cadastradas!
+                </div> 
+            </p-card>
+            <a class="btn btn-info" routerLink="/goals">
+                Ver Mais
+            </a>
+        </div>
+
     </div>
 
-<hr class="featurette-divider">
+<hr class="featurette-divider"  *ngIf="loading === false">
 
-<div class="container">
-    <header class="jumbotron">
-        <p>Atividades e Tarefas da Residência.</p>
+<div class="container"  *ngIf="loading === false">
+    <header class="jumbotron text-center">
+        <h2>Calendário de Atividades e Tarefas da Residência</h2>
     </header>
 </div>
 
-<full-calendar [options]="calendarOptions"></full-calendar>
+<full-calendar [options]="calendarOptions"  *ngIf="loading === false"></full-calendar>
 
 

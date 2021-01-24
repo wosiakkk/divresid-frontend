@@ -22,6 +22,7 @@ import {
   faMoneyCheckAlt,
   faBoxes,
   faTasks,
+  faRocket
 
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -53,6 +54,7 @@ export class SidebarComponent implements OnInit {
    faMoneyCheckAlt = faMoneyCheckAlt;
    faBoxes = faBoxes;
    faTasks = faTasks;
+   faRocket = faRocket;
 
   constructor(public authService: AuthService) { }
 

@@ -9,6 +9,9 @@ import { RouterModule } from "@angular/router";
 import { LoginRoutingModule } from "./home-routing.module";
 import { CardModule } from 'primeng/card';
 import { CurrencyPipe } from '@angular/common';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -24,7 +27,9 @@ FullCalendarModule.registerPlugins([
     RouterModule,
     LoginRoutingModule,
     CardModule,
-    
+    ProgressBarModule,
+    ButtonModule,
+    ProgressSpinnerModule
   ],
   exports: [
     CommonModule

@@ -34,6 +34,19 @@ export class PropertyService extends BaseResourceService<Property>{
         }
     }
 
+   checkActivePropertyId(userId: number): Observable<any>{
+        let userAuth: User = this.tokenService.currentUser;
+        if(userAuth.roles[0] == 'ROLE_RESIDENT'){
+            return this.http
+            .get(`${this.apiPath}/currentActiveOfResident?userId=${userId}`)
+                .pipe(catchError(this.handleError))
+        } else{
+            return this.http
+            .get(`${this.apiPath}/currentActive?userId=${userId}`)
+                .pipe(catchError(this.handleError))
+        }
+    }
+
     removeResident(userId: number, propertyId: number){
         return this.http.delete(`${this.apiPath}`+
             `/removeResident?userId=${userId}&propertyId=${propertyId}`)

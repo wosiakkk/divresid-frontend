@@ -1,0 +1,98 @@
+<app-page-header
+    page-title = "Metas Financeiras"
+    page-sub-title = "Lista de Metas cadastradas."
+    page-new-button-text = "Meta"
+    page-button-link = "new"
+    icon-button = "newIcon">
+</app-page-header>
+
+<div class="row  mb-2">
+    <div class="input-group-prepend ml-3">
+        <label class="input-group-text" for="filterGlobal">
+            <fa-icon [icon]="faSearch" size="lg"></fa-icon>
+        </label>
+    </div>  
+    <input id="filterGlobal" class="form-control" type="text"
+        pInputText style="width:25%"
+        placeholder="Busca dinâmica"
+        (input)="tt.filterGlobal($event.target.value, 'contains')">
+</div>
+
+<div class="table-responsive">
+
+    <p-table #tt [columns]="cols"
+        [value]="resources" [paginator]="true" [rows]="5" 
+        [resizableColumns]="true"
+        [lazy]="true" (onLazyLoad)="loadLazyData($event)" 
+        [totalRecords]="totalRecords" [loading]="loading">
+        
+        <ng-template pTemplate="header" let-columns>
+            <tr class="text-center">
+                <th *ngFor="let col of columns" pResizableColumn  
+                    class="bg-info text-light">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-resources>
+            <tr>
+                <td>
+                    <strong>{{resources.name}}</strong> 
+                </td>
+                <td>
+                    <strong>{{resources.value | currency:'BRL'}}</strong> 
+                </td>
+               <!--Date-->
+                <td class="text-center">
+                    <strong>{{resources.date  | date:'mediumDate'}}</strong> 
+                </td>
+                <td>
+                    <div *ngIf="resources.done === false">
+                        Meta Completa: 
+                        <strong style="color:rgb(10, 155, 29);"
+                            *ngIf="resources.percent > 0">
+                            {{resources.percent | number:'.1-2'}} % 
+                        </strong> 
+                        <strong style="color:rgb(155, 11, 6);"
+                            *ngIf="resources.percent < 0">
+                            {{resources.percent | number:'.1-2'}} % 
+                        </strong>
+                        | 
+                        <strong style="color:rgb(10, 155, 29);"
+                            *ngIf="balance > 0">
+                            Saldo Atual: {{balance | currency:'BRL'}} 
+                        </strong>
+                        <strong style="color:rgb(155, 11, 6);"
+                            *ngIf="balance < 0">
+                            Saldo Atual: {{balance | currency:'BRL'}} 
+                        </strong>
+                    </div>
+                    <div *ngIf="resources.done">
+                        <strong>Meta já finalizada!</strong>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-outline-info btn-sm mr-2" 
+                        [routerLink]="[resources.id, 'edit']"
+                    >
+                        Editar
+                    </a>
+                    <button class="btn btn-outline-danger btn-sm"
+                        (click)="deleteResource(resources)"
+                    >
+                        Excluir
+                    </button>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length">
+                    Você ainda não cadastrou nenhuma Meta!
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
