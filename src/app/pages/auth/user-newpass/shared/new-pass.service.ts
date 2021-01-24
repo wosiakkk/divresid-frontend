@@ -9,9 +9,10 @@ import { Injectable } from '@angular/core'
 })
 export class NewPassService {
 
-    http: HttpClient
+    
+    apiPath: string = "http://localhost:4200/api/auth/residents/newPass";
 
-    constructor( protected apiPath: string){}
+    constructor(private http: HttpClient){}
 
     newpass(newPassReq: NewPassReq): Observable<NewPassReq>{
         return this.http.post(this.apiPath, newPassReq).pipe(

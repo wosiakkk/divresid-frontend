@@ -38,7 +38,7 @@
             name="password"
             [(ngModel)]="form.password"
             required
-            minlength="6"
+            minlength="4"
             #password="ngModel"
           />
           <div
@@ -48,7 +48,7 @@
           >
             <div *ngIf="password.errors.required">A Senha é obrigatória</div>
             <div *ngIf="password.errors.minlength">
-              A senha deve ter pelo menos 6 caracteres.
+              A senha deve ter pelo menos 4 caracteres.
             </div>
           </div>
         </div>
