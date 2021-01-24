@@ -52,29 +52,36 @@ export class HomeComponent implements OnInit {
 
     async ngOnInit() {
         
-            this.change.detectChanges();
-            this.loading = true;
-            this.authUser = new User(this.tokenService.getUser().id);
-            this.activeProperty = await this.loadActiveProperty(this.authUser);
+        this.change.detectChanges();
+        this.loading = true;
+        this.authUser = new User(this.tokenService.getUser().id);
+        this.activeProperty = await this.loadActiveProperty(this.authUser)
+            .catch(() => {return new Property()});
+        if(this.activeProperty.id !== null &&  this.activeProperty.id > 0){
             setTimeout(() => {
-            this.residents = this.activeProperty.residents;
-            this.residents.length = 3;
-            this.currentMonth = new Date().getMonth() +1;
-            this.currentYear = new Date().getFullYear();
-            this.entryService.getByMonthAndYear
-            ( this.currentMonth,this.currentYear,this.authUser)
-                .subscribe(this.setValues.bind(this));
-            this.taskService.getAllActive(this.activeProperty)
-                .subscribe(this.setEvents.bind(this));
-            this.change.detectChanges();
-            this.loading = false;
-        }, 700 ); 
+                this.residents = this.activeProperty.residents;
+                this.residents.length = 3;
+                this.currentMonth = new Date().getMonth() +1;
+                this.currentYear = new Date().getFullYear();
+                this.entryService.getByMonthAndYear
+                    ( this.currentMonth,this.currentYear,this.authUser)
+                            .subscribe(this.setValues.bind(this));
+                this.taskService.getAllActive(this.activeProperty)
+                    .subscribe(this.setEvents.bind(this));
+                this.change.detectChanges();
+                        
+            }, 700 ); 
+        }
+        this.loading = false;
+            
     }
 
 
     loadActiveProperty(user: User): Promise<Property>{
         return this.propertyService
-            .getCurrentActivePropertyId(user.id).toPromise();
+            .getCurrentActivePropertyId(user.id).toPromise().catch(
+                error => {console.log('error: ' , error); return new Property; }
+            );
     }
 
     loadEntries(month: number, year: number, user:User):Promise<Entry[]>{

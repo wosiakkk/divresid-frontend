@@ -17,13 +17,17 @@
             </p-header>
             <hr class="featurette-divider">
             <br>
-            <p><strong>Nome: </strong>{{activeProperty.name}}</p>
-            <p><strong>Descrição: </strong>{{activeProperty.description}}</p>
-            <hr class="featurette-divider mt-5">
-            <a class="btn btn-info" routerLink="/properties/profile">
-                Ver Mais
-            </a>
+            <div *ngIf="activeProperty.id !== undefined ">
+                <p><strong>Nome: </strong>{{activeProperty.name}}</p>
+                <p><strong>Descrição: </strong>{{activeProperty.description}}</p>
+            </div>
+            <div *ngIf="activeProperty.name === undefined ">
+                Você não possui imóvel ativo!
+            </div>
         </p-card>
+        <a class="btn btn-info" routerLink="/properties/profile">
+            Ver Mais
+        </a>
     </div>
         
         <div class="ml-2">
@@ -37,14 +41,18 @@
                 </p-header>
                 <hr class="featurette-divider">
                 <br>
-                <p *ngFor="let res of residents" >
-                    <strong>Nome: </strong>{{res.name}}<br>
-                </p>
-                <hr class="featurette-divider mt-5">
-                <a class="btn btn-info" routerLink="/residents">
-                   Ver Mais
-                </a>
+                <div *ngIf="residents.length > 0">
+                    <p *ngFor="let res of residents" >
+                        <strong>Nome: </strong>{{res.name}}<br>
+                    </p>
+                </div>
+                <div *ngIf="residents.length === 0">
+                    Você não possui moradores ou imóvel ativo!
+                </div>   
             </p-card>
+            <a class="btn btn-info" routerLink="/residents">
+                Ver Mais
+             </a>
         </div>
 
         <div class="ml-2">
@@ -74,11 +82,10 @@
                 <p *ngIf="showEntries === false">
                     Você não possui Lançamentos nesse mês!
                 </p>
-                <hr class="featurette-divider mt-5">
-                <a class="btn btn-info" routerLink="/entries">
-                   Ver Mais
-                </a>
             </p-card>
+            <a class="btn btn-info" routerLink="/entries">
+                Ver Mais
+             </a>
         </div>
 
         <div class="ml-2">
@@ -92,15 +99,19 @@
                 </p-header>
                 <hr class="featurette-divider">
                 <br>
-                <p *ngFor="let goal of goals" >
-                    <strong>Meta: </strong>{{goal.name}}<br>
-                    <p-progressBar [value]="goal.percent"></p-progressBar>
-                </p>
-                <hr class="featurette-divider">
-                <a class="btn btn-info" routerLink="/goals">
-                   Ver Mais
-                </a>
+                <div *ngIf="goals.length > 0">
+                    <p *ngFor="let goal of goals" >
+                        <strong>Meta: </strong>{{goal.name}}<br>
+                        <p-progressBar [value]="goal.percent"></p-progressBar>
+                    </p>
+                </div>
+                <div *ngIf="goals.length === 0">
+                    Você não possui Metas cadastradas!
+                </div> 
             </p-card>
+            <a class="btn btn-info" routerLink="/goals">
+                Ver Mais
+            </a>
         </div>
 
     </div>
