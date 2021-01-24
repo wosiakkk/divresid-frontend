@@ -11,6 +11,8 @@ import { CurrencyPipe } from '@angular/common';
 import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 import { TaskService } from '../../tasks/shared/task.service';
 import { TaskEvent } from './shared/event.model'
+import { Goal } from '../../goals/shared/goal.model';
+import { GoalService } from '../../goals/shared/goal.service';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +32,11 @@ export class HomeComponent implements OnInit {
     expenseTotal: any = 0;
     revenueTotal: any = 0;
     balance: any = 0;
+    balanceUnformatted: any;
     showEntries: boolean = false;
     events: any[] = [];
     options: any;
+    goals: Goal[] = [];
 
     
     constructor(
@@ -42,21 +46,29 @@ export class HomeComponent implements OnInit {
         private propertyService: PropertyService,
         private entryService: EntryService,
         private currencyPipe: CurrencyPipe,
-        private taskService: TaskService
+        private taskService: TaskService,
+        private goalsService: GoalService
     ) { }
 
     async ngOnInit() {
-        this.loading = true;
-        this.authUser = new User(this.tokenService.getUser().id);
-        this.activeProperty = await this.loadActiveProperty(this.authUser);
-        this.residents = this.activeProperty.residents;
-        this.currentMonth = new Date().getMonth() +1;
-        this.currentYear = new Date().getFullYear();
-        this.entryService.getByMonthAndYear
-        ( this.currentMonth,this.currentYear,this.authUser)
-            .subscribe(this.setValues.bind(this));
-        this.taskService.getAllActive(this.activeProperty)
-            .subscribe(this.setEvents.bind(this));
+        
+            this.change.detectChanges();
+            this.loading = true;
+            this.authUser = new User(this.tokenService.getUser().id);
+            this.activeProperty = await this.loadActiveProperty(this.authUser);
+            setTimeout(() => {
+            this.residents = this.activeProperty.residents;
+            this.residents.length = 3;
+            this.currentMonth = new Date().getMonth() +1;
+            this.currentYear = new Date().getFullYear();
+            this.entryService.getByMonthAndYear
+            ( this.currentMonth,this.currentYear,this.authUser)
+                .subscribe(this.setValues.bind(this));
+            this.taskService.getAllActive(this.activeProperty)
+                .subscribe(this.setEvents.bind(this));
+            this.change.detectChanges();
+            this.loading = false;
+        }, 700 ); 
     }
 
 
@@ -95,6 +107,19 @@ export class HomeComponent implements OnInit {
             this.balance = this.currencyPipe
                                     .transform(
                                         (revenueTotal-expenseTotal), 'BRL');
+            this.balanceUnformatted = (revenueTotal-expenseTotal);
+
+            this.goalsService.getAllByAuthUser(this.authUser).subscribe(
+                goals => {
+                    this.goals = goals;
+                    this.goals.length = 2;
+                    this.goals.forEach(g=> {
+                        g.percent = 
+                            (((revenueTotal-expenseTotal) * 100) / g.value)
+                                .toFixed(2);
+                    })
+                }
+            );
         }
     }
 
@@ -104,18 +129,30 @@ export class HomeComponent implements OnInit {
                this.currentTasks.push(task[e]);
             }
         );
-        console.log('valor de currentTasks: '+ JSON.stringify(this.currentTasks))
         this.currentTasks.forEach(t =>{
             let taskEvent = new TaskEvent();
             taskEvent.title = t.name + ' - ' + t.targetUser.name;
             taskEvent.date = t.date;
-            console.log('add evento: '+ JSON.stringify(taskEvent))
             this.events.push(taskEvent);
         })
 
-        console.log('valor de events: '+ JSON.stringify(this.events))
         this.calendarOptions.events = this.events;
     }
+
+   /* setGoals(goals: Goal[]){
+        Object.keys(goals).forEach(g=>{
+            if(goals[g] != undefined)
+               this.goals.push(goals[g]);
+            }
+        );
+        let balance = this.balanceUnformatted;
+        
+      /*  this.goals.forEach(g=>{
+            g.percent = ((balance * 100) / g.value).toFixed(2);
+            console.log("valor balance: "+ balance)
+            console.log("numero percent: "+ g.percent)
+        });*/
+   /* }*/
 
     calendarOptions: CalendarOptions = {
         initialView: 'dayGridMonth',
