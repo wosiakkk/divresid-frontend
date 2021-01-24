@@ -20,6 +20,7 @@ export class GoalsFormComponent extends BaseResourceFormComponent<Goal> {
             name: [null,[Validators.required]],
             date: [null],
             value: [null],
+            done: [false],
             user: [this.loadAuthResource()]
         });
     }

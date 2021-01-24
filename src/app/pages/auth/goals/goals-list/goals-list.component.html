@@ -40,30 +40,37 @@
                 <td>
                     <strong>{{resources.name}}</strong> 
                 </td>
+                <td>
+                    <strong>{{resources.value | currency:'BRL'}}</strong> 
+                </td>
                <!--Date-->
                 <td class="text-center">
                     <strong>{{resources.date  | date:'mediumDate'}}</strong> 
                 </td>
                 <td>
-                    Meta Completa: 
-                    <strong style="color:rgb(10, 155, 29);"
-                        *ngIf="resources.percent > 0">
-                         {{resources.percent | number:'.1-2'}} % 
-                    </strong> 
-                    <strong style="color:rgb(155, 11, 6);"
-                        *ngIf="resources.percent < 0">
-                        {{resources.percent | number:'.1-2'}} % 
-                    </strong>
-                    | 
-                    <strong style="color:rgb(10, 155, 29);"
-                        *ngIf="balance > 0">
-                        Saldo Atual: {{balance | currency:'BRL'}} 
-                    </strong>
-                    <strong style="color:rgb(155, 11, 6);"
-                        *ngIf="balance < 0">
-                        Saldo Atual: {{balance | currency:'BRL'}} 
-                    </strong>
-                    
+                    <div *ngIf="resources.done === false">
+                        Meta Completa: 
+                        <strong style="color:rgb(10, 155, 29);"
+                            *ngIf="resources.percent > 0">
+                            {{resources.percent | number:'.1-2'}} % 
+                        </strong> 
+                        <strong style="color:rgb(155, 11, 6);"
+                            *ngIf="resources.percent < 0">
+                            {{resources.percent | number:'.1-2'}} % 
+                        </strong>
+                        | 
+                        <strong style="color:rgb(10, 155, 29);"
+                            *ngIf="balance > 0">
+                            Saldo Atual: {{balance | currency:'BRL'}} 
+                        </strong>
+                        <strong style="color:rgb(155, 11, 6);"
+                            *ngIf="balance < 0">
+                            Saldo Atual: {{balance | currency:'BRL'}} 
+                        </strong>
+                    </div>
+                    <div *ngIf="resources.done">
+                        <strong>Meta já finalizada!</strong>
+                    </div>
                 </td>
                 <td class="text-center">
                     <a class="btn btn-outline-info btn-sm mr-2" 

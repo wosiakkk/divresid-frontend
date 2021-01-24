@@ -32,6 +32,7 @@ export class GoalsListComponent extends BaseResourceListComponent<Goal> {
 
     cols: any[] =  [
         { field: 'name', header: 'Metas' },
+        { field: 'value', header: 'Valor' },
         { field: 'date', header: 'Data Limite' },
         { field: 'date', header: 'Status' },
         { field: 'desc', header: 'Ações' },

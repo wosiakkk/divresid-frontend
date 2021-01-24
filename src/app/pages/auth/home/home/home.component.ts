@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
                                         (revenueTotal-expenseTotal), 'BRL');
             this.balanceUnformatted = (revenueTotal-expenseTotal);
 
-            this.goalsService.getAllByAuthUser(this.authUser).subscribe(
+            this.goalsService.getAllActive(this.authUser).subscribe(
                 goals => {
                     this.goals = goals;
                     this.goals.length = 2;
