@@ -57,23 +57,26 @@ export class HomeComponent implements OnInit {
         this.authUser = new User(this.tokenService.getUser().id);
         this.activeProperty = await this.loadActiveProperty(this.authUser)
             .catch(() => {return new Property()});
-        if(this.activeProperty.id !== null &&  this.activeProperty.id > 0){
-            setTimeout(() => {
-                this.residents = this.activeProperty.residents;
-                this.residents.length = 3;
-                this.currentMonth = new Date().getMonth() +1;
-                this.currentYear = new Date().getFullYear();
-                this.entryService.getByMonthAndYear
-                    ( this.currentMonth,this.currentYear,this.authUser)
-                            .subscribe(this.setValues.bind(this));
-                this.taskService.getAllActive(this.activeProperty)
-                    .subscribe(this.setEvents.bind(this));
-                this.change.detectChanges();
-                        
-            }, 700 ); 
-        }
-        this.loading = false;
-            
+        setTimeout(() => {
+            if(this.activeProperty.id !== null &&  this.activeProperty.id > 0){
+                
+                    this.residents = this.activeProperty.residents;
+                    if(this.residents.length > 4){
+                        this.residents.length = 4;
+                    }
+                    this.currentMonth = new Date().getMonth() +1;
+                    this.currentYear = new Date().getFullYear();
+                    this.entryService.getByMonthAndYear
+                        ( this.currentMonth,this.currentYear,this.authUser)
+                                .subscribe(this.setValues.bind(this));
+                    this.taskService.getAllActive(this.activeProperty)
+                        .subscribe(this.setEvents.bind(this));
+                    this.change.detectChanges();
+                            
+                
+            }
+            this.loading = false;
+    }, 700 ); 
     }
 
 
@@ -119,7 +122,9 @@ export class HomeComponent implements OnInit {
             this.goalsService.getAllActive(this.authUser).subscribe(
                 goals => {
                     this.goals = goals;
-                    this.goals.length = 2;
+                    if(goals.length > 3){
+                        this.goals.length = 3;
+                    }
                     this.goals.forEach(g=> {
                         g.percent = 
                             (((revenueTotal-expenseTotal) * 100) / g.value)
@@ -146,20 +151,6 @@ export class HomeComponent implements OnInit {
         this.calendarOptions.events = this.events;
     }
 
-   /* setGoals(goals: Goal[]){
-        Object.keys(goals).forEach(g=>{
-            if(goals[g] != undefined)
-               this.goals.push(goals[g]);
-            }
-        );
-        let balance = this.balanceUnformatted;
-        
-      /*  this.goals.forEach(g=>{
-            g.percent = ((balance * 100) / g.value).toFixed(2);
-            console.log("valor balance: "+ balance)
-            console.log("numero percent: "+ g.percent)
-        });*/
-   /* }*/
 
     calendarOptions: CalendarOptions = {
         initialView: 'dayGridMonth',
