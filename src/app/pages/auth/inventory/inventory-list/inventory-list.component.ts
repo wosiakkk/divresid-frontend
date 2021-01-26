@@ -42,7 +42,8 @@ export class InventoryListComponent
     async ngOnInit(){
         this.loading = true;
         let user:User = this.loadAuthResource();
-        this.activeProperty =  await this.loadActiveProperty(user);
+        this.activeProperty =  await this.loadActiveProperty(user)
+            .catch(() => {return new Property()});
         setTimeout(() => {},300);
     }
 
@@ -58,7 +59,9 @@ export class InventoryListComponent
 
         setTimeout(() => {
             this.change.detectChanges();
-            this.inventoryService
+            if(this.activeProperty.id > 0){
+                    console.log('PORRRRRRRRRR: '+ JSON.stringify(this.activeProperty))
+                this.inventoryService
                 .getAllPagination(pageableData,this.activeProperty).subscribe(
                     resources => {
                         this.resources = resources;
@@ -72,6 +75,12 @@ export class InventoryListComponent
                         this.toastService.loadServerListErrorToast();
                     }
                 )
+            }else{
+                this.resources = [];
+                this.totalRecords = 0;
+                this.loading = false;
+            }
+            
         }, 300 );   
     }
 
