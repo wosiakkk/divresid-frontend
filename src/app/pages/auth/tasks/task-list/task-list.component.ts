@@ -52,7 +52,8 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
         this.loading = true;
         let user:User = this.loadAuthResource();
         this.authUser = user;
-        this.activeProperty =  await this.loadActiveProperty(user);
+        this.activeProperty =  await this.loadActiveProperty(user)
+            .catch(() => {return new Property()});
     }
 
     //override
@@ -67,7 +68,8 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
 
         setTimeout(() => {
             this.change.detectChanges();
-            this.taskService
+            if(this.activeProperty.id > 0){
+                this.taskService
                 .getAllPagination(pageableData,this.activeProperty).subscribe(
                     resources => {
                         this.resources = resources;
@@ -83,6 +85,11 @@ export class TaskListComponent extends BaseResourceListComponent<Task> {
                         this.toastService.loadServerListErrorToast();
                     }
                 )
+            }else{
+                this.resources = [];
+                this.totalRecords = 0;
+                this.loading = false;
+            }
         }, 300 );   
     }
 
