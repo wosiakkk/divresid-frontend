@@ -15,6 +15,7 @@ export class PropertyProfileComponent implements OnInit {
     authUser: User;
     propertyActive: Property = new Property();
     onLoading: boolean = false;
+    hasActiveProperty: boolean = true;
 
     constructor(
         private propertyService: PropertyService,
@@ -33,8 +34,9 @@ export class PropertyProfileComponent implements OnInit {
                 },
                 error => {
                     this.onLoading = false;
+                    this.hasActiveProperty = false;
                     this.toastService
-                        .loadErrorToast("Problema ao carregar perfil"
+                        .loadErrorToast("Imóvel ativo não encontrado"
                         + error,
                         "toast-bottom-center");
                 }

@@ -7,8 +7,11 @@
 >
 </app-page-header>
 
+<div *ngIf="hasActiveProperty === false">
+    <p>Você ainda não possui um imóvel ativo!</p>
+</div>
 
-<div class="card">
+<div class="card" *ngIf="hasActiveProperty">
     <div class="card-header">
         Perfil
     </div>
