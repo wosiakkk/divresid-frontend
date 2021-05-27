@@ -54,13 +54,18 @@
                     </div>
                     
                 </td>
-                <td class="text-center" *ngIf="userAuth.id !== resources.id">
+                <td class="text-center" *ngIf="userAuth.id !== resources.id ">
+
                     <a class="btn btn-outline-info btn-sm mr-2" 
+                        *ngIf="(userAuth.roles[0].name === 'ROLE_MODERATOR' 
+                            || userAuth.roles[0].name === 'ROLE_ADMIN')" 
                         [routerLink]="[resources.id, 'edit']"
                     >
                         Editar Permissão
                     </a>
-                    <button class="btn btn-outline-danger btn-sm"
+                    <button class="btn btn-outline-danger btn-sm" 
+                        *ngIf="(userAuth.roles[0].name === 'ROLE_MODERATOR' 
+                            || userAuth.roles[0].name === 'ROLE_ADMIN')" 
                         (click)="deleteResource(resources)"
                     >
                         Excluir do imóvel

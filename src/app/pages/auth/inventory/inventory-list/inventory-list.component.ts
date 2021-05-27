@@ -60,7 +60,7 @@ export class InventoryListComponent
         setTimeout(() => {
             this.change.detectChanges();
             if(this.activeProperty.id > 0){
-                    console.log('PORRRRRRRRRR: '+ JSON.stringify(this.activeProperty))
+                    
                 this.inventoryService
                 .getAllPagination(pageableData,this.activeProperty).subscribe(
                     resources => {
