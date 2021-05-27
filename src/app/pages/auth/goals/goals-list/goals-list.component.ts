@@ -55,9 +55,8 @@ export class GoalsListComponent extends BaseResourceListComponent<Goal> {
         )
         this.currentMonth = new Date().getMonth() +1;
         this.currentYear = new Date().getFullYear();
-        this.entryService.getByMonthAndYear
-        ( this.currentMonth,this.currentYear,user)
-            .subscribe(this.setValues.bind(this));
+        this.entryService.getAllByAuthUser(user)
+            .subscribe(this.setValues.bind(this))
     }
 
     protected loadAuthResource(){

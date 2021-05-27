@@ -66,9 +66,8 @@ export class HomeComponent implements OnInit {
             }
             this.currentMonth = new Date().getMonth() +1;
             this.currentYear = new Date().getFullYear();
-            this.entryService.getByMonthAndYear
-                ( this.currentMonth,this.currentYear,this.authUser)
-                    .subscribe(this.setValues.bind(this));
+            this.entryService.getAllByAuthUser(this.authUser)
+            .subscribe(this.setValues.bind(this))
             this.taskService.getAllActive(this.activeProperty)
                 .subscribe(this.setEvents.bind(this));
                     this.change.detectChanges();
